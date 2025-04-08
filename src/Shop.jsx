@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import {Route, Routes} from "react-router-dom"
 import {Footer, Header} from "./components/index.js"
-import {Authorization, MainPage, Registration} from "./pages/index.js"
+import {Authorization, MainPage, Registration, Users} from "./pages/index.js"
 
 
 const AppColumn = styled.div`
@@ -19,7 +19,6 @@ const Content = styled.div`
 `
 
 export const Shop = () => {
-
     return (
         <AppColumn>
             <Header/>
@@ -28,7 +27,7 @@ export const Shop = () => {
                     <Route path="/" element={<MainPage/>}/>
                     <Route path="/login" element={<Authorization/>}/>
                     <Route path="/register" element={<Registration/>}/>
-                    <Route path="/users" element={<div>Пользователи</div>}/>
+                    <Route path="/users" element={<Users/>}/>
                     <Route path="/catalog" element={<div>Каталог</div>}/>
                     {/*<Route path="/product/:id" element={<div>Продукт</div>}/>*/}
                     <Route path="/basket" element={<div>Корзина</div>}/>

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import {Link, useNavigate} from "react-router-dom"
-import {FiUser, FiHeart} from "react-icons/fi";
+import {FiUser, FiHeart, FiUsers} from "react-icons/fi";
 import {LuStepBack} from "react-icons/lu";
 import {FaSignOutAlt} from "react-icons/fa";
 import {PiHandbagSimpleBold} from "react-icons/pi";
@@ -87,9 +87,10 @@ const ControlPanelContainer = ({className}) => {
                 <StyledButton onClick={() => navigate(-1)}>
                     <LuStepBack size={30}/>
                 </StyledButton>
-                <StyledIcon to="/favorite"><FiHeart size={30}/></StyledIcon>
+                <StyledIcon to="/users"><FiHeart size={30}/></StyledIcon>
                 <StyledIcon to="/basket"><PiHandbagSimpleBold size={30}/></StyledIcon>
                 <StyledIcon to="/login"><FiUser size={30}/></StyledIcon>
+                {roleId === ROLE.ADMIN && <StyledIcon to="/users"><FiUsers size={30}/></StyledIcon>}
             </RightAligned>
         </div>
     )

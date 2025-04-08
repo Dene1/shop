@@ -1,8 +1,17 @@
-import {Icon} from "../../../../components"
 import {TableRow} from "../table-row/table-row.jsx"
 import {useState} from "react"
 import {useServerRequest} from "../../../../hooks"
+import { PiFloppyDiskBold } from "react-icons/pi";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import styled from "styled-components"
+
+const StyledFloppyDiskIcon = styled(PiFloppyDiskBold)`
+    cursor: ${({disabled}) => disabled ? "not-allowed" : "pointer"};
+    fill: ${({disabled}) => disabled ? "#ccc" : "#2C3333"};
+    font-size: 24px;
+    align-items: center;
+    pointer-events: ${({disabled}) => disabled ? 'none' : 'auto'};
+`
 
 const UserRowContainer = ({
                               className,
@@ -42,12 +51,14 @@ const UserRowContainer = ({
                     </select>
 
                     <div className="save-role-button">
-                        <Icon id="fa-floppy-o" disabled={isSaveButtonDisabled}
+                        <StyledFloppyDiskIcon aria-hidden={true} disabled={isSaveButtonDisabled}
                               onClick={() => onRoleSave(id, selectedRoleId)}/>
                     </div>
                 </div>
             </TableRow>
-            <Icon id="fa-trash-o" margin="0 0 0 10px" onClick={onUserRemove}/>
+            <div className="remove-user-button">
+                <RiDeleteBin5Line size="24px" onClick={onUserRemove}/>
+            </div>
         </div>
     )
 }
@@ -65,7 +76,13 @@ export const UserRow = styled(UserRowContainer)`
     & .save-role-button {
         width: 20px;
         height: 30px;
-        margin: 4px 0 0 10px;
+        margin: 6px 0 0 6px;
         text-align: center;
+    }
+
+    & .remove-user-button {
+        margin: 0 0 0 10px;
+        cursor: pointer;
+        align-items: center;
     }
 `

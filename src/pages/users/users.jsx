@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react"
-import {Content, H2} from "../../components"
+import {H2} from "../../components"
 import {TableRow, UserRow} from "./components"
 import {useServerRequest} from "../../hooks"
 import {ROLE} from "../../constants/index.js"
@@ -35,7 +35,7 @@ const UsersContainer = ({className}) => {
 
     return (
         <div className={className}>
-            <Content error={errorMessage}>
+            <Container error={errorMessage}>
                 <H2>Пользователи</H2>
                 <div>
                     <TableRow>
@@ -55,7 +55,7 @@ const UsersContainer = ({className}) => {
                         />
                     ))}
                 </div>
-            </Content>
+            </Container>
         </div>
     )
 }
@@ -68,3 +68,10 @@ export const Users = styled(UsersContainer)`
     width: 570px;
     font-size: 18px;
 `
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    `
