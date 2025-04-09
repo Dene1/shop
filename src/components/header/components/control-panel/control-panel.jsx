@@ -69,6 +69,11 @@ const ControlPanelContainer = ({className}) => {
     const login = useSelector(selectUserLogin)
     const session = useSelector(selectUserSession)
 
+    const handleLogout = () => {
+        dispatch(logout(session));
+        navigate("/");
+    };
+
     return (
         <div className={className}>
             {roleId === ROLE.GUEST ? (
@@ -79,7 +84,7 @@ const ControlPanelContainer = ({className}) => {
                 <RightAligned>
                     <UserName>{login}</UserName>
                     <CursorPointer>
-                        <FaSignOutAlt onClick={() => dispatch(logout(session))}/>
+                        <FaSignOutAlt onClick={handleLogout}/>
                     </CursorPointer>
                 </RightAligned>
             )}
@@ -87,10 +92,11 @@ const ControlPanelContainer = ({className}) => {
                 <StyledButton onClick={() => navigate(-1)}>
                     <LuStepBack size={30}/>
                 </StyledButton>
-                <StyledIcon to="/users"><FiHeart size={30}/></StyledIcon>
+                <StyledIcon to="/favorites"><FiHeart size={30}/></StyledIcon>
                 <StyledIcon to="/basket"><PiHandbagSimpleBold size={30}/></StyledIcon>
                 <StyledIcon to="/login"><FiUser size={30}/></StyledIcon>
-                {roleId === ROLE.ADMIN && <StyledIcon to="/users"><FiUsers size={30}/></StyledIcon>}
+                {roleId === ROLE.ADMIN &&
+                    <StyledIcon to="/users"><FiUsers size={30}/></StyledIcon>}
             </RightAligned>
         </div>
     )

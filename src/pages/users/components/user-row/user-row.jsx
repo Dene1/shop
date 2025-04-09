@@ -1,8 +1,8 @@
 import {TableRow} from "../table-row/table-row.jsx"
 import {useState} from "react"
 import {useServerRequest} from "../../../../hooks"
-import { PiFloppyDiskBold } from "react-icons/pi";
-import { RiDeleteBin5Line } from "react-icons/ri";
+import {PiFloppyDiskBold} from "react-icons/pi";
+import {RiDeleteBin5Line} from "react-icons/ri";
 import styled from "styled-components"
 
 const StyledFloppyDiskIcon = styled(PiFloppyDiskBold)`
@@ -10,7 +10,7 @@ const StyledFloppyDiskIcon = styled(PiFloppyDiskBold)`
     fill: ${({disabled}) => disabled ? "#ccc" : "#2C3333"};
     font-size: 24px;
     align-items: center;
-    pointer-events: ${({disabled}) => disabled ? 'none' : 'auto'};
+    pointer-events: ${({disabled}) => disabled ? "none" : "auto"};
 `
 
 const UserRowContainer = ({
@@ -32,6 +32,7 @@ const UserRowContainer = ({
 
     const onRoleSave = (userId, newUserRoleId) => {
         requestServer("updateUserRole", userId, newUserRoleId).then(() => {
+            console.log("updateUserRole", userId, newUserRoleId)
             setInitialRoleId(newUserRoleId)
         })
     }
@@ -51,8 +52,9 @@ const UserRowContainer = ({
                     </select>
 
                     <div className="save-role-button">
-                        <StyledFloppyDiskIcon aria-hidden={true} disabled={isSaveButtonDisabled}
-                              onClick={() => onRoleSave(id, selectedRoleId)}/>
+                        <StyledFloppyDiskIcon aria-hidden={true}
+                                              disabled={isSaveButtonDisabled}
+                                              onClick={() => onRoleSave(id, selectedRoleId)}/>
                     </div>
                 </div>
             </TableRow>
