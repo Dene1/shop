@@ -4,7 +4,7 @@ import {yupResolver} from "@hookform/resolvers/yup"
 import {server} from "../../bff"
 import {useState} from "react"
 import styled from "styled-components"
-import {AuthFormError, Button, Content, H2, Input} from "../../components"
+import {AuthFormError, Button, Content, Input} from "../../components"
 import {Link, Navigate} from "react-router-dom"
 import {setUser} from "../../actions"
 import {useDispatch, useSelector} from "react-redux"
@@ -77,13 +77,14 @@ const AuthorizationContainer = ({className}) => {
     if (roleID !== ROLE.GUEST) {
         return <Navigate to="/"/>
     }
-    console.log("AuthorizationContainer re-rendered")
+
     return (
         <Content>
             <div className={className}>
-                <H2>Welcome back</H2>
-                <div className="mt-2">Welcome back! Please enter your details.</div>
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-6">
+                <div className="title">Welcome back</div>
+                <div className="title-text">Welcome back! <br/> Please enter your details.
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <Input type="login" placeholder="Логин..." {...register("login", {
                         onChange: () => setServerError(null),
                     })}/>
@@ -102,14 +103,28 @@ const AuthorizationContainer = ({className}) => {
 }
 
 export const Authorization = styled(AuthorizationContainer)`
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
+    & .title {
+        margin-top: 12px;
+        font-size: 40px;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+    }
+
+    & .title-text {
+        margin: 8px 0;
+        text-align: center;
+    }
+
     & > form {
         display: flex;
         flex-direction: column;
         width: 260px;
+        margin-top: 20px;
     }
 `

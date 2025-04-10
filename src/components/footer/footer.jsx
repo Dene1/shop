@@ -28,18 +28,18 @@ const FooterContainer = ({className}) => {
     return (
         <div className={className}>
             <StyledContainer>
-                <div><span style={{color: "#EA454C"}}>Denel</span>Snickers.© 2025</div>
+                <div><span style={{color: "#EA454C"}}>Denel</span>Sneakers.© 2025</div>
                 <div>All rights reserved</div>
             </StyledContainer>
             <StyledContainer>
                 <div>Contacts</div>
                 <div>8 (800) 555-35-35</div>
-                <div>DenelShoes@gmail.com</div>
+                <div>DenelSneakers@gmail.com</div>
             </StyledContainer>
             <StyledContainer>
                  <span style={{display: " flex", justifyItem: " center"}}>
                      <TfiLocationPin size={18}/>
-                     Denel Snickers
+                     Denel Sneakers
                  </span>
                 <div>1234 Shoe Street, Fashion City</div>
                 <div>Moscow, 256789</div>

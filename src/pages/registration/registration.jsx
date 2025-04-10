@@ -2,7 +2,6 @@ import * as yup from "yup"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 import {server} from "../../bff"
-import {useState} from "react"
 import styled from "styled-components"
 import {AuthFormError, Button, Content, H2, Input} from "../../components"
 import {Link, Navigate} from "react-router-dom"
@@ -11,6 +10,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {selectUserRole} from "../../selectors"
 import {ROLE} from "../../constants"
 import {useResetForm} from "../../hooks"
+import {useState} from "react"
 
 const regFormSchema = yup.object().shape({
     login: yup.string()
@@ -38,6 +38,11 @@ const StyledLink = styled(Link)`
     &:hover {
         color: #EA454C;
     }
+`
+
+const ImageContainer = styled.div`
+    padding-top: 5px;
+    width: 510px;
 `
 
 const RegistrationContainer = ({className}) => {
@@ -86,8 +91,8 @@ const RegistrationContainer = ({className}) => {
         <Content>
             <div className={className}>
                 <H2>Register</H2>
-                <div>Hello! Please enter your details.</div>
-                <form onSubmit={handleSubmit(onSubmit)} className="mt-2">
+                <div className="title-text">Hello! Please enter your details.</div>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <Input type="login" placeholder="Логин..." {...register("login", {
                         onChange: () => setServerError(null),
                     })}/>
@@ -105,9 +110,9 @@ const RegistrationContainer = ({className}) => {
                     <StyledLink to="/login">Вернуться к Авторизации</StyledLink>
                 </form>
             </div>
-            <div>
+            <ImageContainer>
                 <img src={imageMan} alt="Man"/>
-            </div>
+            </ImageContainer>
         </Content>
     )
 }
@@ -117,9 +122,14 @@ export const Registration = styled(RegistrationContainer)`
     flex-direction: column;
     align-items: center;
 
+    & .title-text {
+        margin: 8px 0;
+    }
+
     & > form {
         display: flex;
         flex-direction: column;
         width: 260px;
+        margin-top: 8px;
     }
 `

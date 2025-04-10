@@ -29,7 +29,6 @@ export const Shop = () => {
                     <Route path="/register" element={<Registration/>}/>
                     <Route path="/users" element={<Users/>}/>
                     <Route path="/catalog" element={<div>Каталог</div>}/>
-                    {/*<Route path="/product/:id" element={<div>Продукт</div>}/>*/}
                     <Route path="/basket" element={<div>Корзина</div>}/>
                     <Route path="/favorite" element={<div>Избранное</div>}/>
                     <Route path="/order" element={<div>Оформление заказа</div>}/>

@@ -10,27 +10,36 @@ const Title = styled.div`
     line-height: 1.3;
     text-shadow: -0.375rem 0.375rem 0.125rem #9f9f9f;
     position: relative;
-    letter-spacing: -10px;
+
+    & span {
+        font-weight: lighter;
+        letter-spacing: -12px;
+    }
 `
 
 const StyledLink = styled(Link)`
     background-color: #2C3333;
-    border: 1px solid #2C3333;
-    font-size: 1.2rem;
+    font-size: 20px;
     width: 17rem;
-    height: 5rem;
+    height: 5.24rem;
     align-content: center;
     text-align: center;
-    cursor: pointer;
     color: white;
     text-transform: uppercase;
     text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        transition: transform 0.8s ease;
+    }
 `
 
 const Air = "/airmax-main.png"
 const x1 = "/x-main/1.png"
 const x2 = "/x-main/2.png"
-const x3 = "/x-main/3.png"
+const x3 = "/x-main/2.png"
 
 const ImageContainer = styled.div`
     width: 50%;
@@ -49,10 +58,10 @@ const StyledJust = styled.div`
 `
 
 const StyledImage = styled.img`
-    position: relative; /* Абсолютное позиционирование */
-    right: 6%; /*  Настраиваем положение */
-    width: 130%; /*  Занимает всю ширину ImageContainer */
-    max-width: 1000px; /*  Ограничиваем максимальную ширину */
+    position: relative;
+    right: 6%;
+    width: 130%;
+    max-width: 1000px;
     height: auto;
 `
 
@@ -85,6 +94,7 @@ const MiddleImage = styled(PositionedImage)`
 const RightImage = styled(PositionedImage)`
     bottom: -40px;
     left: -5%;
+    rotate: -40deg;
 `
 
 const SocialIcons = styled.div`
@@ -105,6 +115,8 @@ const StyledIconLink = styled.a`
     color: #2C3333;
     padding: 18px;
     border: 1px solid #2C3333;
+
+
 `
 
 const MainPageContainer = ({className}) => {
@@ -116,7 +128,7 @@ const MainPageContainer = ({className}) => {
                     Your dream
                     <MiddleImage src={x2} alt="x"/>
                     shoes
-                    <span className="font-light tracking-[-12px]"> are here</span>
+                    <span> are here</span>
                     <RightImage src={x3} alt="x"/>
                 </Title>
                 <StyledContainer>

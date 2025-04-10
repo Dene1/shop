@@ -8,18 +8,11 @@
       "role_id": 0
     },
     {
-      "id": "ddb7",
-      "login": "qwe",
-      "password": "qwe123",
-      "registered_at": "2048-04-16 07:32",
-      "role_id": 2
-    },
-    {
-      "id": "e388",
-      "login": "qweq",
-      "password": "qwe123",
-      "registered_at": "2061-02-19 22:09",
-      "role_id": 2
+      "id": "779c",
+      "login": "denel",
+      "password": "qwerty123",
+      "registered_at": "2038-12-26 ",
+      "role_id": 1
     }
   ],
   "roles": [

@@ -1,4 +1,4 @@
 export const generateDate = () => new Date(Math.random() * 1000000000000 + 1999999999999)
     .toISOString()
-    .substring(0, 16)
+    .substring(0, 11)
     .replace("T", " ")

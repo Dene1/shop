@@ -79,11 +79,11 @@ export const UserRow = styled(UserRowContainer)`
         width: 20px;
         height: 30px;
         margin: 6px 0 0 6px;
-        text-align: center;
+        align-items: center;
     }
 
     & .remove-user-button {
-        margin: 0 0 0 10px;
+        margin: 3px 0 0 10px;
         cursor: pointer;
         align-items: center;
     }
