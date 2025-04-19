@@ -1,13 +1,12 @@
-import styled from "styled-components"
 import {Link, useNavigate} from "react-router-dom"
-import {FiUser, FiHeart, FiUsers} from "react-icons/fi";
-import {LuStepBack} from "react-icons/lu";
+import {FiHeart, FiUsers} from "react-icons/fi";
+import {LuStepBack, LuShoppingBag} from "react-icons/lu";
 import {FaSignOutAlt} from "react-icons/fa";
-import {PiHandbagSimpleBold} from "react-icons/pi";
 import {useDispatch, useSelector} from "react-redux"
 import {selectUserRole, selectUserLogin, selectUserSession} from "../../../../selectors"
 import {logout} from "../../../../actions"
 import {ROLE} from "../../../../constants"
+import styled from "styled-components"
 
 const RightAligned = styled.div`
     display: flex;
@@ -24,12 +23,11 @@ const StyledLink = styled(Link)`
     font-size: 18px;
     width: 100px;
     height: 30px;
-    border: 1px solid black;
-    border-radius: 6px;
+    border: 1px solid #2C3333;
 
     &:hover {
         cursor: pointer;
-        background-color: #e0e0e0;
+        background-color: #dedede;
     }
 `
 
@@ -55,6 +53,11 @@ const StyledButton = styled.button`
 
 const CursorPointer = styled.div`
     cursor: pointer;
+
+    & > .sign-out {
+        font-size: 18px;
+        margin-top: 4px;
+    }
 `
 
 const UserName = styled.div`
@@ -84,7 +87,7 @@ const ControlPanelContainer = ({className}) => {
                 <RightAligned>
                     <UserName>{login}</UserName>
                     <CursorPointer>
-                        <FaSignOutAlt onClick={handleLogout}/>
+                        <FaSignOutAlt className="sign-out" onClick={handleLogout}/>
                     </CursorPointer>
                 </RightAligned>
             )}
@@ -93,8 +96,7 @@ const ControlPanelContainer = ({className}) => {
                     <LuStepBack size={30}/>
                 </StyledButton>
                 <StyledIcon to="/favorites"><FiHeart size={30}/></StyledIcon>
-                <StyledIcon to="/basket"><PiHandbagSimpleBold size={30}/></StyledIcon>
-                <StyledIcon to="/login"><FiUser size={30}/></StyledIcon>
+                <StyledIcon to="/basket"><LuShoppingBag size={29}/></StyledIcon>
                 {roleId === ROLE.ADMIN &&
                     <StyledIcon to="/users"><FiUsers size={30}/></StyledIcon>}
             </RightAligned>

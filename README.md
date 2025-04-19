@@ -27,9 +27,8 @@
 Схема для редакс стора (на клиенте):
 
 - user: id / login / roleId
-- products: массив product: id / name / price / category / gender / imageUrl / amount /
+- products: массив product: id / name / price / category / gender / imageUrl / amount / brand
   reviewCount
 - product: id / name / price / category / gender / imageUrl / amount / reviews: массив
-  review: id /
-  author / content / publishedAt
+  review: id / author / content / publishedAt
 - users: массив user: id / login / registeredAt / role
