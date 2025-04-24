@@ -81,6 +81,8 @@ const CatalogContainer = ({className}) => {
         setSelectedPrice("All");
     }
 
+    // console.log(selectedGender, selectedBrand, selectedSize, selectedPrice)
+
     return (
         <div className={className}>
             <Filters
@@ -88,7 +90,12 @@ const CatalogContainer = ({className}) => {
                 onSizeFilter={handleSizeFilter}
                 onPriceFilter={handlePriceFilter}
                 onGenderFilter={handleGenderFilter}
-                onResetFilters={onResetFilters}/>
+                onResetFilters={onResetFilters}
+                selectedPrice={selectedPrice}
+                selectedBrand={selectedBrand}
+                selectedSize={selectedSize}
+                selectedGender={selectedGender}
+            />
             <div className="posts-and-search">
                 <div className="sort">
                     <select className="sort-select">
@@ -164,5 +171,13 @@ export const Catalog = styled(CatalogContainer)`
         margin: 20px 0 0 40px;
         grid-template-columns: repeat(3, 1fr);
         gap: 60px;
+    }
+
+    .no-posts-found {
+        text-align: center;
+        margin: 20px 0 0 40px;
+        font-size: 24px;
+        font-weight: 600;
+
     }
 `

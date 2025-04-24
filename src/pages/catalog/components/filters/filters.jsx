@@ -43,6 +43,8 @@ const FiltersContainer = ({
         onPriceFilter(parsePriceRange(priceRange));
     }
 
+    console.log(selectedGender, selectedBrand, selectedSize, selectedPrice)
+
     return (
         <div className={className}>
             <div className="filters-title">Фильтры</div>
