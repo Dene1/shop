@@ -1,10 +1,12 @@
-import styled from "styled-components"
-import {useEffect, useMemo, useState} from "react"
+import React, {useEffect, useMemo, useState} from "react"
 import {useServerRequest} from "../../hooks/index.js"
 import {debounce, getLastPageFromLinks} from "./utils/index.js"
 import {PAGINATION_LIMIT} from "../../constants/index.js"
-import {Filters, Pagination, ProductCard} from "./components/index.js"
+import {Filters, Pagination, ProductList} from "./components/index.js"
 import {Search} from "../../components/header/components/index.js"
+import {Loader} from "../../components/index.js"
+import styled from "styled-components"
+import {FILTER_CATALOG, Select} from "./components/filters/components/index.js"
 
 const CatalogContainer = ({className}) => {
     const [products, setProducts] = useState([])
@@ -12,42 +14,36 @@ const CatalogContainer = ({className}) => {
     const [lastPage, setLastPage] = useState(1)
     const [searchPhrase, setSearchPhrase] = useState("")
     const [shouldSearch, setShouldSearch] = useState(false)
-    const [selectedGender, setSelectedGender] = useState("")
-    const [selectedBrand, setSelectedBrand] = useState("")
-    const [selectedSize, setSelectedSize] = useState("")
-    const [selectedPrice, setSelectedPrice] = useState("")
+    const [selectedGender, setSelectedGender] = useState("Unisex")
+    const [selectedBrand, setSelectedBrand] = useState("All")
+    const [selectedSize, setSelectedSize] = useState("All")
+    const [selectedPrice, setSelectedPrice] = useState("All")
+    const [filter, setFilter] = useState(FILTER_CATALOG[0])
+    const [isLoading, setIsLoading] = useState(true)
     const requestServer = useServerRequest()
 
     useEffect(() => {
+        setIsLoading(true)
         requestServer("fetchProducts", searchPhrase, page, PAGINATION_LIMIT)
             .then(({res: {products, links}}) => {
                 setProducts(products);
                 setLastPage(getLastPageFromLinks(links));
             })
-    }, [requestServer, page, shouldSearch,]);
+            .finally(() => setIsLoading(false))
+    }, [requestServer, page, shouldSearch]);
 
-    const startDelayedSearch = useMemo(() => debounce(setShouldSearch, 2000), [])
+    const startDelayedSearch = useMemo(() => debounce(setShouldSearch, 500), [])
 
     const onSearch = ({target}) => {
         setSearchPhrase(target.value)
         startDelayedSearch(!shouldSearch)
     }
 
-    const handleGenderFilter = (gender) => {
-        setSelectedGender(gender)
-    }
-
-    const handleBrandFilter = (brand) => {
-        setSelectedBrand(brand);
-    };
-
-    const handleSizeFilter = (size) => {
-        setSelectedSize(size);
-    };
-
-    const handlePriceFilter = (price) => {
-        setSelectedPrice(price);
-    };
+    const handleGenderFilter = (gender) => setSelectedGender(gender)
+    const handleBrandFilter = (brand) => setSelectedBrand(brand)
+    const handleSizeFilter = (size) => setSelectedSize(size)
+    const handlePriceFilter = (price) => setSelectedPrice(price)
+    const handleFilterChange = (event) => setFilter(event.target.value)
 
     const renderProducts = useMemo(() => {
         let filteredProducts = [...products];
@@ -64,6 +60,14 @@ const CatalogContainer = ({className}) => {
             filteredProducts = filteredProducts.filter(product => product.size.includes(selectedSize))
         }
 
+        if (filter && filter !== FILTER_CATALOG[0]) {
+            if (filter === FILTER_CATALOG[1]) {
+                filteredProducts = filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            } else if (filter === FILTER_CATALOG[2]) {
+                filteredProducts = filteredProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+            }
+        }
+
         if (selectedPrice && selectedPrice !== "All") {
             const {minPrice, maxPrice} = selectedPrice;
             filteredProducts = filteredProducts.filter(product => {
@@ -72,7 +76,7 @@ const CatalogContainer = ({className}) => {
             });
         }
         return filteredProducts;
-    }, [products, selectedGender, selectedBrand, selectedSize, selectedPrice]);
+    }, [products, selectedGender, selectedBrand, selectedSize, filter, selectedPrice]);
 
     const onResetFilters = () => {
         setSelectedGender("Unisex");
@@ -81,7 +85,9 @@ const CatalogContainer = ({className}) => {
         setSelectedPrice("All");
     }
 
-    // console.log(selectedGender, selectedBrand, selectedSize, selectedPrice)
+    if (!renderProducts || renderProducts.length === 0) {
+        return <div className="no-posts-found">Продукции не найдено</div>;
+    }
 
     return (
         <div className={className}>
@@ -98,43 +104,17 @@ const CatalogContainer = ({className}) => {
             />
             <div className="posts-and-search">
                 <div className="sort">
-                    <select className="sort-select">
-                        <option value="default">По умолчанию</option>
-                        <option value="name-a">По названию</option>
-                        <option value="price-high">По возрастанию цены</option>
-                        <option value="price-low">По убыванию цены</option>
-                    </select>
+                    <Select onChange={handleFilterChange}
+                            children={FILTER_CATALOG}
+                            value={filter}/>
                     <Search onChange={onSearch} searchPhrase={searchPhrase}/>
                 </div>
-
-                {renderProducts.length > 0 ? (
-                    <div className="products">
-                        <div className="product-list">
-                            {renderProducts.map(({
-                                                     id,
-                                                     title,
-                                                     price,
-                                                     category,
-                                                     imageUrl,
-                                                     brand,
-                                                     reviewsCount
-                                                 }) =>
-                                <ProductCard key={id}
-                                             id={id}
-                                             title={title}
-                                             price={price}
-                                             category={category}
-                                             imageUrl={imageUrl}
-                                             brand={brand}
-                                             reviewsCount={reviewsCount}
-                                />)}
-                        </div>
-                    </div>) : (
-                    <div className="no-posts-found">Продукции не найдено</div>)}
+                <ProductList
+                    renderProducts={renderProducts}
+                    page={page}
+                    setPage={setPage}
+                    lastPage={lastPage}/>
             </div>
-            {lastPage > 1 && renderProducts.length > 0 && (
-                <Pagination page={page} lastPage={lastPage} setPage={setPage}/>
-            )}
         </div>
     )
 }
@@ -142,14 +122,9 @@ const CatalogContainer = ({className}) => {
 export const Catalog = styled(CatalogContainer)`
     display: flex;
     flex-direction: row;
+    gap: 10px;
     font-size: 18px;
     margin: 20px;
-
-    .products {
-        margin: 20px;
-        display: flex;
-        flex-direction: row;
-    }
 
     .sort {
         margin-left: 60px;
@@ -160,24 +135,16 @@ export const Catalog = styled(CatalogContainer)`
         align-items: flex-end;
     }
 
-    .sort-select {
-        height: 20px;
-        width: 160px;
-    }
-
-    .product-list {
-        display: grid;
-        align-items: center;
-        margin: 20px 0 0 40px;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 60px;
-    }
-
     .no-posts-found {
         text-align: center;
         margin: 20px 0 0 40px;
         font-size: 24px;
         font-weight: 600;
-
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 `

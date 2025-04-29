@@ -1,28 +1,30 @@
 import styled from "styled-components"
-import {Button} from "../../../../components/index.js"
 
 const PaginationContainer = ({className, page, lastPage, setPage}) => {
     return (
         <div className={className}>
             <button disabled={page === 1} onClick={() => setPage(1)}>В начало</button>
             <button disabled={page === 1}
-                    onClick={() => setPage(page - 1)}>Предыдущая</button>
+                    onClick={() => setPage(page - 1)}>Предыдущая
+            </button>
             <div className="current-page">Страница: {page}</div>
             <button disabled={page === lastPage}
-                    onClick={() => setPage(page + 1)}>Следующая</button>
+                    onClick={() => setPage(page + 1)}>Следующая
+            </button>
             <button disabled={page === lastPage} onClick={() => setPage(lastPage)}>В
-                конец</button>
+                конец
+            </button>
         </div>
     )
 }
 
 export const Pagination = styled(PaginationContainer)`
     display: flex;
-    position: absolute;
-    width: 76.3%;
-    bottom: 160px;
+    width: 73%;
     right: 100px;
-    margin: 0 0 20px;
+    position: absolute;
+    bottom: 170px;
+    margin: 0 0 10px;
     padding: 0 35px;
 
     button {
@@ -32,9 +34,22 @@ export const Pagination = styled(PaginationContainer)`
         font-size: 18px;
         font-weight: 500;
         text-align: center;
-        border: 1px solid black;
+        border: 1px solid #5b6969;
         line-height: 26px;
         background-color: #dedede;
+    }
+
+    button:hover {
+        cursor: pointer;
+        background-color: transparent;
+        color: #2C3333;
+        border: 1px solid #5b6969;
+    }
+
+    button:disabled {
+        cursor: not-allowed;
+        background-color: #dedede;
+        color: #2C3333;
     }
 
     .current-page {

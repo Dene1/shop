@@ -3,11 +3,12 @@ import {Link} from "react-router-dom"
 import {FaTelegramPlane, FaGithub, FaInstagram} from "react-icons/fa";
 
 const Title = styled.div`
-    padding-top: 4rem;
+    padding-top: 8rem;
     font-size: 9rem;
     text-transform: uppercase;
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.2;
+    transform: scaleY(1.2);
     text-shadow: -0.375rem 0.375rem 0.125rem #9f9f9f;
     position: relative;
 
@@ -52,8 +53,9 @@ const StyledJust = styled.div`
     opacity: 0.2;
     text-transform: uppercase;
     font-weight: 200;
-    line-height: 1.4;
-    top: 3%;
+    line-height: 1.3;
+    transform: scaleY(1.2);
+    top: 10%;
     letter-spacing: -10px;
 `
 
@@ -78,21 +80,20 @@ const PositionedImage = styled.img`
     height: auto;
 `
 
-const LeftImage = styled(PositionedImage)`
-    top: 10%;
+const TopImage = styled(PositionedImage)`
+    top: 12%;
     left: 70%;
-    width: 6rem;
+    width: 4rem;
 `
 
 const MiddleImage = styled(PositionedImage)`
     top: 60%;
     left: 84%;
-    width: 5rem;
     transform: translate(-50%, -50%);
 `
 
 const RightImage = styled(PositionedImage)`
-    bottom: -40px;
+    bottom: -60px;
     left: -5%;
     rotate: -40deg;
 `
@@ -107,7 +108,7 @@ const SocialIcons = styled.div`
 const StyledContainer = styled.div`
     display: flex;
     justify-content: space-around;
-    margin-top: 12px;
+    margin-top: 120px;
 `
 
 const StyledIconLink = styled.a`
@@ -115,8 +116,6 @@ const StyledIconLink = styled.a`
     color: #2C3333;
     padding: 18px;
     border: 1px solid #2C3333;
-
-
 `
 
 const MainPageContainer = ({className}) => {
@@ -124,7 +123,7 @@ const MainPageContainer = ({className}) => {
         <div className={className}>
             <InnerContainer>
                 <Title>
-                    <LeftImage src={x1} alt="x"/>
+                    <TopImage src={x1} alt="x"/>
                     Your dream
                     <MiddleImage src={x2} alt="x"/>
                     shoes
@@ -159,6 +158,7 @@ const MainPageContainer = ({className}) => {
 }
 
 export const MainPage = styled(MainPageContainer)`
+    margin: 0 auto;
     padding: 0 3rem;
     display: flex;
     flex-direction: row;

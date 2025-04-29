@@ -26,24 +26,16 @@ const FiltersContainer = ({
         return {minPrice: parseFloat(min), maxPrice: parseFloat(max)};
     };
 
-    const handleGenderFilter = (event) => {
-        onGenderFilter(event.target.value)
-    }
+    const handleGenderFilter = (event) =>  onGenderFilter(event.target.value)
 
-    const handleBrandFilter = (event) => {
-        onBrandFilter(event.target.value)
-    }
+    const handleBrandFilter = (event) =>  onBrandFilter(event.target.value)
 
-    const handleSizeFilter = (event) => {
-        onSizeFilter(event.target.value)
-    }
+    const handleSizeFilter = (event) =>  onSizeFilter(event.target.value)
 
     const handlePriceFilter = (event) => {
         const priceRange = event.target.value;
         onPriceFilter(parsePriceRange(priceRange));
     }
-
-    console.log(selectedGender, selectedBrand, selectedSize, selectedPrice)
 
     return (
         <div className={className}>
@@ -74,7 +66,7 @@ export const Filters = styled(FiltersContainer)`
     display: flex;
     flex-direction: column;
     width: 200px;
-    margin-top: 80px;
+    margin: 80px 0 0 40px;
 
     .filters-title {
         font-size: 24px;
@@ -88,7 +80,7 @@ export const Filters = styled(FiltersContainer)`
     }
 
     .filters-reset {
-        margin: 30px 0 0 10px;
+        margin: 30px 0 0 0;
         font-size: 20px;
         width: 200px;
         height: 40px;

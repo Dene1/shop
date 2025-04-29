@@ -17,7 +17,7 @@ export const Select = styled(SelectContainer)`
     margin: 10px 0 10px 10px;
 
     select {
-        width: 120px;
+        width: 160px;
         height: 20px;
         margin: 10px 0 0 10px;
     }

@@ -1,9 +1,9 @@
 import {setProductData} from "./set-product-data.js"
 
 export const loadProductAsync = (requestServer, productId) => (dispatch) =>
-    requestServer("fetchProduct", productId).then((postData) => {
-        if (postData.res) {
-            dispatch(setProductData(postData.res))
+    requestServer("fetchProduct", productId).then((productData) => {
+        if (productData.res) {
+            dispatch(setProductData(productData.res))
         }
-        return postData
+        return productData
     })

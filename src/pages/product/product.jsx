@@ -1,13 +1,15 @@
-import styled from "styled-components"
 import {useDispatch, useSelector} from "react-redux"
 import {useMatch, useParams} from "react-router-dom"
 import {useEffect, useLayoutEffect, useState} from "react"
 import {useServerRequest} from "../../hooks/index.js"
 import {loadProductAsync, RESET_PRODUCT_DATA} from "../../actions/index.js"
-import {ROLE} from "../../constants/index.js"
 import {selectProduct} from "../../selectors/index.js"
+import {Error, PrivateContent} from "../../components/index.js"
+import {ROLE} from "../../constants/index.js"
+import {ProductContent, Reviews} from "./components/index.js"
+import styled from "styled-components"
 
-const ProductContainer = () => {
+const ProductContainer = ({className}) => {
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
     const params = useParams()
@@ -15,7 +17,7 @@ const ProductContainer = () => {
     const isCreating = !!useMatch("/product")
     const isEditing = !!useMatch("/product/:id/edit")
     const requestServer = useServerRequest()
-    const post = useSelector(selectProduct)
+    const product = useSelector(selectProduct)
 
     useLayoutEffect(() => {
         dispatch(RESET_PRODUCT_DATA)
@@ -27,8 +29,8 @@ const ProductContainer = () => {
             return
         }
 
-        dispatch(loadProductAsync(requestServer, params.id)).then((postData) => {
-            setError(postData.error)
+        dispatch(loadProductAsync(requestServer, params.id)).then((productData) => {
+            setError(productData.error)
             setIsLoading(false)
         })
     }, [dispatch, isCreating, params.id, requestServer]);
@@ -37,18 +39,18 @@ const ProductContainer = () => {
         return null
     }
 
-    // const SpecificPostPage = isCreating || isEditing ? (
-    //     <PrivateContent access={[ROLE.ADMIN]}>
-    //         <div className={className}>
-    //             <PostForm post={post}/>
-    //         </div>
-    //     </PrivateContent>
-    // ) : (
-    //     <div className={className}>
-    //         <PostContent post={post}/>
-    //         <Comments comments={post.comments} postId={post.id}/>
-    //     </div>
-    // )
+    const SpecificPostPage = isCreating || isEditing ? (
+        <PrivateContent access={[ROLE.ADMIN]}>
+            <div className={className}>
+                {/*<PostForm product={product}/>*/}
+            </div>
+        </PrivateContent>
+    ) : (
+        <div className={className}>
+            <ProductContent product={product}/>
+            <Reviews reviews={product.reviews} postId={product.id}/>
+        </div>
+    )
 
     return error ? <Error error={error}/> : SpecificPostPage
 }
