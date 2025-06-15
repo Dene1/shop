@@ -38,7 +38,7 @@ const FooterContainer = ({className}) => {
             </StyledContainer>
             <StyledContainer>
                  <span style={{display: " flex", justifyItem: " center"}}>
-                     <TfiLocationPin size={18}/>
+                     <TfiLocationPin size={18} />
                      Denel Sneakers
                  </span>
                 <div>1234 Shoe Street, Fashion City</div>
@@ -68,5 +68,5 @@ export const Footer = styled(FooterContainer)`
     box-shadow: 0 2px 17px black;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    z-index: 1;
+    z-index: 5;
 `

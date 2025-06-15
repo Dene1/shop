@@ -1,10 +1,10 @@
-import {addReview, getProduct} from "../api"
+import {deleteReview, getProduct} from "../api"
 import {sessions} from "../sessions.js"
 import {ROLE} from "../constants/index.js"
 import {getProductReviewsWithAuthor} from "../utils/index.js"
 
-export const addProductComment = async (hash, userId, productId, content) => {
-    const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR, ROLE.READER]
+export const removeProductReview = async (hash, productId, id) => {
+    const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR]
 
     const access = await sessions.access(hash, accessRoles)
 
@@ -15,17 +15,17 @@ export const addProductComment = async (hash, userId, productId, content) => {
         }
     }
 
-    await addReview(userId, productId, content)
+    await deleteReview(id)
 
     const product = await getProduct(productId)
 
-    const commentsWithAuthor = await getProductReviewsWithAuthor(productId)
+    const reviewsWithAuthor = await getProductReviewsWithAuthor(productId)
 
     return {
         error: null,
         res: {
             ...product,
-            comments: commentsWithAuthor,
+            reviews: reviewsWithAuthor,
         },
     }
 }

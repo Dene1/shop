@@ -85,7 +85,7 @@ const RegistrationContainer = ({className}) => {
     const errorMessage = formError || serverError
 
     if (roleID !== ROLE.GUEST) {
-        return <Navigate to="/"/>
+        return <Navigate to="/" />
     }
 
     return (
@@ -94,25 +94,30 @@ const RegistrationContainer = ({className}) => {
                 <H2>Register</H2>
                 <div className="title-text">Hello! Please enter your details.</div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Input type="login" placeholder="Логин..." {...register("login", {
+                    <Input type="login"
+                           placeholder="Логин..." {...register("login", {
                         onChange: () => setServerError(null),
-                    })}/>
+                    })} />
                     <Input type="password"
                            placeholder="Пароль..."  {...register("password", {
                         onChange: () => setServerError(null),
-                    })}/>
+                    })} />
                     <Input type="password"
                            placeholder="Повторите пароль..." {...register("passcheck", {
                         onChange: () => setServerError(null),
-                    })}/>
-                    <Button type="submit" disabled={!!formError}>Зарегистрироваться
+                    })} />
+                    <Button type="submit"
+                            disabled={!!formError}
+                    >Зарегистрироваться
                     </Button>
                     {errorMessage && <AuthFormError>{errorMessage}</AuthFormError>}
                     <StyledLink to="/login">Вернуться к Авторизации</StyledLink>
                 </form>
             </div>
             <ImageContainer>
-                <img src={imageMan} alt="Man"/>
+                <img src={imageMan}
+                     alt="Man"
+                />
             </ImageContainer>
         </Content>
     )

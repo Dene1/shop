@@ -5,7 +5,6 @@ export const fetchProducts = async (searchPhrase, page, limit) => {
     const [{products, links}, reviews] = await Promise.all([
         getProducts(searchPhrase, page, limit),
         getReview()])
-
     return {
         error: null,
         res: {

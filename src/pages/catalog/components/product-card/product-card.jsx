@@ -2,6 +2,8 @@ import {Link} from "react-router-dom"
 import {FiHeart} from "react-icons/fi";
 import {FaStar} from "react-icons/fa";
 import styled from "styled-components"
+import {addToCart} from "../../../../actions/index.js"
+import {useDispatch} from "react-redux"
 
 const ProductCardContainer = ({
                                   className,
@@ -13,29 +15,47 @@ const ProductCardContainer = ({
                                   imageUrl,
                                   reviewsCount
                               }) => {
+    const dispatch = useDispatch()
+
+    const handleAddToCart = (id) => dispatch(addToCart(id))
+
     return (
         <div className={className}>
+            <FiHeart className="favorite"
+                     size="26px"
+            />
             <Link to={`/product/${id}`}>
-                <FiHeart className="qwe" size="26px"/>
-                <img src={imageUrl ? imageUrl : undefined} alt={title}/>
+                <img src={imageUrl ? imageUrl : undefined}
+                     alt={title}
+                />
+
                 <div className="product-card-footer">
-                    <div className="product-card--price">{price}$</div>
                     <div className="product-card--title">{title}</div>
+                    <div className="product-card--price">{price}$</div>
 
                     <div>{category}</div>
                     <div className="reviews-count">
                         <div>{brand}</div>
                         <div className="rating">
-                            <FaStar style={{fill: "#dca109"}} size="18px"/> 0.0
-                            ({reviewsCount})
+                            <FaStar style={{fill: "#dca109"}}
+                                    size="18px"
+                            />
+                            0.0 ({reviewsCount})
                         </div>
-
                     </div>
+
                     <div className="product-card-buttons">
-                        <button className="add-to-cart">add to cart</button>
+                        <button className="add-to-cart"
+                                onClick={(e) => {
+                                    handleAddToCart(id);
+                                    e.stopPropagation();
+                                }}
+                        >add to cart
+                        </button>
                     </div>
                 </div>
             </Link>
+
         </div>
     )
 }
@@ -44,64 +64,58 @@ export const ProductCard = styled(ProductCardContainer)`
     display: flex;
     flex-direction: column;
     width: 300px;
-    border: 1px solid black;
+    border: 1px solid #2C3333;
     position: relative;
 
-    .qwe {
-        cursor: pointer;
+    .favorite {
         position: absolute;
         top: 10px;
         left: 10px;
-    }
+        z-index: 1;
 
-    .qwe:hover {
-        fill: #EA454C;
-    }
-
-    .qwe:active {
-        opacity: 0.2;
+        &:hover {
+            fill: #EA454C;
+            cursor: pointer;
+            stroke: #5c656e;
+        }
     }
 
     .product-card--price {
         font-size: 24px;
         font-weight: 600;
         color: #5c656e;
+        margin-top: auto;
     }
 
     .product-card--title {
         font-size: 22px;
         font-weight: 600;
         text-align: center;
-    }
-
-    .add-to-favorites {
-        width: 40px;
-        height: 40px;
-        background-color: transparent;
-        cursor: pointer;
+        height: 2.2em;
+        display: flex;
         align-items: center;
-    }
-
-    .add-to-favorites:hover {
-        color: white;
-        background-color: #EA454C;
-        border: none;
+        justify-content: center;
     }
 
     .add-to-cart {
         width: 120px;
         height: 40px;
-        border: 1px solid black;
+        border: 1px solid #2C3333;
         color: white;
         background-color: #2C3333;
-        cursor: pointer;
         text-transform: uppercase;
-    }
 
-    .add-to-cart:hover {
-        background-color: #dedede;
-        color: #2C3333;
-        border: 1px solid #2C3333;
+        &:hover {
+            background-color: #dedede;
+            color: #2C3333;
+            border: 1px solid #2C3333;
+            cursor: pointer;
+        }
+
+        &:active {
+            background-color: #EA454C;
+            color: #dedede;
+        }
     }
 
     img {
@@ -112,7 +126,7 @@ export const ProductCard = styled(ProductCardContainer)`
 
     .product-card-footer {
         padding: 5px;
-        border-top: 1px solid black;
+        border-top: 1px solid #2C3333;
     }
 
     .product-card-buttons {

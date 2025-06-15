@@ -1,6 +1,6 @@
 import {useState} from "react"
+import {FaRegPaperPlane} from "react-icons/fa";
 import {Review} from "./components"
-import {Icon} from "../../../../components"
 import {useDispatch, useSelector} from "react-redux"
 import {selectUserId, selectUserRole} from "../../../../selectors"
 import {useServerRequest} from "../../../../hooks"
@@ -24,20 +24,25 @@ const ReviewsContainer = ({className, reviews, productId}) => {
 
     return (
         <div className={className}>
+            <span>Reviews</span>
             {!isGuest && (
                 <div className="new-review">
                 <textarea
                     name="review"
                     value={newReview}
                     placeholder="Комментарий..."
-                    onChange={({target}) => setNewReview(target.value)}>
+                    onChange={({target}) => setNewReview(target.value)}
+                >
 
                 </textarea>
-                    <Icon id="fa-paper-plane-o" size="18px" margin="5px 0 0 10px"
-                          onClick={() => onNewReviewAdd(userId, productId, newReview)}
-                    />
+                    <div className="paper-plane">
+                        <FaRegPaperPlane size="18px"
+                                         onClick={() => onNewReviewAdd(userId, productId, newReview)}
+                        />
+                    </div>
                 </div>
             )}
+
             <div className="reviews">
                 {reviews.map(({id, author, content, publishedAt}) => (
                     <Review
@@ -64,11 +69,24 @@ export const Reviews = styled(ReviewsContainer)`
         width: 100%;
     }
 
+    span {
+        display: block;
+        margin: 10px 0 10px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 24px;
+    }
+
+    .paper-plane {
+        margin: 4px 0 0 10px;
+        cursor: pointer;
+    }
+
     .new-review textarea {
         width: 550px;
         height: 120px;
         font-size: 18px;
         resize: none;
-        padding: 4px 0 0 8px;
+        padding: 4px 0 0 10px;
     }
 `

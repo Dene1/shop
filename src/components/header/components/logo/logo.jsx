@@ -41,7 +41,9 @@ const IconContainer = styled.div`
 `
 
 const LogoContainer = ({className}) => (
-    <Link to="/" className={className}>
+    <Link to="/"
+          className={className}
+    >
         <IconContainer>
             <LargeText>Denel</LargeText>
             <SmallText>Sneakers</SmallText>

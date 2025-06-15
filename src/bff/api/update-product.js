@@ -4,6 +4,7 @@ export const updateProduct = ({
                                   title,
                                   price,
                                   category,
+                                  size,
                                   gender,
                                   description
                               }) =>
@@ -19,6 +20,7 @@ export const updateProduct = ({
             category,
             gender,
             description,
+            size: size
 
         }),
     }).then((loadedPost) => loadedPost.json())

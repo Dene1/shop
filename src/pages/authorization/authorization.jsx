@@ -76,29 +76,35 @@ const AuthorizationContainer = ({className}) => {
     const errorMessage = formError || serverError
 
     if (roleID !== ROLE.GUEST) {
-        return <Navigate to="/"/>
+        return <Navigate to="/" />
     }
 
     return (
         <Content>
             <div className={className}>
                 <div className="title">Welcome back</div>
-                <div className="title-text">Welcome back! <br/> Please enter your details.
+                <div className="title-text">Welcome back! <br /> Please enter your
+                    details.
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Input type="login" placeholder="Логин..." {...register("login", {
+                    <Input type="login"
+                           placeholder="Логин..." {...register("login", {
                         onChange: () => setServerError(null),
-                    })}/>
+                    })} />
                     <Input type="password"
                            placeholder="Пароль..." {...register("password", {
                         onChange: () => setServerError(null),
-                    })}/>
-                    <Button type="submit" disabled={!!formError}>Авторизоваться</Button>
+                    })} />
+                    <Button type="submit"
+                            disabled={!!formError}
+                    >Авторизоваться</Button>
                     {errorMessage && <AuthFormError>{errorMessage}</AuthFormError>}
                     <StyledLink to="/register">Регистрация</StyledLink>
                 </form>
             </div>
-            <img src={imageMan} alt="Man"/>
+            <img src={imageMan}
+                 alt="Man"
+            />
         </Content>
     )
 }

@@ -1,9 +1,10 @@
-import {Icon} from "../../../../../../components"
 import {CLOSE_MODAL, openModal, removeReviewAsync} from "../../../../../../actions"
 import {useDispatch, useSelector} from "react-redux"
 import {useServerRequest} from "../../../../../../hooks"
 import {selectUserRole} from "../../../../../../selectors"
 import {ROLE} from "../../../../../../constants"
+import {FaRegCalendarAlt, FaRegTrashAlt} from "react-icons/fa";
+import {FaUserCircle} from "react-icons/fa";
 import styled from "styled-components"
 
 const ReviewContainer = ({className, productId, id, author, content, publishedAt}) => {
@@ -29,25 +30,24 @@ const ReviewContainer = ({className, productId, id, author, content, publishedAt
             <div className="review">
                 <div className="information-panel">
                     <div className="author">
-                        <Icon id="fa-user-circle-o" margin="0 7px 0 0" size="18px"/>
-                        {author}
+                        <FaUserCircle size="18px" />
+                        <div className="author-name"> {author}</div>
                     </div>
                     <div className="published-at">
-                        <Icon
-                            inactive={true}
-                            id="fa-calendar-o"
-                            margin="0 7px 0 0"
-                            size="18px"/>
-                        {publishedAt}
+                        <FaRegCalendarAlt size="18px" />
+                        <div className="published-at"> {publishedAt}</div>
                     </div>
                 </div>
                 <div className="review-text">{content}</div>
             </div>
 
             {isAdminOrModerator && (
-                <Icon id="fa-trash-o" margin="5px 0 0 10px" size="20px"
-                      onClick={() => onReviewRemove(id)}
-                />
+                <div className="remove-review">
+                    <FaRegTrashAlt size="20px"
+                                   className="remove-review-icon"
+                                   onClick={() => onReviewRemove(id)}
+                    />
+                </div>
             )}
         </div>
     )
@@ -63,9 +63,17 @@ export const Review = styled(ReviewContainer)`
         width: 550px;
     }
 
+    .published-at {
+        margin: 0 0 0 5px;
+    }
+
     .information-panel {
         display: flex;
         justify-content: space-between;
+    }
+
+    .author-name {
+        margin: 0 0 0 5px;
     }
 
     .author {
@@ -78,5 +86,13 @@ export const Review = styled(ReviewContainer)`
 
     .review-text {
         margin: 10px 0 0;
+    }
+
+    .remove-review {
+        margin: 5px 0 0 8px;
+    }
+
+    .remove-review-icon {
+        cursor: pointer;
     }
 `

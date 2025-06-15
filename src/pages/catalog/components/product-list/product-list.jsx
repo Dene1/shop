@@ -3,7 +3,6 @@ import {ProductCard} from "../product-card/product-card.jsx"
 import {Pagination} from "../pagination/pagination.jsx"
 import styled from "styled-components"
 
-
 export const ProductListContainer = ({
                                          className,
                                          renderProducts,
@@ -15,7 +14,6 @@ export const ProductListContainer = ({
     return (
         <div className={className}>
             <div className="product-list">
-
                 {renderProducts.map(({
                                          id,
                                          title,
@@ -38,7 +36,10 @@ export const ProductListContainer = ({
                 ))}
             </div>
             {lastPage > 1 && renderProducts.length > 0 && (
-                <Pagination page={page} lastPage={lastPage} setPage={setPage}/>
+                <Pagination page={page}
+                            lastPage={lastPage}
+                            setPage={setPage}
+                />
             )}
         </div>
     );
@@ -51,7 +52,7 @@ export const ProductList = styled(ProductListContainer)`
 
     .product-list {
         display: grid;
-        align-items: center;
+        align-items: stretch;
         margin: 20px 0 0 40px;
         grid-template-columns: repeat(3, 1fr);
         gap: 40px;

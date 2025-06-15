@@ -3,8 +3,8 @@ import {ControlPanel, Logo} from "./components/index.js"
 
 const HeaderContainer = ({className}) => (
     <header className={className}>
-        <Logo/>
-        <ControlPanel/>
+        <Logo />
+        <ControlPanel />
     </header>
 )
 
@@ -21,5 +21,5 @@ export const Header = styled(HeaderContainer)`
     box-shadow: 0 -2px 17px black;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    z-index: 1;
+    z-index: 5;
 `

@@ -15,7 +15,7 @@ export const sessions = {
             return
         }
 
-       await deleteSession(session.id)
+        await deleteSession(session.id)
     },
 
     async access(hash, accessRoles) {

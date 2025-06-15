@@ -4,8 +4,12 @@ import styled from "styled-components"
 
 const LoaderContainer = ({className, isLoading}) => {
     return (
-        <div className={className} aria-busy={isLoading}>
-            {isLoading && <DotSpinner color="#EA454C" size={50}/>}
+        <div className={className}
+             aria-busy={isLoading}
+        >
+            {isLoading && <DotSpinner color="#EA454C"
+                                      size={50}
+            />}
         </div>
     )
 }

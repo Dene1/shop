@@ -1,12 +1,22 @@
 import {Route, Routes} from "react-router-dom"
-import {Footer, Header, Loader} from "./components/index.js"
-import {Authorization, MainPage, Product, Registration, Users} from "./pages/index.js"
-import {Catalog} from "./pages/index.js"
-import {setUser} from "./actions/index.js"
-import {useLayoutEffect} from "react"
+import {Footer, Header, Modal} from "./components/index.js"
+import {
+    Authorization,
+    Favorites,
+    MainPage,
+    Product,
+    Registration,
+    Users,
+    Cart,
+    Catalog
+} from "./pages/index.js"
+import {loadCartAsync, setUser} from "./actions/index.js"
+import {useEffect, useLayoutEffect} from "react"
 import {useDispatch} from "react-redux"
 import {ERROR} from "./constants/index.js"
 import styled from "styled-components"
+import {getCart} from "./bff/api/get-cart.js"
+import {useServerRequest} from "./hooks/index.js"
 
 const AppColumn = styled.div`
     display: flex;
@@ -20,11 +30,16 @@ const AppColumn = styled.div`
 `
 
 const Content = styled.div`
-    padding: 120px 0;
+    padding: 120px 0 60px 0;
 `
 
 export const Shop = () => {
     const dispatch = useDispatch()
+    const requestServer = useServerRequest()
+
+    useEffect(() => {
+
+    }, [dispatch, requestServer])
 
     useLayoutEffect(() => {
 
@@ -41,23 +56,46 @@ export const Shop = () => {
 
     return (
         <AppColumn>
-            <Header/>
+            <Header />
             <Content>
                 <Routes>
-                    <Route path="/" element={<MainPage/>}/>
-                    <Route path="/login" element={<Authorization/>}/>
-                    <Route path="/register" element={<Registration/>}/>
-                    <Route path="/users" element={<Users/>}/>
-                    <Route path="/catalog" element={<Catalog/>}/>
-                    <Route path="/product/:id" element={<Product/>}/>
-                    <Route path="/product/:id/edit" element={<Product/>}/>
-                    <Route path="/basket" element={<div>Корзина</div>}/>
-                    <Route path="/favorite" element={<div>Избранное</div>}/>
-                    <Route path="/order" element={<div>Оформление заказа</div>}/>
-                    <Route path="*" element={ERROR.PAGE_NOT_EXIST}/>
+                    <Route path="/"
+                           element={<MainPage />}
+                    />
+                    <Route path="/login"
+                           element={<Authorization />}
+                    />
+                    <Route path="/register"
+                           element={<Registration />}
+                    />
+                    <Route path="/users"
+                           element={<Users />}
+                    />
+                    <Route path="/catalog"
+                           element={<Catalog />}
+                    />
+                    <Route path="/product/:id"
+                           element={<Product />}
+                    />
+                    <Route path="/product/:id/edit"
+                           element={<Product />}
+                    />
+                    <Route path="/cart"
+                           element={<Cart />}
+                    />
+                    <Route path="/favorites"
+                           element={<Favorites />}
+                    />
+                    <Route path="/order"
+                           element={<div>Оформление заказа</div>}
+                    />
+                    <Route path="*"
+                           element={ERROR.PAGE_NOT_EXIST}
+                    />
                 </Routes>
             </Content>
-            <Footer/>
+            <Footer />
+            <Modal />
         </AppColumn>
     )
 }

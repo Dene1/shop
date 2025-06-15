@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import {Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import {FaTelegramPlane, FaGithub, FaInstagram} from "react-icons/fa";
+import {Button} from "../../components/index.js"
 
 const Title = styled.div`
-    padding-top: 8rem;
+    padding-top: 7rem;
     font-size: 9rem;
     text-transform: uppercase;
     font-weight: 600;
@@ -18,25 +19,6 @@ const Title = styled.div`
     }
 `
 
-const StyledLink = styled(Link)`
-    background-color: #2C3333;
-    font-size: 20px;
-    width: 17rem;
-    height: 5.24rem;
-    align-content: center;
-    text-align: center;
-    color: white;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: 500;
-
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-        transition: transform 0.8s ease;
-    }
-`
-
 const Air = "/airmax-main.png"
 const x1 = "/x-main/1.png"
 const x2 = "/x-main/2.png"
@@ -47,24 +29,23 @@ const ImageContainer = styled.div`
 `
 
 const StyledJust = styled.div`
-    font-size: 18.75rem; /* 300px */
+    font-size: 18em;
     position: absolute;
     color: #EA454C;
-    opacity: 0.2;
+    opacity: 0.3;
     text-transform: uppercase;
     font-weight: 200;
-    line-height: 1.3;
+    line-height: 1.2;
     transform: scaleY(1.2);
-    top: 10%;
-    letter-spacing: -10px;
+    top: 11%;
 `
 
 const StyledImage = styled.img`
     position: relative;
-    right: 6%;
-    width: 130%;
+    top: 40px;
+    right: 10%;
+    width: 140%;
     max-width: 1000px;
-    height: auto;
 `
 
 const InnerContainer = styled.div`
@@ -84,6 +65,12 @@ const TopImage = styled(PositionedImage)`
     top: 12%;
     left: 70%;
     width: 4rem;
+`
+
+const TopImage2 = styled(PositionedImage)`
+    top: 70%;
+    right: 10%;
+    width: 6rem;
 `
 
 const MiddleImage = styled(PositionedImage)`
@@ -108,7 +95,7 @@ const SocialIcons = styled.div`
 const StyledContainer = styled.div`
     display: flex;
     justify-content: space-around;
-    margin-top: 120px;
+    margin-top: 100px;
 `
 
 const StyledIconLink = styled.a`
@@ -116,42 +103,71 @@ const StyledIconLink = styled.a`
     color: #2C3333;
     padding: 18px;
     border: 1px solid #2C3333;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: inset #EA454C 0 0 10px;
+    }
 `
 
 const MainPageContainer = ({className}) => {
+    const navigate = useNavigate();
+    const handleClick = () => navigate("/catalog")
+
     return (
         <div className={className}>
             <InnerContainer>
                 <Title>
-                    <TopImage src={x1} alt="x"/>
+                    <TopImage src={x1}
+                              alt="x"
+                    />
                     Your dream
-                    <MiddleImage src={x2} alt="x"/>
+                    <MiddleImage src={x2}
+                                 alt="x"
+                    />
                     shoes
                     <span> are here</span>
-                    <RightImage src={x3} alt="x"/>
+                    <RightImage src={x3}
+                                alt="x"
+                    />
                 </Title>
                 <StyledContainer>
-                    <StyledLink to="/catalog">view catalog</StyledLink>
+                    <Button width="300px"
+                            height="84px"
+                            fontSize="20px"
+                            onClick={handleClick}
+                    > VIEW CATALOG</Button>
                     <SocialIcons>
-                        <StyledIconLink href="https://web.telegram.org/k/" target="_blank"
-                                        rel="noopener noreferrer">
-                            <FaTelegramPlane size={40}/>
+                        <StyledIconLink href="https://web.telegram.org/k/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                        >
+                            <FaTelegramPlane size={40} />
                         </StyledIconLink>
-                        <StyledIconLink href="https://www.instagram.com" target="_blank"
-                                        rel="noopener noreferrer">
-                            <FaInstagram size={40}/>
+                        <StyledIconLink href="https://www.instagram.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                        >
+                            <FaInstagram size={40} />
                         </StyledIconLink>
-                        <StyledIconLink href="https://github.com/Dene1" target="_blank"
-                                        rel="noopener noreferrer">
-                            <FaGithub size={40}/>
+                        <StyledIconLink href="https://github.com/Dene1"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                        >
+                            <FaGithub size={40} />
                         </StyledIconLink>
                     </SocialIcons>
                 </StyledContainer>
             </InnerContainer>
 
             <ImageContainer>
-                <StyledJust>just <br/>do <br/>it</StyledJust>
-                <StyledImage src={Air} alt="Sneackers"/>
+                <StyledJust>just <br />do <br />it</StyledJust>
+                <StyledImage src={Air}
+                             alt="Sneackers"
+                />
+                <TopImage2 src={x1}
+                           alt="x"
+                />
             </ImageContainer>
         </div>
     )

@@ -4,6 +4,11 @@ import {useNavigate, useParams} from "react-router-dom"
 import {FaStarHalfAlt} from "react-icons/fa";
 import {SpecialPanel} from "../special-panel/special-panel.jsx"
 import {FiHeart} from "react-icons/fi"
+import {FaPencilAlt} from "react-icons/fa";
+import {useSelector} from "react-redux"
+import {addCart} from "../../../../bff/api/add-cart.js"
+import {selectUserId} from "../../../../selectors/index.js"
+import {useState} from "react"
 
 const StyledButton = styled(Button)`
     border: 1px solid #2C3333;
@@ -20,6 +25,11 @@ const StyledButton = styled(Button)`
     }
 `
 
+const StyledNotification = styled.p`
+    text-transform: uppercase;
+    text-align: center;
+`
+
 const ProductContentContainer = ({
                                      className,
                                      product: {
@@ -29,71 +39,134 @@ const ProductContentContainer = ({
                                          price,
                                          size,
                                          description,
-                                         brand,
                                          category,
-                                         gender,
+                                         reviews
                                      },
                                  }) => {
     const navigate = useNavigate()
     const params = useParams()
-    const path = `/product/${params.id}`
-    const reviewsCount = 0
+    const path = `${params.id}`
+    const userid = useSelector(selectUserId)
+    const [isOpen, setIsOpen] = useState(false)
+
+    const getSizeArray = (sizeData) => {
+        if (Array.isArray(sizeData)) {
+            return [...sizeData].sort((a, b) => parseInt(a) - parseInt(b));
+        } else if (typeof sizeData === "string") {
+            return sizeData.sort((a, b) => parseInt(a) - parseInt(b)).split(",")
+        } else {
+            return [];
+        }
+    };
+
+    const sizeArray = getSizeArray(size)
+
+    const handleAddToCart = (productId) => {
+        addCart(userid, productId, 1)
+        setIsOpen(true);
+        setTimeout(() => {
+            setIsOpen(false);
+        }, 3000);
+    }
 
     return (
         <div className={className}>
             <div className="header-container">
-                <button className="back" onClick={() => navigate(-1)}>Back</button>
-                <span className="path-text">{path}</span>
+                <button className="back"
+                        onClick={() => navigate(-1)}
+                >
+                    Back
+                </button>
+                <span className="path-text">ID товара: {path}</span>
+
+                <SpecialPanel
+                    id={id}
+                    margin=" 0 20px"
+                    editButton={
+                        <FaPencilAlt
+                            size="21px"
+                            margin="0 10px 0 0"
+                            onClick={() => navigate(`/product/${id}/edit`)}
+                        />
+                    }
+                />
             </div>
             <div className="product">
-                <img src={imageUrl ? imageUrl : undefined} alt={title}/>
+                <img src={imageUrl ? imageUrl : undefined}
+                     alt={title}
+                />
+                {isOpen && (
+                    <div className={isOpen ? "notification" : "notification-hidden"}>
+                        <StyledNotification>Товар добавлен в корзину</StyledNotification>
+                    </div>
+                )}
                 <div className="product-info">
-                    <div className="reviews"><FaStarHalfAlt size={18}/> {reviewsCount}
+                    <div className="reviews">
+                        <FaStarHalfAlt size={18} />
+                        {reviews.length}
                         <span>Reviews</span></div>
                     <span className="title">{title}</span>
-
                     {category}
-                    <div><span className="content-title">Price</span> <span
-                        className="price">{price}$</span></div>
+                    <div className="price-container">
+                        <div className="content-title">Price</div>
+                        <div className="price">{price}$</div>
+                    </div>
                     <div className="size">
                         <span className="content-title">Size</span>
-                        {size.map((item) =>
-                            <div className="size-container" key={item}>{item}</div>)}
+                        {sizeArray.map((item) =>
+                            <div className="size-container"
+                                 key={item}
+                            >
+                                {item}
+                            </div>)}
                     </div>
                     <div className="buttons">
-                        <FiHeart className="heart" size="26px"/>
-                        <StyledButton> Add to cart</StyledButton>
+                        <FiHeart className="heart"
+                                 size="26px"
+                        />
+                        <StyledButton className="add-to-cart"
+                                      onClick={() => handleAddToCart(id)}
+                        >
+                            Add to cart
+                        </StyledButton>
                     </div>
-
-
                 </div>
             </div>
 
-            {/*<SpecialPanel*/}
-            {/*    id={id}*/}
-            {/*    margin="20px 0 20px"*/}
-            {/*    editButton={*/}
-            {/*        <Icon id="fa-pencil-square-o"*/}
-            {/*              size="21px"*/}
-            {/*              margin="0 10px 0 0"*/}
-            {/*              onClick={() => navigate(`/product/${id}/edit`)}/>*/}
-            {/*    }*/}
-            {/*/>*/}
             <div className="product-description">
                 <span className="description-title">Description</span>
-                {description}
+                <div className="description">{description}</div>
             </div>
+
         </div>
     )
 }
 
 export const ProductContent = styled(ProductContentContainer)`
+    .notification {
+        position: fixed;
+        top: 20px;
+        left: 84%;
+        transform: translateX(-50%);
+        width: 300px;
+        font-size: 18px;
+        background-color: #f0f0f0; /* Пример фона */
+        padding: 8px 20px;
+        border: 1px solid #EA454C;
+        border-radius: 5px; /* Пример скругления углов */
+        z-index: 20;
+    }
+
+    .notification-hidden {
+        display: none;
+    }
 
     .header-container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin: 0 0 20px 0;
+        align-items: center;
+        margin: 20px 0 20px 0;
     }
 
     .product {
@@ -105,8 +178,18 @@ export const ProductContent = styled(ProductContentContainer)`
     .heart {
         cursor: pointer;
         align-self: center;
-        margin: 10px 0 0 0;
 
+        &:hover {
+            fill: #EA454C;
+            cursor: pointer;
+            stroke: #5c656e;
+        }
+    }
+
+    .description {
+        padding-top: 20px;
+        margin-inline: 40px;
+        text-align: center;
     }
 
     .buttons {
@@ -132,6 +215,7 @@ export const ProductContent = styled(ProductContentContainer)`
         color: #2C3333;
         width: 100px;
         height: 30px;
+        cursor: pointer;
     }
 
     .content-title {
@@ -153,9 +237,16 @@ export const ProductContent = styled(ProductContentContainer)`
         font-size: 18px;
     }
 
+    .price-container {
+        display: flex;
+        flex-direction: row;
+        gap: 60px;
+    }
+
     .price {
-        font-size: 30px;
+        font-size: 34px;
         font-weight: 600;
+        color: #4e6173;
     }
 
     .size-container {

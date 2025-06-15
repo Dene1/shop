@@ -14,7 +14,7 @@ export const Button = styled(ButtonContainer)`
     align-items: center;
     font-size: ${({fontSize = "18px"}) => fontSize};
     width: ${({width = "100%"}) => width};
-    height: 40px;
+    height: ${({height = "40px"}) => height};
     color: ${({color = "white"}) => color};
     border: 1px solid #2C3333;
     background-color: ${({backgroundColor = "#2C3333"}) => backgroundColor};

@@ -45,10 +45,12 @@ const UsersContainer = ({className}) => {
     }
 
     return (
-        <PrivateContent access={[ROLE.ADMIN]} serverError={errorMessage}>
+        <PrivateContent access={[ROLE.ADMIN]}
+                        serverError={errorMessage}
+        >
             <div className={className}>
                 <H2>Пользователи</H2>
-                <div>
+                <div className="table">
                     <TableRow>
                         <div className="login-column">Логин</div>
                         <div className="registered-at-column">Дата регистрации</div>
@@ -78,4 +80,8 @@ export const Users = styled(UsersContainer)`
     align-items: center;
     width: 570px;
     font-size: 18px;
+
+    .table {
+        margin-top: 20px;
+    }
 `

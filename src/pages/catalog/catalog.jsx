@@ -1,12 +1,12 @@
-import React, {useEffect, useMemo, useState} from "react"
+import {useEffect, useMemo, useState} from "react"
 import {useServerRequest} from "../../hooks/index.js"
 import {debounce, getLastPageFromLinks} from "./utils/index.js"
 import {PAGINATION_LIMIT} from "../../constants/index.js"
-import {Filters, Pagination, ProductList} from "./components/index.js"
+import {Filters, ProductList} from "./components/index.js"
 import {Search} from "../../components/header/components/index.js"
 import {Loader} from "../../components/index.js"
-import styled from "styled-components"
 import {FILTER_CATALOG, Select} from "./components/filters/components/index.js"
+import styled from "styled-components"
 
 const CatalogContainer = ({className}) => {
     const [products, setProducts] = useState([])
@@ -24,12 +24,14 @@ const CatalogContainer = ({className}) => {
 
     useEffect(() => {
         setIsLoading(true)
-        requestServer("fetchProducts", searchPhrase, page, PAGINATION_LIMIT)
-            .then(({res: {products, links}}) => {
-                setProducts(products);
-                setLastPage(getLastPageFromLinks(links));
-            })
-            .finally(() => setIsLoading(false))
+        setTimeout(() => {
+            requestServer("fetchProducts", searchPhrase, page, PAGINATION_LIMIT)
+                .then(({res: {products, links}}) => {
+                    setProducts(products)
+                    setLastPage(getLastPageFromLinks(links));
+                })
+                .finally(() => setIsLoading(false))
+        }, 1000)
     }, [requestServer, page, shouldSearch]);
 
     const startDelayedSearch = useMemo(() => debounce(setShouldSearch, 500), [])
@@ -45,8 +47,28 @@ const CatalogContainer = ({className}) => {
     const handlePriceFilter = (price) => setSelectedPrice(price)
     const handleFilterChange = (event) => setFilter(event.target.value)
 
+    function filterProductsByPrice(products, selectedPrice) {
+        if (selectedPrice === "All") {
+            return products;
+        }
+
+        if (selectedPrice === "$10000+") {
+            return products.filter(product => parseFloat(product.price) >= 10000);
+        }
+
+        const priceRange = selectedPrice.replace(/\$/g, "").trim(); // Удаляем $
+        const [min, max] = priceRange.split(" - ");
+        const minPrice = parseFloat(min);
+        const maxPrice = parseFloat(max);
+
+        return products.filter(product => {
+            const productPrice = parseFloat(product.price);
+            return productPrice >= minPrice && productPrice <= maxPrice;
+        });
+    }
+
     const renderProducts = useMemo(() => {
-        let filteredProducts = [...products];
+        let filteredProducts = [...products]
 
         if (selectedGender && selectedGender !== "Unisex") {
             filteredProducts = filteredProducts.filter(product => product.gender === selectedGender);
@@ -60,33 +82,24 @@ const CatalogContainer = ({className}) => {
             filteredProducts = filteredProducts.filter(product => product.size.includes(selectedSize))
         }
 
-        if (filter && filter !== FILTER_CATALOG[0]) {
-            if (filter === FILTER_CATALOG[1]) {
-                filteredProducts = filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-            } else if (filter === FILTER_CATALOG[2]) {
-                filteredProducts = filteredProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-            }
+        filteredProducts = filterProductsByPrice(filteredProducts, selectedPrice);
+
+        if (filter === FILTER_CATALOG[1]) {
+            return filteredProducts.sort((a, b) => a.price - b.price)
+        } else if (filter === FILTER_CATALOG[2]) {
+            return filteredProducts.sort((a, b) => b.price - a.price)
+        } else if (filter === FILTER_CATALOG[0]) {
+            return filteredProducts;
         }
 
-        if (selectedPrice && selectedPrice !== "All") {
-            const {minPrice, maxPrice} = selectedPrice;
-            filteredProducts = filteredProducts.filter(product => {
-                const productPrice = parseFloat(product.price);
-                return productPrice >= minPrice && productPrice <= maxPrice;
-            });
-        }
         return filteredProducts;
-    }, [products, selectedGender, selectedBrand, selectedSize, filter, selectedPrice]);
+    }, [products, filter, selectedGender, selectedBrand, selectedSize, selectedPrice]);
 
     const onResetFilters = () => {
         setSelectedGender("Unisex");
         setSelectedBrand("All");
         setSelectedSize("All");
         setSelectedPrice("All");
-    }
-
-    if (!renderProducts || renderProducts.length === 0) {
-        return <div className="no-posts-found">Продукции не найдено</div>;
     }
 
     return (
@@ -106,14 +119,22 @@ const CatalogContainer = ({className}) => {
                 <div className="sort">
                     <Select onChange={handleFilterChange}
                             children={FILTER_CATALOG}
-                            value={filter}/>
-                    <Search onChange={onSearch} searchPhrase={searchPhrase}/>
+                            value={filter}
+                    />
+                    <Search onChange={onSearch}
+                            searchPhrase={searchPhrase}
+                    />
                 </div>
-                <ProductList
-                    renderProducts={renderProducts}
-                    page={page}
-                    setPage={setPage}
-                    lastPage={lastPage}/>
+                {isLoading ? (<Loader isLoading={isLoading} />) :
+                    (!renderProducts || renderProducts.length === 0) ? (
+                            <div className="no-posts-found">Продукции не найдено</div>) :
+                        <ProductList
+                            renderProducts={renderProducts}
+                            page={page}
+                            setPage={setPage}
+                            lastPage={lastPage}
+                        />
+                }
             </div>
         </div>
     )

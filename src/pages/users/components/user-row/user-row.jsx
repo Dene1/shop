@@ -45,21 +45,28 @@ const UserRowContainer = ({
                 <div className="login-column">{login}</div>
                 <div className="registered-at-column">{registeredAt}</div>
                 <div className="role-column">
-                    <select value={selectedRoleId} onChange={onRoleChange}>
+                    <select value={selectedRoleId}
+                            onChange={onRoleChange}
+                    >
                         {roles.map(({id: roleId, name: roleName}) => (
-                            <option key={roleId} value={roleId}>{roleName}</option>
+                            <option key={roleId}
+                                    value={roleId}
+                            >{roleName}</option>
                         ))}
                     </select>
 
                     <div className="save-role-button">
                         <StyledFloppyDiskIcon aria-hidden={true}
                                               disabled={isSaveButtonDisabled}
-                                              onClick={() => onRoleSave(id, selectedRoleId)}/>
+                                              onClick={() => onRoleSave(id, selectedRoleId)}
+                        />
                     </div>
                 </div>
             </TableRow>
             <div className="remove-user-button">
-                <RiDeleteBin5Line size="24px" onClick={onUserRemove}/>
+                <RiDeleteBin5Line size="24px"
+                                  onClick={onUserRemove}
+                />
             </div>
         </div>
     )

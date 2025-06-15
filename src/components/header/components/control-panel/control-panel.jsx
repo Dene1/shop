@@ -7,6 +7,9 @@ import {selectUserRole, selectUserLogin, selectUserSession} from "../../../../se
 import {logout} from "../../../../actions"
 import {ROLE} from "../../../../constants"
 import styled from "styled-components"
+import {getCart} from "../../../../bff/api/get-cart.js"
+import {useEffect, useState} from "react"
+import {getProductsForCart} from "../../../../bff/api/index.js"
 
 const RightAligned = styled.div`
     display: flex;
@@ -71,6 +74,15 @@ const ControlPanelContainer = ({className}) => {
     const roleId = useSelector(selectUserRole)
     const login = useSelector(selectUserLogin)
     const session = useSelector(selectUserSession)
+    const [cart, setCart] = useState([])
+
+    useEffect(() => {
+        const fetchCart = async () => {
+            const data = await getCart();
+            setCart(data);
+        }
+        fetchCart()
+    }, []);
 
     const handleLogout = () => {
         dispatch(logout(session));
@@ -87,21 +99,25 @@ const ControlPanelContainer = ({className}) => {
                 <RightAligned>
                     <UserName>{login}</UserName>
                     <CursorPointer>
-                        <FaSignOutAlt className="sign-out" onClick={handleLogout}/>
+                        <FaSignOutAlt className="sign-out"
+                                      onClick={handleLogout}
+                        />
                     </CursorPointer>
                 </RightAligned>
             )}
             <RightAligned>
                 <StyledButton onClick={() => navigate(-1)}>
-                    <LuStepBack size={30}/>
+                    <LuStepBack size={30} />
                 </StyledButton>
-                <StyledIcon to="/favorites"><FiHeart size={30}/></StyledIcon>
-                <StyledIcon to="/basket"><LuShoppingBag size={29}/></StyledIcon>
+                <StyledIcon to="/favorites"><FiHeart size={30} /></StyledIcon>
+                <StyledIcon to="/cart">{cart.length == 0 ?
+                    <LuShoppingBag size={29} /> : <LuShoppingBag size={30} />}
+                </StyledIcon>
                 {roleId === ROLE.ADMIN &&
-                    <StyledIcon to="/users"><FiUsers size={30}/></StyledIcon>}
+                    <StyledIcon to="/users"><FiUsers size={30} /></StyledIcon>}
             </RightAligned>
         </div>
     )
 }
 
-export const ControlPanel = styled(ControlPanelContainer)` `
+export const ControlPanel = styled(ControlPanelContainer)``

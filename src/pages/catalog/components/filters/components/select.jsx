@@ -4,8 +4,12 @@ const SelectContainer = ({className, children, name, onChange, value}) => {
     return (
         <div className={className}>
             {name}
-            <select onChange={onChange} value={value}>
-                {children.map((item) => <option key={item} value={item}>{item}</option>)}
+            <select onChange={onChange}
+                    value={value}
+            >
+                {children.map((item) => <option key={item}
+                                                value={item}
+                >{item}</option>)}
             </select>
         </div>
     )
