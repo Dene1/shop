@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {BRANDS_NAME, SIZE, PRICE, GENDER, Select} from "./components/index.js"
+import { BRANDS_NAME, GENDER, PRICE, Select, SIZE } from "./components/index.js"
 
 
 const FiltersContainer = ({
@@ -20,37 +20,37 @@ const FiltersContainer = ({
     const handlePriceFilter = (event) => onPriceFilter(event.target.value)
 
     return (
-        <div className={className}>
+        <div className={ className }>
             <div className="filters-title">Фильтры</div>
 
             <div className="select-container">
                 <Select name="Gender"
-                        onChange={handleGenderFilter}
-                        children={GENDER}
-                        value={selectedGender}
+                        onChange={ handleGenderFilter }
+                        children={ GENDER }
+                        value={ selectedGender }
                 />
 
                 <Select name="Brand"
-                        onChange={handleBrandFilter}
-                        children={BRANDS_NAME}
-                        value={selectedBrand}
+                        onChange={ handleBrandFilter }
+                        children={ BRANDS_NAME }
+                        value={ selectedBrand }
                 />
 
                 <Select name="Size"
-                        onChange={handleSizeFilter}
-                        children={SIZE}
-                        value={selectedSize}
+                        onChange={ handleSizeFilter }
+                        children={ SIZE }
+                        value={ selectedSize }
                 />
 
                 <Select name="Price"
-                        onChange={handlePriceFilter}
-                        children={PRICE}
-                        value={selectedPrice}
+                        onChange={ handlePriceFilter }
+                        children={ PRICE }
+                        value={ selectedPrice }
                 />
             </div>
 
             <button className="filters-reset"
-                    onClick={onResetFilters}
+                    onClick={ onResetFilters }
             >
                 Reset Filters
             </button>

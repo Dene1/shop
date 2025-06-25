@@ -1,6 +1,6 @@
-import {deleteReview, deleteProduct, getReview} from "../api"
-import {sessions} from "../sessions.js"
-import {ROLE} from "../constants/index.js"
+import { deleteProduct, deleteReview, getReview } from "../api"
+import { sessions } from "../sessions.js"
+import { ROLE } from "../constants/index.js"
 
 export const removeProduct = async (hash, id) => {
     const accessRoles = [ROLE.ADMIN]
@@ -18,7 +18,7 @@ export const removeProduct = async (hash, id) => {
 
     const reviews = await getReview(id)
 
-    await Promise.all(reviews.map(({id: reviewId}) => deleteReview(reviewId)))
+    await Promise.all(reviews.map(({ id: reviewId }) => deleteReview(reviewId)))
 
     return {
         error: null,

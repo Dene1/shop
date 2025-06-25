@@ -1,4 +1,4 @@
-import {transformCart} from "../transformers/index.js"
+import { transformCart } from "../transformers/index.js"
 
 export const getCart = () =>
     fetch("http://localhost:3001/cart")

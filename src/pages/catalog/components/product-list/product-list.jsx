@@ -1,6 +1,6 @@
 import React from "react";
-import {ProductCard} from "../product-card/product-card.jsx"
-import {Pagination} from "../pagination/pagination.jsx"
+import { ProductCard } from "../product-card/product-card.jsx"
+import { Pagination } from "../pagination/pagination.jsx"
 import styled from "styled-components"
 
 export const ProductListContainer = ({
@@ -12,35 +12,37 @@ export const ProductListContainer = ({
                                      }) => {
 
     return (
-        <div className={className}>
+        <div className={ className }>
             <div className="product-list">
-                {renderProducts.map(({
-                                         id,
-                                         title,
-                                         price,
-                                         category,
-                                         imageUrl,
-                                         brand,
-                                         reviewsCount
-                                     }) => (
+                { renderProducts.map(({
+                                          id,
+                                          title,
+                                          price,
+                                          category,
+                                          imageUrl,
+                                          brand,
+                                          size,
+                                          reviewsCount
+                                      }) => (
                     <ProductCard
-                        key={id}
-                        id={id}
-                        title={title}
-                        price={price}
-                        category={category}
-                        imageUrl={imageUrl}
-                        brand={brand}
-                        reviewsCount={reviewsCount}
+                        key={ id }
+                        id={ id }
+                        title={ title }
+                        price={ price }
+                        size={ size }
+                        category={ category }
+                        imageUrl={ imageUrl }
+                        brand={ brand }
+                        reviewsCount={ reviewsCount }
                     />
-                ))}
+                )) }
             </div>
-            {lastPage > 1 && renderProducts.length > 0 && (
-                <Pagination page={page}
-                            lastPage={lastPage}
-                            setPage={setPage}
+            { lastPage > 1 && renderProducts.length > 0 && (
+                <Pagination page={ page }
+                            lastPage={ lastPage }
+                            setPage={ setPage }
                 />
-            )}
+            ) }
         </div>
     );
 };

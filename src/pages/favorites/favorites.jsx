@@ -1,10 +1,9 @@
 import styled from "styled-components"
 
-const FavoritesContainer = ({className}) => {
+const FavoritesContainer = ({ className }) => {
     return (
-        <div className={className}>
-            <h1>В разработке ...
-                <br />Будет позже
+        <div className={ className }>
+            <h1>In development, it will be later ...
             </h1>
         </div>
     )

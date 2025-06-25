@@ -1,4 +1,4 @@
-import {setProductData} from "./set-product-data.js"
+import { setProductData } from "./set-product-data.js"
 
 export const saveProductAsync = (requestServer, newProductData) => (dispatch) =>
     requestServer("saveProduct", newProductData)

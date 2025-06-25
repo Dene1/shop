@@ -1,56 +1,48 @@
 import styled from "styled-components"
-import {useNavigate} from "react-router-dom"
-import {FaTelegramPlane, FaGithub, FaInstagram} from "react-icons/fa";
-import {Button} from "../../components/index.js"
+import { useNavigate } from "react-router-dom"
+import { FaGithub, FaInstagram, FaTelegramPlane } from "react-icons/fa";
+import { Button } from "../../components/index.js"
 
 const Title = styled.div`
-    padding-top: 7rem;
-    font-size: 9rem;
     text-transform: uppercase;
-    font-weight: 600;
-    line-height: 1.2;
-    transform: scaleY(1.2);
-    text-shadow: -0.375rem 0.375rem 0.125rem #9f9f9f;
+    letter-spacing: 6px;
+    text-shadow: -0.575rem 0.375rem 0.1rem #9f9f9f;
     position: relative;
+    font: 900 200px "Bebas Neue", sans-serif;
 
-    & span {
-        font-weight: lighter;
-        letter-spacing: -12px;
+    span {
+        font-weight: 400;
     }
 `
 
-const Air = "/airmax-main.png"
-const x1 = "/x-main/1.png"
-const x2 = "/x-main/2.png"
-const x3 = "/x-main/2.png"
-
-const ImageContainer = styled.div`
-    width: 50%;
-`
+const RightShoeImage = "/airmax-main.png"
+const cross1 = "/x-main/1.png"
+const cross2 = "/x-main/2.png"
+const cross3 = "/x-main/2.png"
 
 const StyledJust = styled.div`
-    font-size: 18em;
     position: absolute;
     color: #EA454C;
     opacity: 0.3;
     text-transform: uppercase;
-    font-weight: 200;
-    line-height: 1.2;
-    transform: scaleY(1.2);
-    top: 11%;
+    letter-spacing: 60px;
+    top: 3%;
+    font: 400 24rem "Bebas Neue", sans-serif;
+
 `
 
 const StyledImage = styled.img`
     position: relative;
     top: 40px;
-    right: 10%;
-    width: 140%;
+    right: 16%;
+    width: 150%;
     max-width: 1000px;
 `
 
 const InnerContainer = styled.div`
     display: flex;
     flex-direction: column;
+    padding: 40px 0 0 10px;
     gap: 2rem;
     width: 50%;
 `
@@ -64,24 +56,24 @@ const PositionedImage = styled.img`
 const TopImage = styled(PositionedImage)`
     top: 12%;
     left: 70%;
-    width: 4rem;
-`
-
-const TopImage2 = styled(PositionedImage)`
-    top: 70%;
-    right: 10%;
     width: 6rem;
 `
-
-const MiddleImage = styled(PositionedImage)`
+const MiddleCross = styled(PositionedImage)`
     top: 60%;
     left: 84%;
     transform: translate(-50%, -50%);
+    width: 4rem;
 `
 
-const RightImage = styled(PositionedImage)`
-    bottom: -60px;
-    left: -5%;
+const RightCross = styled(PositionedImage)`
+    top: 74%;
+    right: 8%;
+    width: 6rem;
+`
+
+const FooterCross = styled(PositionedImage)`
+    bottom: -40px;
+    left: -6%;
     rotate: -40deg;
 `
 
@@ -90,12 +82,7 @@ const SocialIcons = styled.div`
     grid-template-columns: repeat(3, 1fr);
     border: 1px solid #2C3333;
     align-items: center;
-`
-
-const StyledContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-    margin-top: 100px;
+    z-index: 25;
 `
 
 const StyledIconLink = styled.a`
@@ -106,69 +93,71 @@ const StyledIconLink = styled.a`
 
     &:hover {
         cursor: pointer;
-        box-shadow: inset #EA454C 0 0 10px;
+        box-shadow: inset rgba(64, 80, 96, 0.5) 0 0 10px;
     }
 `
 
-const MainPageContainer = ({className}) => {
+const MainPageContainer = ({ className }) => {
     const navigate = useNavigate();
     const handleClick = () => navigate("/catalog")
 
     return (
-        <div className={className}>
+        <div className={ className }>
             <InnerContainer>
                 <Title>
-                    <TopImage src={x1}
+                    <TopImage src={ cross1 }
                               alt="x"
                     />
-                    Your dream
-                    <MiddleImage src={x2}
+                    <div>Your</div>
+                    <div>Dream</div>
+                    <div>Shoes</div>
+                    <MiddleCross src={ cross2 }
                                  alt="x"
                     />
-                    shoes
+
                     <span> are here</span>
-                    <RightImage src={x3}
-                                alt="x"
+                    <FooterCross src={ cross3 }
+                                 alt="x"
                     />
                 </Title>
-                <StyledContainer>
+                <div className="buttons-container">
                     <Button width="300px"
                             height="84px"
-                            fontSize="20px"
-                            onClick={handleClick}
+                            fontSize="24px"
+                            onClick={ handleClick }
                     > VIEW CATALOG</Button>
                     <SocialIcons>
                         <StyledIconLink href="https://web.telegram.org/k/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                         >
-                            <FaTelegramPlane size={40} />
+                            <FaTelegramPlane size={ 40 } />
                         </StyledIconLink>
                         <StyledIconLink href="https://www.instagram.com"
                                         target="_blank"
                                         rel="noopener noreferrer"
                         >
-                            <FaInstagram size={40} />
+                            <FaInstagram size={ 40 } />
                         </StyledIconLink>
                         <StyledIconLink href="https://github.com/Dene1"
                                         target="_blank"
                                         rel="noopener noreferrer"
                         >
-                            <FaGithub size={40} />
+                            <FaGithub size={ 40 } />
                         </StyledIconLink>
                     </SocialIcons>
-                </StyledContainer>
+                </div>
             </InnerContainer>
 
-            <ImageContainer>
+            <div className="image-container">
                 <StyledJust>just <br />do <br />it</StyledJust>
-                <StyledImage src={Air}
-                             alt="Sneackers"
+                <StyledImage src={ RightShoeImage }
+                             alt="Nike Shoe"
                 />
-                <TopImage2 src={x1}
-                           alt="x"
+                <RightCross src={ cross1 }
+                            alt="cross png"
                 />
-            </ImageContainer>
+            </div>
         </div>
     )
 }
@@ -180,4 +169,13 @@ export const MainPage = styled(MainPageContainer)`
     flex-direction: row;
     align-items: center;
     overflow: hidden;
+
+    .buttons-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .image-container {
+        width: 50%;
+    }
 `

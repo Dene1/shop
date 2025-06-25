@@ -1,9 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@font-face {
+    font-family: "Roboto Slab";
+    src: url("../public/fonts/RobotoSlab-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url("../public/fonts/BebasNeue-Thin.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url("../public/fonts/BebasNeue-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url("../public/fonts/BebasNeue-Book.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url("../public/fonts/BebasNeue-Regular.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Bebas Neue";
+    src: url("../public/fonts/BebasNeue-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
 
 * {
     box-sizing: border-box;
     color: #2C3333;
-    font-family: Montserrat, sans-serif;
 }
 
 a {
@@ -11,8 +56,10 @@ a {
     color: black;
 }
 
+
 body {
     background-color: #405060;
+    font-family: "Roboto Slab", "Montserrat", sans-serif;
 }
 
 html, body, #root {
@@ -20,8 +67,36 @@ html, body, #root {
     margin: 0;
 }
 
+input {
+    font-family: "Roboto Slab", "Montserrat", sans-serif;
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    ::placeholder {
+        font-family: "Roboto Slab", "Montserrat", sans-serif;
+    }
+}
+
+select {
+    font-family: "Roboto Slab", "Montserrat", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, button {
+    letter-spacing: 1px;
+    margin: 0;
+    font-family: "Bebas Neue", sans-serif
+}
+
+h1 {
+    font-size: 48px;
+}
+
+h2 {
+    font-size: 36px;
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 16px;
 }

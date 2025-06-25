@@ -1,12 +1,12 @@
-import {createStore, combineReducers, applyMiddleware, compose} from "redux"
-import {thunk} from "redux-thunk"
+import { applyMiddleware, combineReducers, compose, createStore } from "redux"
+import { thunk } from "redux-thunk"
 import {
     appReducer,
+    cartReducer,
     productReducer,
     productsReducer,
     userReducer,
-    usersReducer,
-    cartReducer
+    usersReducer
 } from "../reducers"
 
 const reducer = combineReducers({

@@ -1,4 +1,4 @@
-import {ACTION_TYPE} from "./action-type.js"
+import { ACTION_TYPE } from "./action-type.js"
 
 export const updateCartData = (cartData) => {
     return {

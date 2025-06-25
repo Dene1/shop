@@ -1,4 +1,4 @@
-import {format} from "date-fns";
+import { format } from "date-fns";
 
 export const generateDate = () => {
     const date = new Date(Math.random() * 1000000000000 + 1999999999999)

@@ -1,5 +1,5 @@
-import {getUser} from "../api"
-import {sessions} from "../sessions.js"
+import { getUser } from "../api"
+import { sessions } from "../sessions.js"
 
 export const authorize = async (authLogin, authPassword) => {
     const user = await getUser(authLogin)
@@ -11,7 +11,7 @@ export const authorize = async (authLogin, authPassword) => {
         }
     }
 
-    const {id, login, password, roleId} = user
+    const { id, login, password, roleId } = user
 
     if (authPassword !== password) {
         return {

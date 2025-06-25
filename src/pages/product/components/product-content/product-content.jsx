@@ -1,172 +1,189 @@
 import styled from "styled-components"
-import {Button, Icon} from "../../../../components"
-import {useNavigate, useParams} from "react-router-dom"
-import {FaStarHalfAlt} from "react-icons/fa";
-import {SpecialPanel} from "../special-panel/special-panel.jsx"
-import {FiHeart} from "react-icons/fi"
-import {FaPencilAlt} from "react-icons/fa";
-import {useSelector} from "react-redux"
-import {addCart} from "../../../../bff/api/add-cart.js"
-import {selectUserId} from "../../../../selectors/index.js"
-import {useState} from "react"
-
-const StyledButton = styled(Button)`
-    border: 1px solid #2C3333;
-    background-color: #2C3333;
-    color: white;
-    width: 40%;
-    height: 46px;
-
-    &:hover {
-        cursor: pointer;
-        background-color: #dedede;
-        color: #2C3333;
-        border: 1px solid #5b6969;
-    }
-`
-
-const StyledNotification = styled.p`
-    text-transform: uppercase;
-    text-align: center;
-`
+import { Button, Modal } from "../../../../components"
+import { useNavigate, useParams } from "react-router-dom"
+import { FaPencilAlt, FaStarHalfAlt } from "react-icons/fa"
+import { SpecialPanel } from "../special-panel/special-panel.jsx"
+import { FiHeart } from "react-icons/fi"
+import { useDispatch, useSelector } from "react-redux"
+import {
+    selectProduct,
+    selectUserId,
+    selectUserSession
+} from "../../../../selectors/index.js"
+import { useState } from "react"
+import { addCartAsync } from "../../../../actions/index.js"
+import { useServerRequest } from "../../../../hooks/index.js"
+import { nanoid } from "nanoid"
 
 const ProductContentContainer = ({
                                      className,
-                                     product: {
-                                         id,
-                                         title,
-                                         imageUrl,
-                                         price,
-                                         size,
-                                         description,
-                                         category,
-                                         reviews
-                                     },
+
                                  }) => {
     const navigate = useNavigate()
     const params = useParams()
-    const path = `${params.id}`
-    const userid = useSelector(selectUserId)
+    const path = `${ params.id }`
+    const userId = useSelector(selectUserId)
+    const sessionUserId = useSelector(selectUserSession)
+    const [selectedSize, setSelectedSize] = useState(null)
     const [isOpen, setIsOpen] = useState(false)
+    const [modalText, setModalText] = useState("")
+    const requestServer = useServerRequest()
+    const dispatch = useDispatch()
+    const product = useSelector(selectProduct)
+    console.log(product)
 
     const getSizeArray = (sizeData) => {
         if (Array.isArray(sizeData)) {
-            return [...sizeData].sort((a, b) => parseInt(a) - parseInt(b));
+            return [...sizeData].sort((a, b) => parseInt(a) - parseInt(b))
         } else if (typeof sizeData === "string") {
             return sizeData.sort((a, b) => parseInt(a) - parseInt(b)).split(",")
         } else {
-            return [];
+            return []
         }
-    };
+    }
 
-    const sizeArray = getSizeArray(size)
+    const sizeArray = getSizeArray(product.size)
 
     const handleAddToCart = (productId) => {
-        addCart(userid, productId, 1)
-        setIsOpen(true);
+        if (selectedSize === null) {
+            setModalText("Выберите размер")
+            setIsOpen(true)
+            setTimeout(() => {
+                setIsOpen(false)
+            }, 2000)
+            return
+        }
+
+        if (sessionUserId === null) {
+            setModalText("Сначала авторизуйтесь")
+            setIsOpen(true)
+            setTimeout(() => {
+                setIsOpen(false)
+            }, 2000)
+            return
+        }
+
+        const generateId = () => {
+            return nanoid()
+        }
+        const myId = generateId()
+        const cartItemId = `${ productId }-${ myId }`
+
+        dispatch(addCartAsync(requestServer, cartItemId, userId, productId, selectedSize, 1))
+        setModalText("Товар добавлен в корзину")
+        setIsOpen(true)
         setTimeout(() => {
-            setIsOpen(false);
-        }, 3000);
+            setIsOpen(false)
+        }, 3000)
+    }
+
+    const handleSizeClick = (size) => {
+        setSelectedSize(size)
     }
 
     return (
-        <div className={className}>
+        <div className={ className }>
+            { isOpen && <Modal text={ modalText } /> }
             <div className="header-container">
                 <button className="back"
-                        onClick={() => navigate(-1)}
+                        onClick={ () => navigate(-1) }
                 >
                     Back
                 </button>
-                <span className="path-text">ID товара: {path}</span>
+                <span className="path-text">ID товара: { path }</span>
 
                 <SpecialPanel
-                    id={id}
+                    id={ product.id }
                     margin=" 0 20px"
                     editButton={
                         <FaPencilAlt
                             size="21px"
                             margin="0 10px 0 0"
-                            onClick={() => navigate(`/product/${id}/edit`)}
+                            onClick={ () => navigate(`/product/${ product.id }/edit`) }
                         />
                     }
                 />
             </div>
             <div className="product">
-                <img src={imageUrl ? imageUrl : undefined}
-                     alt={title}
+                <img src={ product.imageUrl ? product.imageUrl : undefined }
+                     alt={ product.title }
                 />
-                {isOpen && (
-                    <div className={isOpen ? "notification" : "notification-hidden"}>
-                        <StyledNotification>Товар добавлен в корзину</StyledNotification>
-                    </div>
-                )}
                 <div className="product-info">
                     <div className="reviews">
-                        <FaStarHalfAlt size={18} />
-                        {reviews.length}
-                        <span>Reviews</span></div>
-                    <span className="title">{title}</span>
-                    {category}
-                    <div className="price-container">
-                        <div className="content-title">Price</div>
-                        <div className="price">{price}$</div>
+                        <FaStarHalfAlt size={ 18 } />
+                        { product.reviews.length }
+                        <span>Reviews</span>
                     </div>
-                    <div className="size">
-                        <span className="content-title">Size</span>
-                        {sizeArray.map((item) =>
-                            <div className="size-container"
-                                 key={item}
-                            >
-                                {item}
-                            </div>)}
+                    <h1>{ product.title }</h1>
+                    { product.category }
+                    <div className="price-container">
+                        <div className="content-title">PRICE</div>
+                        <div className="price">{ product.price }$</div>
+                    </div>
+                    <div className="sizes">
+                        <div className="content-title">SIZE</div>
+                        <div className="size-items">
+                            { sizeArray.map((item) =>
+                                <div className={ `size-container ${ selectedSize === item ? "selected" : "" }` }
+                                     key={ item }
+                                     onClick={ () => handleSizeClick(item) }
+                                >
+                                    { item }
+                                </div>) }
+                        </div>
                     </div>
                     <div className="buttons">
                         <FiHeart className="heart"
                                  size="26px"
                         />
-                        <StyledButton className="add-to-cart"
-                                      onClick={() => handleAddToCart(id)}
+                        <Button width="40%"
+                                onClick={ () => handleAddToCart(product.id) }
                         >
                             Add to cart
-                        </StyledButton>
+                        </Button>
                     </div>
                 </div>
             </div>
 
             <div className="product-description">
-                <span className="description-title">Description</span>
-                <div className="description">{description}</div>
+                <h1>DESCRIPTION</h1>
+                <div className="description">{ product.description }</div>
             </div>
-
         </div>
     )
 }
 
 export const ProductContent = styled(ProductContentContainer)`
-    .notification {
-        position: fixed;
-        top: 20px;
-        left: 84%;
-        transform: translateX(-50%);
-        width: 300px;
-        font-size: 18px;
-        background-color: #f0f0f0; /* Пример фона */
-        padding: 8px 20px;
-        border: 1px solid #EA454C;
-        border-radius: 5px; /* Пример скругления углов */
-        z-index: 20;
-    }
-
-    .notification-hidden {
-        display: none;
-    }
-
     .header-container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin: 20px 0 20px 0;
+        margin: 24px 60px;
+    }
+
+    .sizes {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+    }
+
+    .size-container {
+        cursor: pointer;
+        padding: 5px;
+        border: 1px solid #ccc;
+        margin-right: 5px;
+
+    }
+
+    .size-container.selected {
+        background-color: #EA454C;
+        color: white;
+    }
+
+    .selected-size {
+        margin-top: 10px;
+        font-weight: bold;
     }
 
     .product {
@@ -187,7 +204,6 @@ export const ProductContent = styled(ProductContentContainer)`
     }
 
     .description {
-        padding-top: 20px;
         margin-inline: 40px;
         text-align: center;
     }
@@ -205,9 +221,7 @@ export const ProductContent = styled(ProductContentContainer)`
         gap: 20px;
     }
 
-    .title {
-        font-size: 50px;
-        font-weight: 600;
+    .product-title {
     }
 
     .back {
@@ -216,6 +230,7 @@ export const ProductContent = styled(ProductContentContainer)`
         width: 100px;
         height: 30px;
         cursor: pointer;
+        font-size: 18px;
     }
 
     .content-title {
@@ -223,11 +238,6 @@ export const ProductContent = styled(ProductContentContainer)`
         font-weight: 600;
     }
 
-    .description-title {
-        font-size: 30px;
-        font-weight: 600;
-        text-align: center;
-    }
 
     .reviews {
         display: flex;
@@ -244,7 +254,7 @@ export const ProductContent = styled(ProductContentContainer)`
     }
 
     .price {
-        font-size: 34px;
+        font-size: 54px;
         font-weight: 600;
         color: #4e6173;
     }
@@ -269,6 +279,7 @@ export const ProductContent = styled(ProductContentContainer)`
     .product-description {
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
 
     img {
@@ -277,7 +288,7 @@ export const ProductContent = styled(ProductContentContainer)`
         margin: 0 20px 10px 0;
     }
 
-    .size {
+    .size-items {
         display: flex;
         flex-direction: row;
         gap: 5px 10px;

@@ -1,5 +1,5 @@
-import {getProduct} from "../api"
-import {getProductReviewsWithAuthor} from "../utils/index.js"
+import { getProduct } from "../api"
+import { getProductReviewsWithAuthor } from "../utils/index.js"
 
 export const fetchProduct = async (productId) => {
     let product

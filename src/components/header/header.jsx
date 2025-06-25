@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import {ControlPanel, Logo} from "./components/index.js"
+import { ControlPanel, Logo } from "./components/index.js"
 
-const HeaderContainer = ({className}) => (
-    <header className={className}>
+const HeaderContainer = ({ className }) => (
+    <header className={ className }>
         <Logo />
         <ControlPanel />
     </header>

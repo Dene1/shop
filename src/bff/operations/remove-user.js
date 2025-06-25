@@ -1,6 +1,6 @@
-import {ROLE} from "../constants"
-import {sessions} from "../sessions.js"
-import {deleteUser} from "../api"
+import { ROLE } from "../constants"
+import { sessions } from "../sessions.js"
+import { deleteUser } from "../api"
 
 export const removeUser = async (hash, userId) => {
     const accessRoles = [ROLE.ADMIN]

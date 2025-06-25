@@ -1,12 +1,14 @@
-import {deleteCart} from "../api"
-import {sessions} from "../sessions.js"
-import {getCart} from "../api/get-cart.js"
+import { deleteCart } from "../api"
+import { getCart } from "../api/get-cart.js"
+// import {ROLE} from "../constants/index.js"
+// import {sessions} from "../sessions.js"
 
 export const removeCart = async (hash, productId) => {
-    // const accessRoles = [ROLE.ADMIN]
-    //
+    // const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR, ROLE.READER]
+
     // const access = await sessions.access(hash, accessRoles)
 
+    console.log(productId)
 
     await deleteCart(productId)
 

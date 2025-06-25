@@ -1,4 +1,4 @@
-import {transformUser} from "../transformers"
+import { transformUser } from "../transformers"
 
 export const getUsers = () =>
     fetch("http://localhost:3001/users")

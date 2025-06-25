@@ -1,13 +1,13 @@
 import styled from "styled-components"
 
-const TableRowContainer = ({className, children}) => (
-    <div className={className}> {children} </div>
+const TableRowContainer = ({ className, children }) => (
+    <div className={ className }> { children } </div>
 )
 
 export const TableRow = styled(TableRowContainer)`
     display: flex;
     align-items: center;
-    border: ${({border}) => (border ? "1px solid black" : "none")};
+    border: ${ ({ border }) => (border ? "1px solid black" : "none") };
 
     & > div {
         display: flex;

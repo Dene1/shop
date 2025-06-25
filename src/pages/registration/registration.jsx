@@ -1,16 +1,16 @@
 import * as yup from "yup"
-import {useForm} from "react-hook-form"
-import {yupResolver} from "@hookform/resolvers/yup"
-import {server} from "../../bff"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { server } from "../../bff"
+import { AuthFormError, Button, Content, Input } from "../../components"
+import { Link, Navigate } from "react-router-dom"
+import { setUser } from "../../actions"
+import { useDispatch, useSelector } from "react-redux"
+import { selectUserRole } from "../../selectors"
+import { ROLE } from "../../constants"
+import { useResetForm } from "../../hooks"
+import { useState } from "react"
 import styled from "styled-components"
-import {AuthFormError, Button, Content, H2, Input} from "../../components"
-import {Link, Navigate} from "react-router-dom"
-import {setUser} from "../../actions"
-import {useDispatch, useSelector} from "react-redux"
-import {selectUserRole} from "../../selectors"
-import {ROLE} from "../../constants"
-import {useResetForm} from "../../hooks"
-import {useState} from "react"
 
 const regFormSchema = yup.object().shape({
     login: yup.string()
@@ -40,17 +40,13 @@ const StyledLink = styled(Link)`
     }
 `
 
-const ImageContainer = styled.div`
-    padding-top: 5px;
-    width: 510px;
-`
 
-const RegistrationContainer = ({className}) => {
+const RegistrationContainer = ({ className }) => {
     const {
         register,
         reset,
         handleSubmit,
-        formState: {errors},
+        formState: { errors },
     } = useForm({
         defaultValues: {
             login: "",
@@ -61,17 +57,14 @@ const RegistrationContainer = ({className}) => {
     })
 
     const [serverError, setServerError] = useState(null)
-
     const dispatch = useDispatch()
-
     const roleID = useSelector(selectUserRole)
-
     useResetForm(reset)
 
-    const onSubmit = ({login, password}) => {
-        server.register(login, password).then(({error, res}) => {
+    const onSubmit = ({ login, password }) => {
+        server.register(login, password).then(({ error, res }) => {
             if (error) {
-                setServerError(`Ошибка запроса: ${error}`)
+                setServerError(`Ошибка запроса: ${ error }`)
                 return
             }
             dispatch(setUser(res))
@@ -90,35 +83,33 @@ const RegistrationContainer = ({className}) => {
 
     return (
         <Content>
-            <div className={className}>
-                <H2>Register</H2>
+            <div className={ className }>
+                <h1>Register</h1>
                 <div className="title-text">Hello! Please enter your details.</div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={ handleSubmit(onSubmit) }>
                     <Input type="login"
-                           placeholder="Логин..." {...register("login", {
+                           placeholder="Логин..." { ...register("login", {
                         onChange: () => setServerError(null),
-                    })} />
+                    }) } />
                     <Input type="password"
-                           placeholder="Пароль..."  {...register("password", {
+                           placeholder="Пароль..."  { ...register("password", {
                         onChange: () => setServerError(null),
-                    })} />
+                    }) } />
                     <Input type="password"
-                           placeholder="Повторите пароль..." {...register("passcheck", {
+                           placeholder="Повторите пароль..." { ...register("passcheck", {
                         onChange: () => setServerError(null),
-                    })} />
+                    }) } />
                     <Button type="submit"
-                            disabled={!!formError}
+                            disabled={ !!formError }
                     >Зарегистрироваться
                     </Button>
-                    {errorMessage && <AuthFormError>{errorMessage}</AuthFormError>}
+                    { errorMessage && <AuthFormError>{ errorMessage }</AuthFormError> }
                     <StyledLink to="/login">Вернуться к Авторизации</StyledLink>
                 </form>
             </div>
-            <ImageContainer>
-                <img src={imageMan}
-                     alt="Man"
-                />
-            </ImageContainer>
+            <img src={ imageMan }
+                 alt="Man"
+            />
         </Content>
     )
 }
@@ -126,13 +117,16 @@ const RegistrationContainer = ({className}) => {
 export const Registration = styled(RegistrationContainer)`
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 
-    & .title-text {
+    .title-text {
         margin: 8px 0;
+        width: 324px;
+        text-align: center;
     }
 
-    & > form {
+    form {
         display: flex;
         flex-direction: column;
         width: 260px;

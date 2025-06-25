@@ -1,16 +1,39 @@
-import {generateDate} from "../utils/index.js"
+import { nanoid } from "nanoid"
+import { transformProduct } from "../transformers/index.js"
 
-export const addProduct = ({imageUrl, size, title, content}) =>
+export const generateId = () => {
+    return nanoid()
+}
+
+const myId = generateId()
+const productId = `${ myId }`
+
+export const addProduct = ({
+                               imageUrl,
+                               size,
+                               title,
+                               price,
+                               brand,
+                               category,
+                               gender,
+                               description
+                           }) =>
+
     fetch("http://localhost:3001/products", {
         method: "POST",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify({
-            image_url: imageUrl,
-            published_at: generateDate(),
+            id: productId,
             title,
-            size: size,
-            content,
+            price,
+            category,
+            gender,
+            size,
+            image_url: imageUrl,
+            brand,
+            description,
         }),
-    }).then((createdPost) => createdPost.json())
+    }).then((createdProduct) => createdProduct.json())
+        .then((createdProduct) => createdProduct && transformProduct(createdProduct))

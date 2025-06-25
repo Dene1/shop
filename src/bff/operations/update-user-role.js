@@ -1,6 +1,6 @@
-import {setUserRole} from "../api"
-import {ROLE} from "../constants"
-import {sessions} from "../sessions.js"
+import { setUserRole } from "../api"
+import { ROLE } from "../constants"
+import { sessions } from "../sessions.js"
 
 export const updateUserRole = async (hash, userId, newUserRoleId) => {
     const accessRoles = [ROLE.ADMIN]

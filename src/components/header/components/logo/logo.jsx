@@ -1,16 +1,17 @@
 import styled from "styled-components"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const LargeText = styled.div`
-    font-size: 40px;
+    font-size: 48px;
     font-weight: 500;
     line-height: 48px;
     color: transparent;
     -webkit-text-stroke: 1px #EA454C;
+
 `
 
 const SmallText = styled.div`
-    font-size: 40px;
+    font-size: 48px;
     text-transform: unset;
     font-weight: 500;
     user-select: none;
@@ -23,7 +24,7 @@ const IconContainer = styled.div`
     display: flex;
     flex-direction: row;
     user-select: none;
-    letter-spacing: -2px;
+    letter-spacing: -1px;
     align-items: center;
 
     &:hover {
@@ -31,18 +32,18 @@ const IconContainer = styled.div`
         transition: transform 0.8s ease;
     }
 
-    &:hover ${LargeText} {
+    &:hover ${ LargeText } {
         color: #EA454C;
     }
 
-    &:hover ${SmallText} {
+    &:hover ${ SmallText } {
         color: #2C3333;
     }
 `
 
-const LogoContainer = ({className}) => (
+const LogoContainer = ({ className }) => (
     <Link to="/"
-          className={className}
+          className={ className }
     >
         <IconContainer>
             <LargeText>Denel</LargeText>
@@ -54,4 +55,5 @@ const LogoContainer = ({className}) => (
 export const Logo = styled(LogoContainer)`
     display: flex;
     align-items: center;
+    font-family: "Bebas Neue", sans-serif;
 `

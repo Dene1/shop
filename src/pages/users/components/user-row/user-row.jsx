@@ -1,16 +1,16 @@
-import {TableRow} from "../table-row/table-row.jsx"
-import {useState} from "react"
-import {useServerRequest} from "../../../../hooks"
-import {PiFloppyDiskBold} from "react-icons/pi";
-import {RiDeleteBin5Line} from "react-icons/ri";
+import { TableRow } from "../table-row/table-row.jsx"
+import { useState } from "react"
+import { useServerRequest } from "../../../../hooks"
+import { PiFloppyDiskBold } from "react-icons/pi";
+import { RiDeleteBin5Line } from "react-icons/ri";
 import styled from "styled-components"
 
 const StyledFloppyDiskIcon = styled(PiFloppyDiskBold)`
-    cursor: ${({disabled}) => disabled ? "not-allowed" : "pointer"};
-    fill: ${({disabled}) => disabled ? "#ccc" : "#2C3333"};
+    cursor: ${ ({ disabled }) => disabled ? "not-allowed" : "pointer" };
+    fill: ${ ({ disabled }) => disabled ? "#ccc" : "#2C3333" };
     font-size: 24px;
     align-items: center;
-    pointer-events: ${({disabled}) => disabled ? "none" : "auto"};
+    pointer-events: ${ ({ disabled }) => disabled ? "none" : "auto" };
 `
 
 const UserRowContainer = ({
@@ -26,7 +26,7 @@ const UserRowContainer = ({
     const [selectedRoleId, setSelectedRoleId] = useState(userRoleId)
     const requestServer = useServerRequest()
 
-    const onRoleChange = ({target}) => {
+    const onRoleChange = ({ target }) => {
         setSelectedRoleId(Number(target.value))
     }
 
@@ -40,32 +40,32 @@ const UserRowContainer = ({
     const isSaveButtonDisabled = selectedRoleId === initialRoleId
 
     return (
-        <div className={className}>
-            <TableRow border={true}>
-                <div className="login-column">{login}</div>
-                <div className="registered-at-column">{registeredAt}</div>
+        <div className={ className }>
+            <TableRow border={ true }>
+                <div className="login-column">{ login }</div>
+                <div className="registered-at-column">{ registeredAt }</div>
                 <div className="role-column">
-                    <select value={selectedRoleId}
-                            onChange={onRoleChange}
+                    <select value={ selectedRoleId }
+                            onChange={ onRoleChange }
                     >
-                        {roles.map(({id: roleId, name: roleName}) => (
-                            <option key={roleId}
-                                    value={roleId}
-                            >{roleName}</option>
-                        ))}
+                        { roles.map(({ id: roleId, name: roleName }) => (
+                            <option key={ roleId }
+                                    value={ roleId }
+                            >{ roleName }</option>
+                        )) }
                     </select>
 
                     <div className="save-role-button">
-                        <StyledFloppyDiskIcon aria-hidden={true}
-                                              disabled={isSaveButtonDisabled}
-                                              onClick={() => onRoleSave(id, selectedRoleId)}
+                        <StyledFloppyDiskIcon aria-hidden={ true }
+                                              disabled={ isSaveButtonDisabled }
+                                              onClick={ () => onRoleSave(id, selectedRoleId) }
                         />
                     </div>
                 </div>
             </TableRow>
             <div className="remove-user-button">
                 <RiDeleteBin5Line size="24px"
-                                  onClick={onUserRemove}
+                                  onClick={ onUserRemove }
                 />
             </div>
         </div>

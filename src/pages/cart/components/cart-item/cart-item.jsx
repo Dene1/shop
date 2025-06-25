@@ -1,5 +1,16 @@
-import {FaRegCircle, FaRegTrashAlt} from "react-icons/fa";
+import { FaRegCircle, FaRegTrashAlt } from "react-icons/fa";
 import styled from "styled-components"
+import { Link } from "react-router-dom"
+
+const Container = styled(Link)`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    width: 46.7%;
+    text-decoration: none;
+    color: #2C3333;
+`
 
 const CartItemContainer = ({
                                className,
@@ -12,42 +23,43 @@ const CartItemContainer = ({
     const disabled = () => productDetails.count <= 1
 
     return (
-        <li className={className}>
+        <li className={ className }>
             <div className="remove-from-cart">
                 <FaRegTrashAlt size="22px"
-                               onClick={() => handleRemoveFromCart(product.id)}
+                               onClick={ () => handleRemoveFromCart(productDetails.id) }
                 />
             </div>
 
-            <img src={product.imageUrl}
-                 alt={product.title}
-            />
+            <Container to={ `/product/${ product.id }` }>
+                <img src={ product.imageUrl }
+                     alt={ product.title }
+                />
 
-            <div className="product-info">
-                <div className="product-title">{product.title}</div>
-                <div className="container">
-                    <span>{product.gender}</span>
-                    <span className="dot">
-                        <FaRegCircle size="8px" />
-                    </span>
-                    <span>Size : {product.size}</span>
+                <div className="product-info">
+                    <h3>{ product.title }</h3>
+                    <div className="container">
+                        <span>{ product.gender }</span>
+                        <span className="dot"> <FaRegCircle size="8px" /> </span>
+                        <span>Size: <span className="size">{ productDetails.size }</span></span>
+                    </div>
+                    <div className="product-price">$ { product.price }</div>
                 </div>
-                <div className="product-price">$ {product.price}</div>
-            </div>
+            </Container>
+
             <div className="quantity">
                 <div className="quantity-title">
                     QTY
                 </div>
                 <div className="quantity-container">
                     <button className="q-btn"
-                            onClick={() => increaseCount(product.id)}
+                            onClick={ () => increaseCount(productDetails.id) }
                     >
                         +
                     </button>
-                    <div className="q-value">{productDetails.count}X</div>
+                    <div className="q-value">{ productDetails.count }X</div>
                     <button className="q-btn"
-                            disabled={disabled()}
-                            onClick={() => decreaseCount(product.id)}
+                            disabled={ disabled() }
+                            onClick={ () => decreaseCount(productDetails.id) }
                     >
                         -
                     </button>
@@ -55,11 +67,12 @@ const CartItemContainer = ({
             </div>
             <div>
                 <div className="subtotal-price">
-                    <div>Subtotal</div>
-                    <div className="subtotal-price-value">$ {product.price * productDetails.count}</div>
+                    <div className="subtotal-price-title">SUBTOTAL</div>
+                    <div className="subtotal-price-value">$ { product.price * productDetails.count }</div>
                 </div>
             </div>
         </li>
+
     )
 }
 
@@ -70,8 +83,7 @@ export const CartItem = styled(CartItemContainer)`
     margin: 20px 0 0 40px;
 
     .q-value {
-        font-size: 18px;
-        font-weight: 500;
+        font: 500 20px "Bebas Neue", sans-serif;
     }
 
     .quantity-container {
@@ -97,11 +109,18 @@ export const CartItem = styled(CartItemContainer)`
         flex-direction: column;
         padding-top: 10px;
         gap: 10px;
+        z-index: 5;
     }
 
     .quantity-title {
-        padding-top: 1px;
-        font-size: 18px;
+        font: 500 24px "Bebas Neue", sans-serif;
+        letter-spacing: 1px;
+        color: gray;
+    }
+
+    .size {
+        font: 700 18px "Bebas Neue", sans-serif;
+        color: #2C3333;
     }
 
     .q-btn {
@@ -134,8 +153,7 @@ export const CartItem = styled(CartItemContainer)`
     }
 
     .product-price {
-        font-weight: 500;
-        font-size: 20px;
+        font: 500 24px "Bebas Neue", sans-serif;
     }
 
     .subtotal-price {
@@ -145,9 +163,15 @@ export const CartItem = styled(CartItemContainer)`
         gap: 10px;
     }
 
+    .subtotal-price-title {
+        font: 500 24px "Bebas Neue", sans-serif;
+        letter-spacing: 1px;
+        color: gray;
+
+    }
+
     .subtotal-price-value {
-        font-weight: 500;
-        font-size: 20px;
+        font: 500 24px "Bebas Neue", sans-serif;
     }
 
     span {
@@ -167,10 +191,11 @@ export const CartItem = styled(CartItemContainer)`
     }
 
     .product-info {
+        color: gray;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 6px;
+        gap: 5px;
     }
 
     .remove-from-cart {

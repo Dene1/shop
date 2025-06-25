@@ -1,4 +1,4 @@
-import {ACTION_TYPE} from "../actions/index.js"
+import { ACTION_TYPE } from "../actions/index.js"
 
 const initialState = {
     cart: [],
@@ -8,8 +8,7 @@ export const cartReducer = (state = initialState, action) => {
     switch (action.type) {
         case ACTION_TYPE.ADD_TO_CART:
             return {
-                ...state,
-                cart: [...state.cart, action.payload],
+                cart: [...state.cart, action.payload]
             }
         case ACTION_TYPE.SET_CART_DATA:
             return {
@@ -31,7 +30,6 @@ export const cartReducer = (state = initialState, action) => {
                 ),
             }
         case ACTION_TYPE.UPDATE_QUANTITY:
-            console.log(action.payload)
             return {
                 ...state,
                 cart: state.cart.map((product) => {

@@ -1,15 +1,15 @@
-import {DotSpinner} from "ldrs/react"
+import { DotSpinner } from "ldrs/react"
 import "ldrs/react/DotSpinner.css";
 import styled from "styled-components"
 
-const LoaderContainer = ({className, isLoading}) => {
+const LoaderContainer = ({ className, isLoading }) => {
     return (
-        <div className={className}
-             aria-busy={isLoading}
+        <div className={ className }
+             aria-busy={ isLoading }
         >
-            {isLoading && <DotSpinner color="#EA454C"
-                                      size={50}
-            />}
+            { isLoading && <DotSpinner color="#EA454C"
+                                       size={ 50 }
+            /> }
         </div>
     )
 }

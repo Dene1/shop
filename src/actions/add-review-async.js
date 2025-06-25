@@ -1,4 +1,4 @@
-import {setProductData} from "./set-product-data.js"
+import { setProductData } from "./set-product-data.js"
 
 export const addReviewAsync = (requestServer, userId, productId, content) => (dispatch) => {
     requestServer("addProductReview", userId, productId, content)

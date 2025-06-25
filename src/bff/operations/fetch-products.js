@@ -1,8 +1,8 @@
-import {getReview, getProducts} from "../api"
-import {getReviewsCount} from "../utils/index.js"
+import { getProducts, getReview } from "../api"
+import { getReviewsCount } from "../utils/index.js"
 
 export const fetchProducts = async (searchPhrase, page, limit) => {
-    const [{products, links}, reviews] = await Promise.all([
+    const [{ products, links }, reviews] = await Promise.all([
         getProducts(searchPhrase, page, limit),
         getReview()])
     return {

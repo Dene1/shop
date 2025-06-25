@@ -1,4 +1,4 @@
-import {setProductData} from "./set-product-data.js"
+import { setProductData } from "./set-product-data.js"
 
 export const removeReviewAsync = (requestServer, productId, id) => (dispatch) => {
     requestServer("removeProductReview", productId, id)

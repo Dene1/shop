@@ -1,4 +1,4 @@
-import {FiSearch} from "react-icons/fi"
+import { FiSearch } from "react-icons/fi"
 import styled from "styled-components"
 
 const StyledInput = styled.input`
@@ -16,15 +16,15 @@ const StyledButton = styled.button`
     opacity: 0.8;
 `
 
-const SearchContainer = ({className, searchPhrase, onChange}) => {
+const SearchContainer = ({ className, searchPhrase, onChange }) => {
     return (
-        <div className={className}>
-            <StyledInput value={searchPhrase}
+        <div className={ className }>
+            <StyledInput value={ searchPhrase }
                          type="text"
                          placeholder="🔍︎ Поиск..."
-                         onChange={onChange}
+                         onChange={ onChange }
             />
-            <StyledButton>{<FiSearch size={24} />}</StyledButton>
+            <StyledButton>{ <FiSearch size={ 24 } /> }</StyledButton>
         </div>
     )
 }

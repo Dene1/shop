@@ -1,13 +1,12 @@
-import {CLOSE_MODAL, openModal, removeReviewAsync} from "../../../../../../actions"
-import {useDispatch, useSelector} from "react-redux"
-import {useServerRequest} from "../../../../../../hooks"
-import {selectUserRole} from "../../../../../../selectors"
-import {ROLE} from "../../../../../../constants"
-import {FaRegCalendarAlt, FaRegTrashAlt} from "react-icons/fa";
-import {FaUserCircle} from "react-icons/fa";
+import { CLOSE_MODAL, openModal, removeReviewAsync } from "../../../../../../actions"
+import { useDispatch, useSelector } from "react-redux"
+import { useServerRequest } from "../../../../../../hooks"
+import { selectUserRole } from "../../../../../../selectors"
+import { ROLE } from "../../../../../../constants"
+import { FaRegCalendarAlt, FaRegTrashAlt, FaUserCircle } from "react-icons/fa";
 import styled from "styled-components"
 
-const ReviewContainer = ({className, productId, id, author, content, publishedAt}) => {
+const ReviewContainer = ({ className, productId, id, author, content, publishedAt }) => {
     const dispatch = useDispatch()
     const requestServer = useServerRequest()
     const userRole = useSelector(selectUserRole)
@@ -26,35 +25,36 @@ const ReviewContainer = ({className, productId, id, author, content, publishedAt
     const isAdminOrModerator = [ROLE.ADMIN, ROLE.MODERATOR].includes(userRole)
 
     return (
-        <div className={className}>
+        <div className={ className }>
             <div className="review">
                 <div className="information-panel">
                     <div className="author">
                         <FaUserCircle size="18px" />
-                        <div className="author-name"> {author}</div>
+                        <div className="author-name"> { author }</div>
                     </div>
                     <div className="published-at">
                         <FaRegCalendarAlt size="18px" />
-                        <div className="published-at"> {publishedAt}</div>
+                        <div className="published-at"> { publishedAt }</div>
                     </div>
                 </div>
-                <div className="review-text">{content}</div>
+                <div className="review-text">{ content }</div>
             </div>
 
-            {isAdminOrModerator && (
+            { isAdminOrModerator && (
                 <div className="remove-review">
                     <FaRegTrashAlt size="20px"
                                    className="remove-review-icon"
-                                   onClick={() => onReviewRemove(id)}
+                                   onClick={ () => onReviewRemove(id) }
                     />
                 </div>
-            )}
+            ) }
         </div>
     )
 }
 
 export const Review = styled(ReviewContainer)`
     display: flex;
+    align-items: center;
     margin-top: 10px;
 
     .review {

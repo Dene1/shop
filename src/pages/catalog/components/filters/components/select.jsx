@@ -1,15 +1,15 @@
 import styled from "styled-components"
 
-const SelectContainer = ({className, children, name, onChange, value}) => {
+const SelectContainer = ({ className, children, name, onChange, value }) => {
     return (
-        <div className={className}>
-            {name}
-            <select onChange={onChange}
-                    value={value}
+        <div className={ className }>
+            { name }
+            <select onChange={ onChange }
+                    value={ value }
             >
-                {children.map((item) => <option key={item}
-                                                value={item}
-                >{item}</option>)}
+                { children.map((item) => <option key={ item }
+                                                 value={ item }
+                >{ item }</option>) }
             </select>
         </div>
     )

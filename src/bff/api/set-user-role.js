@@ -1,5 +1,5 @@
 export const setUserRole = (userId, roleId) =>
-    fetch(`http://localhost:3001/users/${userId}`, {
+    fetch(`http://localhost:3001/users/${ userId }`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json;charset=utf-8",

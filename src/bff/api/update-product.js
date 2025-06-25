@@ -1,3 +1,5 @@
+import { transformProduct } from "../transformers/index.js"
+
 export const updateProduct = ({
                                   id,
                                   imageUrl,
@@ -8,7 +10,7 @@ export const updateProduct = ({
                                   gender,
                                   description
                               }) =>
-    fetch(`http://localhost:3001/products/${id}`, {
+    fetch(`http://localhost:3001/products/${ id }`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -23,4 +25,5 @@ export const updateProduct = ({
             size: size
 
         }),
-    }).then((loadedPost) => loadedPost.json())
+    }).then((loadedProduct) => loadedProduct.json())
+        .then((loadedProduct) => loadedProduct && transformProduct(loadedProduct))

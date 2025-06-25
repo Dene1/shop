@@ -1,22 +1,24 @@
-import {Route, Routes} from "react-router-dom"
-import {Footer, Header, Modal} from "./components/index.js"
+import { Route, Routes } from "react-router-dom"
+import { Footer, Header, ConfirmModal } from "./components/index.js"
 import {
+    AdminPanel,
     Authorization,
+    Cart,
+    Catalog,
     Favorites,
     MainPage,
     Product,
     Registration,
-    Users,
-    Cart,
-    Catalog
+    Users
 } from "./pages/index.js"
-import {loadCartAsync, setUser} from "./actions/index.js"
-import {useEffect, useLayoutEffect} from "react"
-import {useDispatch} from "react-redux"
-import {ERROR} from "./constants/index.js"
+import { loadCartAsync, setProductsData, setUser } from "./actions/index.js"
+import { useEffect, useLayoutEffect } from "react"
+import { useDispatch } from "react-redux"
+import { ERROR } from "./constants/index.js"
+import { getCart } from "./bff/api/get-cart.js"
+import { useServerRequest } from "./hooks/index.js"
 import styled from "styled-components"
-import {getCart} from "./bff/api/get-cart.js"
-import {useServerRequest} from "./hooks/index.js"
+import { getProductsForCart } from "./bff/api/index.js"
 
 const AppColumn = styled.div`
     display: flex;
@@ -37,12 +39,7 @@ export const Shop = () => {
     const dispatch = useDispatch()
     const requestServer = useServerRequest()
 
-    useEffect(() => {
-
-    }, [dispatch, requestServer])
-
     useLayoutEffect(() => {
-
         const currentUserDataJSON = sessionStorage.getItem("userData")
 
         if (!currentUserDataJSON) {
@@ -51,8 +48,23 @@ export const Shop = () => {
 
         const currentUserData = JSON.parse(currentUserDataJSON)
 
-        dispatch(setUser({...currentUserData, roleId: Number(currentUserData.roleId)}))
+        dispatch(setUser({ ...currentUserData, roleId: Number(currentUserData.roleId) }))
     }, [dispatch])
+
+    useEffect(() => {
+        const fetchCart = async () => {
+            const data = await getCart();
+            dispatch(loadCartAsync(requestServer, data));
+        };
+
+        const fetchProduct = async () => {
+            const data = await getProductsForCart()
+            dispatch(setProductsData(data))
+        }
+
+        fetchProduct();
+        fetchCart();
+    }, [dispatch, requestServer]);
 
     return (
         <AppColumn>
@@ -60,42 +72,45 @@ export const Shop = () => {
             <Content>
                 <Routes>
                     <Route path="/"
-                           element={<MainPage />}
+                           element={ <MainPage /> }
                     />
                     <Route path="/login"
-                           element={<Authorization />}
+                           element={ <Authorization /> }
                     />
                     <Route path="/register"
-                           element={<Registration />}
+                           element={ <Registration /> }
                     />
                     <Route path="/users"
-                           element={<Users />}
+                           element={ <Users /> }
                     />
                     <Route path="/catalog"
-                           element={<Catalog />}
+                           element={ <Catalog /> }
                     />
                     <Route path="/product/:id"
-                           element={<Product />}
+                           element={ <Product /> }
                     />
                     <Route path="/product/:id/edit"
-                           element={<Product />}
+                           element={ <Product /> }
                     />
                     <Route path="/cart"
-                           element={<Cart />}
+                           element={ <Cart /> }
                     />
                     <Route path="/favorites"
-                           element={<Favorites />}
+                           element={ <Favorites /> }
+                    />
+                    <Route path="/admin"
+                           element={ <AdminPanel /> }
                     />
                     <Route path="/order"
-                           element={<div>Оформление заказа</div>}
+                           element={ <div>Оформление заказа</div> }
                     />
                     <Route path="*"
-                           element={ERROR.PAGE_NOT_EXIST}
+                           element={ ERROR.PAGE_NOT_EXIST }
                     />
                 </Routes>
             </Content>
             <Footer />
-            <Modal />
+            <ConfirmModal />
         </AppColumn>
     )
 }

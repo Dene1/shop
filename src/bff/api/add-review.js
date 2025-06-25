@@ -1,4 +1,4 @@
-import {generateDate} from "../utils"
+import { generateDate } from "../utils"
 
 export const addReview = (userId, productId, content) =>
     fetch("http://localhost:3001/reviews", {

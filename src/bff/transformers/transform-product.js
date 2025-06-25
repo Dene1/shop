@@ -6,7 +6,6 @@ export const transformProduct = (dbProduct) => ({
     gender: dbProduct.gender,
     size: dbProduct.size,
     imageUrl: dbProduct.image_url,
-    amount: dbProduct.amount,
     brand: dbProduct.brand,
     description: dbProduct.description,
 })

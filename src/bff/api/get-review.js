@@ -1,4 +1,4 @@
-import {transformReviews} from "../transformers"
+import { transformReviews } from "../transformers"
 
 const ALL_REVIEWS_URL = "http://localhost:3001/reviews"
 const POST_REVIEWS_URL = "http://localhost:3001/reviews?product_id="

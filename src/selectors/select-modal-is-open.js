@@ -1,1 +1,1 @@
-export const selectModalIsOpen = ({app}) => app.modal.isOpen
+export const selectModalIsOpen = ({ app }) => app.modal.isOpen

@@ -1,14 +1,14 @@
-import {useEffect, useMemo, useState} from "react"
-import {useServerRequest} from "../../hooks/index.js"
-import {debounce, getLastPageFromLinks} from "./utils/index.js"
-import {PAGINATION_LIMIT} from "../../constants/index.js"
-import {Filters, ProductList} from "./components/index.js"
-import {Search} from "../../components/header/components/index.js"
-import {Loader} from "../../components/index.js"
-import {FILTER_CATALOG, Select} from "./components/filters/components/index.js"
+import { useEffect, useMemo, useState } from "react"
+import { useServerRequest } from "../../hooks/index.js"
+import { debounce, getLastPageFromLinks } from "./utils/index.js"
+import { PAGINATION_LIMIT } from "../../constants/index.js"
+import { Filters, ProductList } from "./components/index.js"
+import { Search } from "../../components/header/components/index.js"
+import { Loader } from "../../components/index.js"
+import { FILTER_CATALOG, Select } from "./components/filters/components/index.js"
 import styled from "styled-components"
 
-const CatalogContainer = ({className}) => {
+const CatalogContainer = ({ className }) => {
     const [products, setProducts] = useState([])
     const [page, setPage] = useState(1)
     const [lastPage, setLastPage] = useState(1)
@@ -26,7 +26,7 @@ const CatalogContainer = ({className}) => {
         setIsLoading(true)
         setTimeout(() => {
             requestServer("fetchProducts", searchPhrase, page, PAGINATION_LIMIT)
-                .then(({res: {products, links}}) => {
+                .then(({ res: { products, links } }) => {
                     setProducts(products)
                     setLastPage(getLastPageFromLinks(links));
                 })
@@ -36,7 +36,7 @@ const CatalogContainer = ({className}) => {
 
     const startDelayedSearch = useMemo(() => debounce(setShouldSearch, 500), [])
 
-    const onSearch = ({target}) => {
+    const onSearch = ({ target }) => {
         setSearchPhrase(target.value)
         startDelayedSearch(!shouldSearch)
     }
@@ -51,7 +51,6 @@ const CatalogContainer = ({className}) => {
         if (selectedPrice === "All") {
             return products;
         }
-
         if (selectedPrice === "$10000+") {
             return products.filter(product => parseFloat(product.price) >= 10000);
         }
@@ -81,7 +80,6 @@ const CatalogContainer = ({className}) => {
         if (selectedSize && selectedSize !== "All") {
             filteredProducts = filteredProducts.filter(product => product.size.includes(selectedSize))
         }
-
         filteredProducts = filterProductsByPrice(filteredProducts, selectedPrice);
 
         if (filter === FILTER_CATALOG[1]) {
@@ -91,7 +89,6 @@ const CatalogContainer = ({className}) => {
         } else if (filter === FILTER_CATALOG[0]) {
             return filteredProducts;
         }
-
         return filteredProducts;
     }, [products, filter, selectedGender, selectedBrand, selectedSize, selectedPrice]);
 
@@ -103,36 +100,36 @@ const CatalogContainer = ({className}) => {
     }
 
     return (
-        <div className={className}>
+        <div className={ className }>
             <Filters
-                onBrandFilter={handleBrandFilter}
-                onSizeFilter={handleSizeFilter}
-                onPriceFilter={handlePriceFilter}
-                onGenderFilter={handleGenderFilter}
-                onResetFilters={onResetFilters}
-                selectedPrice={selectedPrice}
-                selectedBrand={selectedBrand}
-                selectedSize={selectedSize}
-                selectedGender={selectedGender}
+                onBrandFilter={ handleBrandFilter }
+                onSizeFilter={ handleSizeFilter }
+                onPriceFilter={ handlePriceFilter }
+                onGenderFilter={ handleGenderFilter }
+                onResetFilters={ onResetFilters }
+                selectedPrice={ selectedPrice }
+                selectedBrand={ selectedBrand }
+                selectedSize={ selectedSize }
+                selectedGender={ selectedGender }
             />
             <div className="posts-and-search">
                 <div className="sort">
-                    <Select onChange={handleFilterChange}
-                            children={FILTER_CATALOG}
-                            value={filter}
+                    <Select onChange={ handleFilterChange }
+                            children={ FILTER_CATALOG }
+                            value={ filter }
                     />
-                    <Search onChange={onSearch}
-                            searchPhrase={searchPhrase}
+                    <Search onChange={ onSearch }
+                            searchPhrase={ searchPhrase }
                     />
                 </div>
-                {isLoading ? (<Loader isLoading={isLoading} />) :
+                { isLoading ? (<Loader isLoading={ isLoading } />) :
                     (!renderProducts || renderProducts.length === 0) ? (
                             <div className="no-posts-found">Продукции не найдено</div>) :
                         <ProductList
-                            renderProducts={renderProducts}
-                            page={page}
-                            setPage={setPage}
-                            lastPage={lastPage}
+                            renderProducts={ renderProducts }
+                            page={ page }
+                            setPage={ setPage }
+                            lastPage={ lastPage }
                         />
                 }
             </div>

@@ -1,7 +1,7 @@
-import {addReview, getProduct} from "../api"
-import {sessions} from "../sessions.js"
-import {ROLE} from "../constants/index.js"
-import {getProductReviewsWithAuthor} from "../utils/index.js"
+import { addReview, getProduct } from "../api"
+import { sessions } from "../sessions.js"
+import { ROLE } from "../constants/index.js"
+import { getProductReviewsWithAuthor } from "../utils/index.js"
 
 export const addProductReview = async (hash, userId, productId, content) => {
     const accessRoles = [ROLE.ADMIN, ROLE.MODERATOR, ROLE.READER]

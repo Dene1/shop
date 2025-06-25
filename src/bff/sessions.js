@@ -1,4 +1,4 @@
-import {addSession, deleteSession, getSession,} from "./api/index.js"
+import { addSession, deleteSession, getSession } from "./api/index.js"
 
 export const sessions = {
     create(user) {
@@ -8,6 +8,7 @@ export const sessions = {
 
         return hash
     },
+
     async remove(hash) {
         const session = await getSession(hash)
 
