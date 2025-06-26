@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
-import { PrivateContent } from "../../components"
+import { PrivateContent } from "@components"
 import { TableRow, UserRow } from "./components"
-import { useServerRequest } from "../../hooks"
-import { ROLE } from "../../constants/index.js"
-import { checkAccess } from "../../utils/index.js"
+import { useServerRequest } from "@hooks"
+import { ROLE } from "@constants"
+import { checkAccess } from "@utils"
 import { useSelector } from "react-redux"
-import { selectUserRole } from "../../selectors/index.js"
+import { selectUserRole } from "@selectors"
 import styled from "styled-components"
 
 const UsersContainer = ({ className }) => {
@@ -45,28 +45,30 @@ const UsersContainer = ({ className }) => {
     }
 
     return (
-        <PrivateContent access={ [ROLE.ADMIN] }
-                        serverError={ errorMessage }
-        >
-            <div className={ className }>
+        <PrivateContent access={[ROLE.ADMIN]} serverError={errorMessage}>
+            <div className={className}>
                 <h1>Users</h1>
                 <div className="table">
                     <TableRow>
                         <div className="login-column">Логин</div>
-                        <div className="registered-at-column">Дата регистрации</div>
+                        <div className="registered-at-column">
+                            Дата регистрации
+                        </div>
                         <div className="role-column">Роль</div>
                     </TableRow>
-                    { users.map(({ id, login, registeredAt, roleId }) => (
+                    {users.map(({ id, login, registeredAt, roleId }) => (
                         <UserRow
-                            key={ id }
-                            id={ id }
-                            login={ login }
-                            registeredAt={ registeredAt }
-                            roleId={ roleId }
-                            roles={ roles.filter(({ id: roleId }) => roleId !== ROLE.GUEST) }
-                            onUserRemove={ () => onUserRemove(id) }
+                            key={id}
+                            id={id}
+                            login={login}
+                            registeredAt={registeredAt}
+                            roleId={roleId}
+                            roles={roles.filter(
+                                ({ id: roleId }) => roleId !== ROLE.GUEST,
+                            )}
+                            onUserRemove={() => onUserRemove(id)}
                         />
-                    )) }
+                    ))}
                 </div>
             </div>
         </PrivateContent>

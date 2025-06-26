@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux"
-import { selectProducts } from "../../selectors/index.js"
-import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa";
-import { useServerRequest } from "../../hooks/index.js"
+import { selectProducts } from "@selectors"
+import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa"
+import { useServerRequest } from "@hooks"
 import {
     addProductAsync,
     CLOSE_MODAL,
     openModal,
-    removeProductAsync
-} from "../../actions/index.js"
-import { Button, Input, Modal, sanitizeContent } from "../../components/index.js"
+    removeProductAsync,
+} from "@actions"
+import { Button, Input, Modal, sanitizeContent } from "@components"
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
@@ -28,7 +28,6 @@ const AdminPanelContainer = ({ className }) => {
     const [sizeValue, setSizeValue] = useState("")
     const [modalText, setModalText] = useState("")
     const [isOpen, setIsOpen] = useState(false)
-    console.log(products)
 
     const onImageChange = ({ target }) => setImageUrlValue(target.value)
     const onTitleChange = ({ target }) => setTitleValue(target.value)
@@ -56,10 +55,10 @@ const AdminPanelContainer = ({ className }) => {
 
         function isValidUrl(url) {
             try {
-                new URL(url);
-                return true;
+                new URL(url)
+                return true
             } catch (e) {
-                return false;
+                return false
             }
         }
 
@@ -126,43 +125,48 @@ const AdminPanelContainer = ({ className }) => {
             return
         }
 
-
         function sortSizes(str) {
-            return str.split(",").map(Number).sort((a, b) => a - b)
+            return str
+                .split(",")
+                .map(Number)
+                .sort((a, b) => a - b)
         }
 
         const sizeValueArr = sortSizes(sizeValue)
 
-        dispatch(addProductAsync(requestServer, {
-            id: "",
-            imageUrl: imageUrlValue,
-            title: titleValue,
-            price: priceValue,
-            brand: brandValue,
-            category: categoryValue,
-            size: sizeValueArr,
-            gender: genderValue,
-            description: newContent,
-        }))
+        dispatch(
+            addProductAsync(requestServer, {
+                id: "",
+                imageUrl: imageUrlValue,
+                title: titleValue,
+                price: priceValue,
+                brand: brandValue,
+                category: categoryValue,
+                size: sizeValueArr,
+                gender: genderValue,
+                description: newContent,
+            }),
+        )
 
         resetForm()
     }
 
-
     const onPostRemove = (id) => {
-        dispatch(openModal({
-            text: "Удалить продукт?",
-            onConfirm: () => {
-                dispatch(removeProductAsync(requestServer, id))
-                dispatch(CLOSE_MODAL);
-            },
-            onCancel: () => dispatch(CLOSE_MODAL),
-        }))
+        dispatch(
+            openModal({
+                text: "Удалить продукт?",
+                onConfirm: () => {
+                    dispatch(removeProductAsync(requestServer, id))
+                    dispatch(CLOSE_MODAL)
+                },
+                onCancel: () => dispatch(CLOSE_MODAL),
+            }),
+        )
     }
 
     return (
-        <div className={ className }>
-            { isOpen && <Modal text={ modalText } /> }
+        <div className={className}>
+            {isOpen && <Modal text={modalText} />}
 
             <h1>Admin panel</h1>
             <div className="container">
@@ -171,58 +175,56 @@ const AdminPanelContainer = ({ className }) => {
                         <h2>Add product</h2>
                         <div>
                             <Input
-                                value={ titleValue }
+                                value={titleValue}
                                 placeholder="Title"
-                                onChange={ onTitleChange }
+                                onChange={onTitleChange}
                             />
 
                             <Input
-                                value={ imageUrlValue }
+                                value={imageUrlValue}
                                 placeholder="Photo"
-                                onChange={ onImageChange }
+                                onChange={onImageChange}
                             />
 
                             <Input
-                                value={ categoryValue }
+                                value={categoryValue}
                                 placeholder="Category"
-                                onChange={ onCategoryChange }
+                                onChange={onCategoryChange}
                             />
 
                             <Input
-                                value={ genderValue }
+                                value={genderValue}
                                 placeholder="Gender"
-                                onChange={ onGenderChange }
+                                onChange={onGenderChange}
                             />
 
                             <Input
-                                value={ priceValue }
+                                value={priceValue}
                                 placeholder="Price"
-                                onChange={ onPriceChange }
+                                onChange={onPriceChange}
                             />
 
                             <Input
-                                value={ brandValue }
+                                value={brandValue}
                                 placeholder="Brand"
-                                onChange={ onBrandChange }
+                                onChange={onBrandChange}
                             />
 
                             <Input
-                                value={ sizeValue }
+                                value={sizeValue}
                                 placeholder="Size"
-                                onChange={ onSizeChange }
+                                onChange={onSizeChange}
                             />
 
-                            <div ref={ descriptionRef }
-                                 contentEditable={ true }
-                                 suppressContentEditableWarning={ true }
-                                 className="product-text"
-                                 placeholder="Description"
-                            >
-                            </div>
+                            <div
+                                ref={descriptionRef}
+                                contentEditable={true}
+                                suppressContentEditableWarning={true}
+                                className="product-text"
+                                placeholder="Description"
+                            ></div>
                         </div>
-                        <Button onClick={ onSave }>
-                            ADD
-                        </Button>
+                        <Button onClick={onSave}>ADD</Button>
                     </div>
                 </div>
                 <table>
@@ -240,26 +242,40 @@ const AdminPanelContainer = ({ className }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        { products.map((product) => (
-                            <tr key={ product.id }>
-                                <td>{ product.id }</td>
-                                <td className="product-title">{ product.title }</td>
-                                <td>{ product.imageUrl }</td>
-                                <td>{ product.category }</td>
-                                <td>{ product.gender }</td>
-                                <td>{ product.price }</td>
-                                <td>{ product.brand }</td>
-                                <td>{ product.size.join(",") }</td>
+                        {products.map((product) => (
+                            <tr key={product.id}>
+                                <td>{product.id}</td>
+                                <td className="product-title">
+                                    {product.title}
+                                </td>
+                                <td>{product.imageUrl}</td>
+                                <td>{product.category}</td>
+                                <td>{product.gender}</td>
+                                <td>{product.price}</td>
+                                <td>{product.brand}</td>
+                                <td>{product.size.join(",")}</td>
                                 <td className="edit-panel">
-                                    <button><FaPencilAlt size="24px"
-                                                         onClick={ () => navigate(`/product/${ product.id }/edit`) }
-                                    /></button>
-                                    <button><FaRegTrashAlt size="24px"
-                                                           onClick={ () => onPostRemove(product.id) }
-                                    /></button>
+                                    <button>
+                                        <FaPencilAlt
+                                            size="24px"
+                                            onClick={() =>
+                                                navigate(
+                                                    `/product/${product.id}/edit`,
+                                                )
+                                            }
+                                        />
+                                    </button>
+                                    <button>
+                                        <FaRegTrashAlt
+                                            size="24px"
+                                            onClick={() =>
+                                                onPostRemove(product.id)
+                                            }
+                                        />
+                                    </button>
                                 </td>
                             </tr>
-                        )) }
+                        ))}
                     </tbody>
                 </table>
             </div>
@@ -269,7 +285,6 @@ const AdminPanelContainer = ({ className }) => {
 
 export const AdminPanel = styled(AdminPanelContainer)`
     margin: 0 20px;
-
 
     .container {
         display: flex;
@@ -305,7 +320,8 @@ export const AdminPanel = styled(AdminPanelContainer)`
         text-transform: uppercase;
     }
 
-    th, td {
+    th,
+    td {
         border: 1px solid black;
         padding: 8px;
         text-align: center;

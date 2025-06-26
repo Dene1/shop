@@ -1,57 +1,58 @@
 import styled from "styled-components"
-import { BRANDS_NAME, GENDER, PRICE, Select, SIZE } from "./components/index.js"
-
+import { BRANDS_NAME, GENDER, PRICE, Select, SIZE } from "./components"
 
 const FiltersContainer = ({
-                              className,
-                              onGenderFilter,
-                              onBrandFilter,
-                              onSizeFilter,
-                              onPriceFilter,
-                              onResetFilters,
-                              selectedGender,
-                              selectedBrand,
-                              selectedSize,
-                              selectedPrice
-                          }) => {
+    className,
+    onGenderFilter,
+    onBrandFilter,
+    onSizeFilter,
+    onPriceFilter,
+    onResetFilters,
+    selectedGender,
+    selectedBrand,
+    selectedSize,
+    selectedPrice,
+}) => {
     const handleGenderFilter = (event) => onGenderFilter(event.target.value)
     const handleBrandFilter = (event) => onBrandFilter(event.target.value)
     const handleSizeFilter = (event) => onSizeFilter(event.target.value)
     const handlePriceFilter = (event) => onPriceFilter(event.target.value)
 
     return (
-        <div className={ className }>
+        <div className={className}>
             <div className="filters-title">Фильтры</div>
 
             <div className="select-container">
-                <Select name="Gender"
-                        onChange={ handleGenderFilter }
-                        children={ GENDER }
-                        value={ selectedGender }
+                <Select
+                    name="Gender"
+                    onChange={handleGenderFilter}
+                    children={GENDER}
+                    value={selectedGender}
                 />
 
-                <Select name="Brand"
-                        onChange={ handleBrandFilter }
-                        children={ BRANDS_NAME }
-                        value={ selectedBrand }
+                <Select
+                    name="Brand"
+                    onChange={handleBrandFilter}
+                    children={BRANDS_NAME}
+                    value={selectedBrand}
                 />
 
-                <Select name="Size"
-                        onChange={ handleSizeFilter }
-                        children={ SIZE }
-                        value={ selectedSize }
+                <Select
+                    name="Size"
+                    onChange={handleSizeFilter}
+                    children={SIZE}
+                    value={selectedSize}
                 />
 
-                <Select name="Price"
-                        onChange={ handlePriceFilter }
-                        children={ PRICE }
-                        value={ selectedPrice }
+                <Select
+                    name="Price"
+                    onChange={handlePriceFilter}
+                    children={PRICE}
+                    value={selectedPrice}
                 />
             </div>
 
-            <button className="filters-reset"
-                    onClick={ onResetFilters }
-            >
+            <button className="filters-reset" onClick={onResetFilters}>
                 Reset Filters
             </button>
         </div>
@@ -81,15 +82,15 @@ export const Filters = styled(FiltersContainer)`
         width: 200px;
         height: 40px;
         color: white;
-        background-color: #2C3333;
+        background-color: #2c3333;
     }
 
     .filters-reset:hover {
         background-color: #dedede;
-        color: #2C3333;
+        color: #2c3333;
     }
 
     .filters-reset:active {
-        background-color: #EA454C;
+        background-color: #ea454c;
     }
 `

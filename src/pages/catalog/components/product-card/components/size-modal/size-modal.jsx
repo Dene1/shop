@@ -1,59 +1,57 @@
-import styled from "styled-components"
-import { Button } from "../../../../../../components/index.js"
+import { Button } from "@components"
 import { useState } from "react"
+import styled from "styled-components"
 
 const SizeModalContainer = ({
-                                className,
-                                handleAddToCart,
-                                onClose,
-                                productId,
-                                setSelectedSize,
-                                size
-                            }) => {
-    const [localSelectedSize, setLocalSelectedSize] = useState(null);
+    className,
+    handleAddToCart,
+    onClose,
+    productId,
+    setSelectedSize,
+    size,
+}) => {
+    const [localSelectedSize, setLocalSelectedSize] = useState(null)
     const handleSizeSelect = (size) => {
-        setLocalSelectedSize(size);
-        setSelectedSize(size);
-    };
+        setLocalSelectedSize(size)
+        setSelectedSize(size)
+    }
 
     return (
-        <div className={ className }>
+        <div className={className}>
             <div className="overlay"></div>
             <div className="box">
                 <h3>Выберите размер:</h3>
                 <div className="size-container">
-                    { size.map((item) =>
+                    {size.map((item) => (
                         <Button
-                            key={ item }
+                            key={item}
                             width="50px"
                             fontSize="18px"
-                            className={ `size-container ${ localSelectedSize === item ? "selected" : "" }` }
-                            onClick={ () => handleSizeSelect(item) }
+                            className={`size-container ${localSelectedSize === item ? "selected" : ""}`}
+                            onClick={() => handleSizeSelect(item)}
                         >
-                            { item }
-                        </Button>) }
+                            {item}
+                        </Button>
+                    ))}
                 </div>
                 <div className="buttons-container">
                     <Button
                         height="60px"
-                        onClick={ () => {
-                            handleAddToCart(productId);
-                            onClose();
-                        } }
+                        onClick={() => {
+                            handleAddToCart(productId)
+                            onClose()
+                        }}
                     >
                         Добавить в корзину
                     </Button>
-                    <Button height="60px"
-                            onClick={ onClose }
-                    >
+                    <Button height="60px" onClick={onClose}>
                         Отмена
                     </Button>
                 </div>
             </div>
         </div>
-
-    );
-};
+    )
+}
 
 export const SizeModal = styled(SizeModalContainer)`
     position: fixed;
@@ -91,7 +89,7 @@ export const SizeModal = styled(SizeModalContainer)`
     }
 
     .size-container.selected {
-        background-color: #EA454C;
+        background-color: #ea454c;
         color: white;
     }
 

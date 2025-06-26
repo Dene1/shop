@@ -1,4 +1,4 @@
-import { FaRegCircle, FaRegTrashAlt } from "react-icons/fa";
+import { FaRegCircle, FaRegTrashAlt } from "react-icons/fa"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
@@ -9,57 +9,62 @@ const Container = styled(Link)`
     gap: 20px;
     width: 46.7%;
     text-decoration: none;
-    color: #2C3333;
+    color: #2c3333;
 `
 
 const CartItemContainer = ({
-                               className,
-                               product,
-                               productDetails,
-                               handleRemoveFromCart,
-                               increaseCount,
-                               decreaseCount
-                           }) => {
+    className,
+    product,
+    productDetails,
+    handleRemoveFromCart,
+    increaseCount,
+    decreaseCount,
+}) => {
     const disabled = () => productDetails.count <= 1
 
     return (
-        <li className={ className }>
+        <li className={className}>
             <div className="remove-from-cart">
-                <FaRegTrashAlt size="22px"
-                               onClick={ () => handleRemoveFromCart(productDetails.id) }
+                <FaRegTrashAlt
+                    size="22px"
+                    onClick={() => handleRemoveFromCart(productDetails.id)}
                 />
             </div>
 
-            <Container to={ `/product/${ product.id }` }>
-                <img src={ product.imageUrl }
-                     alt={ product.title }
-                />
+            <Container to={`/product/${product.id}`}>
+                <img src={product.imageUrl} alt={product.title} />
 
                 <div className="product-info">
-                    <h3>{ product.title }</h3>
+                    <h3>{product.title}</h3>
                     <div className="container">
-                        <span>{ product.gender }</span>
-                        <span className="dot"> <FaRegCircle size="8px" /> </span>
-                        <span>Size: <span className="size">{ productDetails.size }</span></span>
+                        <span>{product.gender}</span>
+                        <span className="dot">
+                            {" "}
+                            <FaRegCircle size="8px" />{" "}
+                        </span>
+                        <span>
+                            Size:{" "}
+                            <span className="size">{productDetails.size}</span>
+                        </span>
                     </div>
-                    <div className="product-price">$ { product.price }</div>
+                    <div className="product-price">$ {product.price}</div>
                 </div>
             </Container>
 
             <div className="quantity">
-                <div className="quantity-title">
-                    QTY
-                </div>
+                <div className="quantity-title">QTY</div>
                 <div className="quantity-container">
-                    <button className="q-btn"
-                            onClick={ () => increaseCount(productDetails.id) }
+                    <button
+                        className="q-btn"
+                        onClick={() => increaseCount(productDetails.id)}
                     >
                         +
                     </button>
-                    <div className="q-value">{ productDetails.count }X</div>
-                    <button className="q-btn"
-                            disabled={ disabled() }
-                            onClick={ () => decreaseCount(productDetails.id) }
+                    <div className="q-value">{productDetails.count}X</div>
+                    <button
+                        className="q-btn"
+                        disabled={disabled()}
+                        onClick={() => decreaseCount(productDetails.id)}
                     >
                         -
                     </button>
@@ -68,11 +73,12 @@ const CartItemContainer = ({
             <div>
                 <div className="subtotal-price">
                     <div className="subtotal-price-title">SUBTOTAL</div>
-                    <div className="subtotal-price-value">$ { product.price * productDetails.count }</div>
+                    <div className="subtotal-price-value">
+                        $ {product.price * productDetails.count}
+                    </div>
                 </div>
             </div>
         </li>
-
     )
 }
 
@@ -83,7 +89,9 @@ export const CartItem = styled(CartItemContainer)`
     margin: 20px 0 0 40px;
 
     .q-value {
-        font: 500 20px "Bebas Neue", sans-serif;
+        font:
+            500 20px "Bebas Neue",
+            sans-serif;
     }
 
     .quantity-container {
@@ -113,14 +121,18 @@ export const CartItem = styled(CartItemContainer)`
     }
 
     .quantity-title {
-        font: 500 24px "Bebas Neue", sans-serif;
+        font:
+            500 24px "Bebas Neue",
+            sans-serif;
         letter-spacing: 1px;
         color: gray;
     }
 
     .size {
-        font: 700 18px "Bebas Neue", sans-serif;
-        color: #2C3333;
+        font:
+            700 18px "Bebas Neue",
+            sans-serif;
+        color: #2c3333;
     }
 
     .q-btn {
@@ -128,19 +140,19 @@ export const CartItem = styled(CartItemContainer)`
         width: 30px;
         height: 30px;
         background-color: #dedede;
-        color: #2C3333;
+        color: #2c3333;
         border: 1px solid #5b6969;
 
         &:hover {
             cursor: pointer;
             background-color: transparent;
-            color: #2C3333;
+            color: #2c3333;
             border: 1px solid #5b6969;
         }
 
         &:active {
             cursor: pointer;
-            background-color: #EA454C;
+            background-color: #ea454c;
             color: #dedede;
         }
 
@@ -153,7 +165,9 @@ export const CartItem = styled(CartItemContainer)`
     }
 
     .product-price {
-        font: 500 24px "Bebas Neue", sans-serif;
+        font:
+            500 24px "Bebas Neue",
+            sans-serif;
     }
 
     .subtotal-price {
@@ -164,14 +178,17 @@ export const CartItem = styled(CartItemContainer)`
     }
 
     .subtotal-price-title {
-        font: 500 24px "Bebas Neue", sans-serif;
+        font:
+            500 24px "Bebas Neue",
+            sans-serif;
         letter-spacing: 1px;
         color: gray;
-
     }
 
     .subtotal-price-value {
-        font: 500 24px "Bebas Neue", sans-serif;
+        font:
+            500 24px "Bebas Neue",
+            sans-serif;
     }
 
     span {

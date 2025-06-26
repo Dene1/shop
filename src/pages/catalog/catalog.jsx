@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react"
-import { useServerRequest } from "../../hooks/index.js"
-import { debounce, getLastPageFromLinks } from "./utils/index.js"
-import { PAGINATION_LIMIT } from "../../constants/index.js"
-import { Filters, ProductList } from "./components/index.js"
-import { Search } from "../../components/header/components/index.js"
-import { Loader } from "../../components/index.js"
-import { FILTER_CATALOG, Select } from "./components/filters/components/index.js"
+import { useServerRequest } from "@hooks"
+import { debounce, getLastPageFromLinks } from "./utils"
+import { PAGINATION_LIMIT } from "@constants"
+import { Filters, ProductList } from "./components"
+import { Search } from "@components/header/components"
+import { Loader } from "@components"
+import { FILTER_CATALOG, Select } from "./components/filters/components"
 import styled from "styled-components"
 
 const CatalogContainer = ({ className }) => {
@@ -28,11 +28,11 @@ const CatalogContainer = ({ className }) => {
             requestServer("fetchProducts", searchPhrase, page, PAGINATION_LIMIT)
                 .then(({ res: { products, links } }) => {
                     setProducts(products)
-                    setLastPage(getLastPageFromLinks(links));
+                    setLastPage(getLastPageFromLinks(links))
                 })
                 .finally(() => setIsLoading(false))
         }, 1000)
-    }, [requestServer, page, shouldSearch]);
+    }, [requestServer, page, shouldSearch])
 
     const startDelayedSearch = useMemo(() => debounce(setShouldSearch, 500), [])
 
@@ -49,89 +49,108 @@ const CatalogContainer = ({ className }) => {
 
     function filterProductsByPrice(products, selectedPrice) {
         if (selectedPrice === "All") {
-            return products;
+            return products
         }
         if (selectedPrice === "$10000+") {
-            return products.filter(product => parseFloat(product.price) >= 10000);
+            return products.filter(
+                (product) => parseFloat(product.price) >= 10000,
+            )
         }
 
-        const priceRange = selectedPrice.replace(/\$/g, "").trim(); // Удаляем $
-        const [min, max] = priceRange.split(" - ");
-        const minPrice = parseFloat(min);
-        const maxPrice = parseFloat(max);
+        const priceRange = selectedPrice.replace(/\$/g, "").trim() // Удаляем $
+        const [min, max] = priceRange.split(" - ")
+        const minPrice = parseFloat(min)
+        const maxPrice = parseFloat(max)
 
-        return products.filter(product => {
-            const productPrice = parseFloat(product.price);
-            return productPrice >= minPrice && productPrice <= maxPrice;
-        });
+        return products.filter((product) => {
+            const productPrice = parseFloat(product.price)
+            return productPrice >= minPrice && productPrice <= maxPrice
+        })
     }
 
     const renderProducts = useMemo(() => {
         let filteredProducts = [...products]
 
         if (selectedGender && selectedGender !== "Unisex") {
-            filteredProducts = filteredProducts.filter(product => product.gender === selectedGender);
+            filteredProducts = filteredProducts.filter(
+                (product) => product.gender === selectedGender,
+            )
         }
 
         if (selectedBrand && selectedBrand !== "All") {
-            filteredProducts = filteredProducts.filter(product => product.brand === selectedBrand);
+            filteredProducts = filteredProducts.filter(
+                (product) => product.brand === selectedBrand,
+            )
         }
 
         if (selectedSize && selectedSize !== "All") {
-            filteredProducts = filteredProducts.filter(product => product.size.includes(selectedSize))
+            filteredProducts = filteredProducts.filter((product) =>
+                product.size.includes(selectedSize),
+            )
         }
-        filteredProducts = filterProductsByPrice(filteredProducts, selectedPrice);
+        filteredProducts = filterProductsByPrice(
+            filteredProducts,
+            selectedPrice,
+        )
 
         if (filter === FILTER_CATALOG[1]) {
             return filteredProducts.sort((a, b) => a.price - b.price)
         } else if (filter === FILTER_CATALOG[2]) {
             return filteredProducts.sort((a, b) => b.price - a.price)
         } else if (filter === FILTER_CATALOG[0]) {
-            return filteredProducts;
+            return filteredProducts
         }
-        return filteredProducts;
-    }, [products, filter, selectedGender, selectedBrand, selectedSize, selectedPrice]);
+        return filteredProducts
+    }, [
+        products,
+        filter,
+        selectedGender,
+        selectedBrand,
+        selectedSize,
+        selectedPrice,
+    ])
 
     const onResetFilters = () => {
-        setSelectedGender("Unisex");
-        setSelectedBrand("All");
-        setSelectedSize("All");
-        setSelectedPrice("All");
+        setSelectedGender("Unisex")
+        setSelectedBrand("All")
+        setSelectedSize("All")
+        setSelectedPrice("All")
     }
 
     return (
-        <div className={ className }>
+        <div className={className}>
             <Filters
-                onBrandFilter={ handleBrandFilter }
-                onSizeFilter={ handleSizeFilter }
-                onPriceFilter={ handlePriceFilter }
-                onGenderFilter={ handleGenderFilter }
-                onResetFilters={ onResetFilters }
-                selectedPrice={ selectedPrice }
-                selectedBrand={ selectedBrand }
-                selectedSize={ selectedSize }
-                selectedGender={ selectedGender }
+                onBrandFilter={handleBrandFilter}
+                onSizeFilter={handleSizeFilter}
+                onPriceFilter={handlePriceFilter}
+                onGenderFilter={handleGenderFilter}
+                onResetFilters={onResetFilters}
+                selectedPrice={selectedPrice}
+                selectedBrand={selectedBrand}
+                selectedSize={selectedSize}
+                selectedGender={selectedGender}
             />
             <div className="posts-and-search">
                 <div className="sort">
-                    <Select onChange={ handleFilterChange }
-                            children={ FILTER_CATALOG }
-                            value={ filter }
+                    <Select
+                        onChange={handleFilterChange}
+                        children={FILTER_CATALOG}
+                        value={filter}
                     />
-                    <Search onChange={ onSearch }
-                            searchPhrase={ searchPhrase }
-                    />
+                    <Search onChange={onSearch} searchPhrase={searchPhrase} />
                 </div>
-                { isLoading ? (<Loader isLoading={ isLoading } />) :
-                    (!renderProducts || renderProducts.length === 0) ? (
-                            <div className="no-posts-found">Продукции не найдено</div>) :
-                        <ProductList
-                            renderProducts={ renderProducts }
-                            page={ page }
-                            setPage={ setPage }
-                            lastPage={ lastPage }
-                        />
-                }
+                {isLoading ? (
+                    <Loader isLoading={isLoading} />
+                ) : !renderProducts || renderProducts.length === 0 ? (
+                    <div className="no-posts-found">Продукции не найдено</div>
+                ) : (
+                    <ProductList
+                        renderProducts={renderProducts}
+                        page={page}
+                        setPage={setPage}
+                        lastPage={lastPage}
+                    />
+                )}
             </div>
         </div>
     )

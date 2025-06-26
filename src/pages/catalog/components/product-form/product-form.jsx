@@ -1,25 +1,25 @@
-import { Button, Input, sanitizeContent } from "../../../../components"
-import { SpecialPanel } from "../../../product/components/index.js"
+import { Button, Input, sanitizeContent } from "@components"
+import { SpecialPanel } from "@pages/product/components"
 import { useLayoutEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-import { saveProductAsync } from "../../../../actions"
-import { useServerRequest } from "../../../../hooks"
-import { selectUserSession } from "../../../../selectors"
+import { saveProductAsync } from "@actions"
+import { useServerRequest } from "@/hooks"
+import { selectUserSession } from "@selectors"
 import { FaRegSave } from "react-icons/fa"
-import { TiDocumentDelete } from "react-icons/ti";
+import { TiDocumentDelete } from "react-icons/ti"
 import styled from "styled-components"
 
 const Container = styled.div`
     text-align: center;
     font-size: 24px;
 
-    a:Link {
+    a:link {
         cursor: pointer;
         text-decoration: underline;
     }
 
-    a:Link:hover {
+    a:link:hover {
         text-decoration: none;
         opacity: 0.8;
     }
@@ -31,18 +31,10 @@ const StyledSpan = styled.span`
 `
 
 const ProductFormContainer = ({
-                                  className,
-                                  product: {
-                                      id,
-                                      title,
-                                      imageUrl,
-                                      price,
-                                      size,
-                                      publishedAt,
-                                      description
-                                  },
-                              }) => {
-    const session = useSelector(selectUserSession);
+    className,
+    product: { id, title, imageUrl, price, size, publishedAt, description },
+}) => {
+    const session = useSelector(selectUserSession)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const requestServer = useServerRequest()
@@ -53,41 +45,42 @@ const ProductFormContainer = ({
 
     const getSizeArray = (sizeData) => {
         if (Array.isArray(sizeData)) {
-            return sizeData;
+            return sizeData
         } else if (typeof sizeData === "string") {
-            return sizeData.split(",");
+            return sizeData.split(",")
         } else {
-            return [];
+            return []
         }
-    };
+    }
 
     const sortSizes = (sizes) => {
-        return [...sizes].sort((a, b) => parseInt(a) - parseInt(b));
-    };
+        return [...sizes].sort((a, b) => parseInt(a) - parseInt(b))
+    }
 
     const [sizeValue, setSizeValue] = useState(() => {
-        const initialSizes = getSizeArray(size);
-        return sortSizes(initialSizes);
-    });
+        const initialSizes = getSizeArray(size)
+        return sortSizes(initialSizes)
+    })
 
     useLayoutEffect(() => {
         setImageUrlValue(imageUrl)
         setTitleValue(title)
-    }, [imageUrl, title]);
+    }, [imageUrl, title])
 
     const onSave = () => {
         const newContent = sanitizeContent(descriptionRef.current.innerHTML)
         console.log(imageUrlValue)
 
-        dispatch(saveProductAsync(requestServer, {
-            id,
-            imageUrl: imageUrlValue,
-            title: titleValue,
-            price: priceValue,
-            size: sizeValue,
-            content: newContent,
-        }))
-            .then(({ id }) => navigate(`/product/${ id }`))
+        dispatch(
+            saveProductAsync(requestServer, {
+                id,
+                imageUrl: imageUrlValue,
+                title: titleValue,
+                price: priceValue,
+                size: sizeValue,
+                content: newContent,
+            }),
+        ).then(({ id }) => navigate(`/product/${id}`))
     }
 
     const onImageChange = ({ target }) => setImageUrlValue(target.value)
@@ -96,99 +89,92 @@ const ProductFormContainer = ({
     const addSize = () => setSizeValue([...sizeValue, ""])
 
     const removeSize = (index) => {
-        const newSizes = [...sizeValue];
-        newSizes.splice(index, 1);
-        setSizeValue(newSizes);
-    };
+        const newSizes = [...sizeValue]
+        newSizes.splice(index, 1)
+        setSizeValue(newSizes)
+    }
 
     const updateSize = (index, newSize) => {
-        const newSizes = [...sizeValue];
-        newSizes[index] = newSize;
-        setSizeValue(newSizes);
-    };
+        const newSizes = [...sizeValue]
+        newSizes[index] = newSize
+        setSizeValue(newSizes)
+    }
 
     if (!session) {
         return (
             <Container>
-                Вы должны войти в систему, чтобы создать или изменить пост.<br />
+                Вы должны войти в систему, чтобы создать или изменить пост.
+                <br />
                 Пожалуйста <Link to="/login">Войдите.</Link>
             </Container>
-        );
+        )
     }
 
     return (
-        <div className={ className }>
-
+        <div className={className}>
             <div className="edit-panel">
                 <h1>Изменить карточку</h1>
                 <SpecialPanel
-                    id={ id }
-                    publishedAt={ publishedAt }
-                    editButton={ <FaRegSave size="30px"
-                                            onClick={ onSave }
-                    /> }
+                    id={id}
+                    publishedAt={publishedAt}
+                    editButton={<FaRegSave size="30px" onClick={onSave} />}
                 />
             </div>
 
             <StyledSpan>Picture</StyledSpan>
             <Input
-                value={ imageUrlValue }
+                value={imageUrlValue}
                 placeholder="Изображение"
-                onChange={ onImageChange }
+                onChange={onImageChange}
             />
             <StyledSpan>Title</StyledSpan>
             <Input
-                value={ titleValue }
+                value={titleValue}
                 placeholder="Заголовок"
-                onChange={ onTitleChange }
+                onChange={onTitleChange}
             />
 
             <StyledSpan>Price</StyledSpan>
             <Input
-                value={ priceValue }
+                value={priceValue}
                 placeholder="Цена"
-                onChange={ onPriceChange }
+                onChange={onPriceChange}
             />
 
             <StyledSpan>Size</StyledSpan>
             <div className="size-container">
-                { sizeValue.map((size, index) => (
-                    <div className="container"
-                         key={ index }
-                    >
+                {sizeValue.map((size, index) => (
+                    <div className="container" key={index}>
                         <Input
                             type="text"
-                            value={ size }
+                            value={size}
                             placeholder="Размер"
-                            onChange={ (e) => updateSize(index, e.target.value) }
+                            onChange={(e) => updateSize(index, e.target.value)}
                         />
-                        <TiDocumentDelete className="delete"
-                                          type="button"
-                                          size="36px"
-                                          onClick={ () => removeSize(index) }
-                        >
-                        </TiDocumentDelete>
+                        <TiDocumentDelete
+                            className="delete"
+                            type="button"
+                            size="36px"
+                            onClick={() => removeSize(index)}
+                        ></TiDocumentDelete>
                     </div>
-                )) }
-                <Button
-                    type="button"
-                    onClick={ addSize }
-                >
+                ))}
+                <Button type="button" onClick={addSize}>
                     Add size
                 </Button>
             </div>
 
             <div className="description">
                 <StyledSpan>Description</StyledSpan>
-                <div ref={ descriptionRef }
-                     contentEditable={ true }
-                     suppressContentEditableWarning={ true }
-                     className="post-text"
+                <div
+                    ref={descriptionRef}
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    className="post-text"
                 >
-                    { description }
+                    {description}
                 </div>
             </div>
-
         </div>
     )
 }

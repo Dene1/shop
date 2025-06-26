@@ -1,14 +1,16 @@
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
-import { FaGithub, FaInstagram, FaTelegramPlane } from "react-icons/fa";
-import { Button } from "../../components/index.js"
+import { FaGithub, FaInstagram, FaTelegramPlane } from "react-icons/fa"
+import { Button } from "@components"
 
 const Title = styled.div`
     text-transform: uppercase;
     letter-spacing: 6px;
     text-shadow: -0.575rem 0.375rem 0.1rem #9f9f9f;
     position: relative;
-    font: 900 200px "Bebas Neue", sans-serif;
+    font:
+        900 200px "Bebas Neue",
+        sans-serif;
 
     span {
         font-weight: 400;
@@ -22,13 +24,14 @@ const cross3 = "/x-main/2.png"
 
 const StyledJust = styled.div`
     position: absolute;
-    color: #EA454C;
+    color: #ea454c;
     opacity: 0.3;
     text-transform: uppercase;
     letter-spacing: 60px;
     top: 3%;
-    font: 400 24rem "Bebas Neue", sans-serif;
-
+    font:
+        400 24rem "Bebas Neue",
+        sans-serif;
 `
 
 const StyledImage = styled.img`
@@ -80,16 +83,16 @@ const FooterCross = styled(PositionedImage)`
 const SocialIcons = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    border: 1px solid #2C3333;
+    border: 1px solid #2c3333;
     align-items: center;
     z-index: 25;
 `
 
 const StyledIconLink = styled.a`
     text-decoration: none;
-    color: #2C3333;
+    color: #2c3333;
     padding: 18px;
-    border: 1px solid #2C3333;
+    border: 1px solid #2c3333;
 
     &:hover {
         cursor: pointer;
@@ -98,65 +101,66 @@ const StyledIconLink = styled.a`
 `
 
 const MainPageContainer = ({ className }) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const handleClick = () => navigate("/catalog")
 
     return (
-        <div className={ className }>
+        <div className={className}>
             <InnerContainer>
                 <Title>
-                    <TopImage src={ cross1 }
-                              alt="x"
-                    />
+                    <TopImage src={cross1} alt="x" />
                     <div>Your</div>
                     <div>Dream</div>
                     <div>Shoes</div>
-                    <MiddleCross src={ cross2 }
-                                 alt="x"
-                    />
+                    <MiddleCross src={cross2} alt="x" />
 
                     <span> are here</span>
-                    <FooterCross src={ cross3 }
-                                 alt="x"
-                    />
+                    <FooterCross src={cross3} alt="x" />
                 </Title>
                 <div className="buttons-container">
-                    <Button width="300px"
-                            height="84px"
-                            fontSize="24px"
-                            onClick={ handleClick }
-                    > VIEW CATALOG</Button>
+                    <Button
+                        width="300px"
+                        height="84px"
+                        fontSize="24px"
+                        onClick={handleClick}
+                    >
+                        {" "}
+                        VIEW CATALOG
+                    </Button>
                     <SocialIcons>
-                        <StyledIconLink href="https://web.telegram.org/k/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                        <StyledIconLink
+                            href="https://web.telegram.org/k/"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
-                            <FaTelegramPlane size={ 40 } />
+                            <FaTelegramPlane size={40} />
                         </StyledIconLink>
-                        <StyledIconLink href="https://www.instagram.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                        <StyledIconLink
+                            href="https://www.instagram.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
-                            <FaInstagram size={ 40 } />
+                            <FaInstagram size={40} />
                         </StyledIconLink>
-                        <StyledIconLink href="https://github.com/Dene1"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                        <StyledIconLink
+                            href="https://github.com/Dene1"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
-                            <FaGithub size={ 40 } />
+                            <FaGithub size={40} />
                         </StyledIconLink>
                     </SocialIcons>
                 </div>
             </InnerContainer>
 
             <div className="image-container">
-                <StyledJust>just <br />do <br />it</StyledJust>
-                <StyledImage src={ RightShoeImage }
-                             alt="Nike Shoe"
-                />
-                <RightCross src={ cross1 }
-                            alt="cross png"
-                />
+                <StyledJust>
+                    just <br />
+                    do <br />
+                    it
+                </StyledJust>
+                <StyledImage src={RightShoeImage} alt="Nike Shoe" />
+                <RightCross src={cross1} alt="cross png" />
             </div>
         </div>
     )

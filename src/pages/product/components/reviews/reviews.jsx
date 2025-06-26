@@ -1,11 +1,11 @@
 import { useState } from "react"
-import { FaRegPaperPlane } from "react-icons/fa";
+import { FaRegPaperPlane } from "react-icons/fa"
 import { Review } from "./components"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUserId, selectUserRole } from "../../../../selectors"
-import { useServerRequest } from "../../../../hooks"
-import { addReviewAsync } from "../../../../actions"
-import { ROLE } from "../../../../constants/index.js"
+import { selectUserId, selectUserRole } from "@selectors"
+import { useServerRequest } from "@hooks"
+import { addReviewAsync } from "@actions"
+import { ROLE } from "@constants"
 import styled from "styled-components"
 
 const ReviewsContainer = ({ className, reviews, productId }) => {
@@ -23,37 +23,38 @@ const ReviewsContainer = ({ className, reviews, productId }) => {
     const isGuest = userRole === ROLE.GUEST
 
     return (
-        <div className={ className }>
+        <div className={className}>
             <h1 className="title">Reviews</h1>
-            { !isGuest && (
+            {!isGuest && (
                 <div className="new-review">
-                <textarea
-                    name="review"
-                    value={ newReview }
-                    placeholder="Комментарий..."
-                    onChange={ ({ target }) => setNewReview(target.value) }
-                >
-
-                </textarea>
+                    <textarea
+                        name="review"
+                        value={newReview}
+                        placeholder="Комментарий..."
+                        onChange={({ target }) => setNewReview(target.value)}
+                    ></textarea>
                     <div className="paper-plane">
-                        <FaRegPaperPlane size="18px"
-                                         onClick={ () => onNewReviewAdd(userId, productId, newReview) }
+                        <FaRegPaperPlane
+                            size="18px"
+                            onClick={() =>
+                                onNewReviewAdd(userId, productId, newReview)
+                            }
                         />
                     </div>
                 </div>
-            ) }
+            )}
 
             <div className="reviews">
-                { reviews.map(({ id, author, content, publishedAt }) => (
+                {reviews.map(({ id, author, content, publishedAt }) => (
                     <Review
-                        key={ id }
-                        productId={ productId }
-                        id={ id }
-                        author={ author }
-                        content={ content }
-                        publishedAt={ publishedAt }
+                        key={id}
+                        productId={productId}
+                        id={id}
+                        author={author}
+                        content={content}
+                        publishedAt={publishedAt}
                     />
-                )) }
+                ))}
             </div>
         </div>
     )
@@ -62,7 +63,6 @@ const ReviewsContainer = ({ className, reviews, productId }) => {
 export const Reviews = styled(ReviewsContainer)`
     width: 580px;
     margin: 0 auto;
-
 
     .title {
         display: flex;

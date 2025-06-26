@@ -1,27 +1,20 @@
 import styled from "styled-components"
-import { Button, Modal } from "../../../../components"
+import { Button, Modal } from "@components"
 import { useNavigate, useParams } from "react-router-dom"
 import { FaPencilAlt, FaStarHalfAlt } from "react-icons/fa"
-import { SpecialPanel } from "../special-panel/special-panel.jsx"
+import { SpecialPanel } from "@pages/product/components/special-panel/special-panel"
 import { FiHeart } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux"
-import {
-    selectProduct,
-    selectUserId,
-    selectUserSession
-} from "../../../../selectors/index.js"
+import { selectProduct, selectUserId, selectUserSession } from "@selectors"
 import { useState } from "react"
-import { addCartAsync } from "../../../../actions/index.js"
-import { useServerRequest } from "../../../../hooks/index.js"
+import { addCartAsync } from "@actions"
+import { useServerRequest } from "@hooks"
 import { nanoid } from "nanoid"
 
-const ProductContentContainer = ({
-                                     className,
-
-                                 }) => {
+const ProductContentContainer = ({ className }) => {
     const navigate = useNavigate()
     const params = useParams()
-    const path = `${ params.id }`
+    const path = `${params.id}`
     const userId = useSelector(selectUserId)
     const sessionUserId = useSelector(selectUserSession)
     const [selectedSize, setSelectedSize] = useState(null)
@@ -67,9 +60,18 @@ const ProductContentContainer = ({
             return nanoid()
         }
         const myId = generateId()
-        const cartItemId = `${ productId }-${ myId }`
+        const cartItemId = `${productId}-${myId}`
 
-        dispatch(addCartAsync(requestServer, cartItemId, userId, productId, selectedSize, 1))
+        dispatch(
+            addCartAsync(
+                requestServer,
+                cartItemId,
+                userId,
+                productId,
+                selectedSize,
+                1,
+            ),
+        )
         setModalText("Товар добавлен в корзину")
         setIsOpen(true)
         setTimeout(() => {
@@ -82,62 +84,64 @@ const ProductContentContainer = ({
     }
 
     return (
-        <div className={ className }>
-            { isOpen && <Modal text={ modalText } /> }
+        <div className={className}>
+            {isOpen && <Modal text={modalText} />}
             <div className="header-container">
-                <button className="back"
-                        onClick={ () => navigate(-1) }
-                >
+                <button className="back" onClick={() => navigate(-1)}>
                     Back
                 </button>
-                <span className="path-text">ID товара: { path }</span>
+                <span className="path-text">ID товара: {path}</span>
 
                 <SpecialPanel
-                    id={ product.id }
+                    id={product.id}
                     margin=" 0 20px"
                     editButton={
                         <FaPencilAlt
                             size="21px"
                             margin="0 10px 0 0"
-                            onClick={ () => navigate(`/product/${ product.id }/edit`) }
+                            onClick={() =>
+                                navigate(`/product/${product.id}/edit`)
+                            }
                         />
                     }
                 />
             </div>
             <div className="product">
-                <img src={ product.imageUrl ? product.imageUrl : undefined }
-                     alt={ product.title }
+                <img
+                    src={product.imageUrl ? product.imageUrl : undefined}
+                    alt={product.title}
                 />
                 <div className="product-info">
                     <div className="reviews">
-                        <FaStarHalfAlt size={ 18 } />
-                        { product.reviews.length }
+                        <FaStarHalfAlt size={18} />
+                        {product.reviews.length}
                         <span>Reviews</span>
                     </div>
-                    <h1>{ product.title }</h1>
-                    { product.category }
+                    <h1>{product.title}</h1>
+                    {product.category}
                     <div className="price-container">
                         <div className="content-title">PRICE</div>
-                        <div className="price">{ product.price }$</div>
+                        <div className="price">{product.price}$</div>
                     </div>
                     <div className="sizes">
                         <div className="content-title">SIZE</div>
                         <div className="size-items">
-                            { sizeArray.map((item) =>
-                                <div className={ `size-container ${ selectedSize === item ? "selected" : "" }` }
-                                     key={ item }
-                                     onClick={ () => handleSizeClick(item) }
+                            {sizeArray.map((item) => (
+                                <div
+                                    className={`size-container ${selectedSize === item ? "selected" : ""}`}
+                                    key={item}
+                                    onClick={() => handleSizeClick(item)}
                                 >
-                                    { item }
-                                </div>) }
+                                    {item}
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <div className="buttons">
-                        <FiHeart className="heart"
-                                 size="26px"
-                        />
-                        <Button width="40%"
-                                onClick={ () => handleAddToCart(product.id) }
+                        <FiHeart className="heart" size="26px" />
+                        <Button
+                            width="40%"
+                            onClick={() => handleAddToCart(product.id)}
                         >
                             Add to cart
                         </Button>
@@ -147,7 +151,7 @@ const ProductContentContainer = ({
 
             <div className="product-description">
                 <h1>DESCRIPTION</h1>
-                <div className="description">{ product.description }</div>
+                <div className="description">{product.description}</div>
             </div>
         </div>
     )
@@ -173,11 +177,10 @@ export const ProductContent = styled(ProductContentContainer)`
         padding: 5px;
         border: 1px solid #ccc;
         margin-right: 5px;
-
     }
 
     .size-container.selected {
-        background-color: #EA454C;
+        background-color: #ea454c;
         color: white;
     }
 
@@ -197,7 +200,7 @@ export const ProductContent = styled(ProductContentContainer)`
         align-self: center;
 
         &:hover {
-            fill: #EA454C;
+            fill: #ea454c;
             cursor: pointer;
             stroke: #5c656e;
         }
@@ -226,7 +229,7 @@ export const ProductContent = styled(ProductContentContainer)`
 
     .back {
         border: 1px solid #dedede;
-        color: #2C3333;
+        color: #2c3333;
         width: 100px;
         height: 30px;
         cursor: pointer;
@@ -237,7 +240,6 @@ export const ProductContent = styled(ProductContentContainer)`
         font-size: 30px;
         font-weight: 600;
     }
-
 
     .reviews {
         display: flex;
@@ -260,7 +262,7 @@ export const ProductContent = styled(ProductContentContainer)`
     }
 
     .size-container {
-        border: 1px solid #2C3333;
+        border: 1px solid #2c3333;
         padding: 5px 10px;
         user-select: none;
         align-self: center;
@@ -272,7 +274,7 @@ export const ProductContent = styled(ProductContentContainer)`
     }
 
     .size-container:active {
-        background-color: #EA454C;
+        background-color: #ea454c;
         color: #fff;
     }
 

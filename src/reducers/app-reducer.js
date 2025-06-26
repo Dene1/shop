@@ -1,15 +1,13 @@
-import { ACTION_TYPE } from "../actions"
+import { ACTION_TYPE } from "@actions"
 
 const initialAppState = {
     wasLogout: false,
     modal: {
         isOpen: false,
         text: "",
-        onConfirm: () => {
-        },
-        onCancel: () => {
-        },
-    }
+        onConfirm: () => {},
+        onCancel: () => {},
+    },
 }
 
 export const appReducer = (state = initialAppState, action) => {
@@ -31,7 +29,7 @@ export const appReducer = (state = initialAppState, action) => {
         case ACTION_TYPE.CLOSE_MODAL:
             return {
                 ...state,
-                modal: initialAppState.modal
+                modal: initialAppState.modal,
             }
         default:
             return state

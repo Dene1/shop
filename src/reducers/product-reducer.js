@@ -1,4 +1,4 @@
-import { ACTION_TYPE } from "../actions"
+import { ACTION_TYPE } from "@actions"
 
 const initialProductState = {
     id: "",
@@ -26,7 +26,7 @@ export const productReducer = (state = initialProductState, action) => {
             return {
                 ...state,
                 reviews: state.reviews.filter(
-                    (review) => review.id !== action.payload
+                    (review) => review.id !== action.payload,
                 ),
             }
         }

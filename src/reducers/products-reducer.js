@@ -1,4 +1,4 @@
-import { ACTION_TYPE } from "../actions/index.js"
+import { ACTION_TYPE } from "@actions/index"
 
 const initialPostsState = {
     products: [],
@@ -21,7 +21,7 @@ export const productsReducer = (state = initialPostsState, action) => {
             return {
                 ...state,
                 products: state.products.filter(
-                    (product) => product.id !== action.payload
+                    (product) => product.id !== action.payload,
                 ),
             }
         default:

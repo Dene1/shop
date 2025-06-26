@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
+import { GrLocation } from "react-icons/gr"
+import { FiMail, FiPhone } from "react-icons/fi"
 import styled from "styled-components"
-import { GrLocation } from "react-icons/gr";
-import { FiMail, FiPhone } from "react-icons/fi";
 
 const StyledContainer = styled.div`
     display: flex;
@@ -11,51 +11,56 @@ const StyledContainer = styled.div`
 `
 
 const FooterContainer = ({ className }) => {
-
     const [city, setCity] = useState("")
     const [temperature, setTemperature] = useState("")
     const [weather, setWeather] = useState("")
 
     useEffect(() => {
-        fetch("http://api.openweathermap.org/data/2.5/weather?q=Moscow&units=metric&lang=ru&appid=acd4f346c669d7400f4dbbeb7f1350e0")
+        fetch(
+            "http://api.openweathermap.org/data/2.5/weather?q=Moscow&units=metric&lang=ru&appid=acd4f346c669d7400f4dbbeb7f1350e0",
+        )
             .then((res) => res.json())
             .then(({ name, main, weather }) => {
                 setCity(name)
                 setTemperature(Math.round(main.temp))
                 setWeather(weather[0].description)
-            });
-    }, []);
+            })
+    }, [])
 
     return (
-        <div className={ className }>
+        <div className={className}>
             <StyledContainer>
-                <div><span className="logo">Denel</span>Sneakers.© 2025
+                <div>
+                    <span className="logo">Denel</span>Sneakers.© 2025
                 </div>
                 All rights reserved
             </StyledContainer>
             <StyledContainer>
                 <div className="container">
-                    <FiPhone size={ 18 } />
-                    8 (800) 555-35-35
+                    <FiPhone size={18} />8 (800) 555-35-35
                 </div>
                 <div className="container">
-                    <FiMail size={ 18 } />
+                    <FiMail size={18} />
                     denelsneakers@gmail.com
                 </div>
             </StyledContainer>
             <StyledContainer>
                 <div className="container">
-                    <GrLocation size={ 18 } />
+                    <GrLocation size={18} />
                     Denel Sneakers
                 </div>
                 1234 Shoe Street, Moscow City, CA 86423
             </StyledContainer>
             <StyledContainer>
-                <div>{ city }, { new Date().toLocaleString("ru",
-                    { day: "numeric", month: "long" }) }
+                <div>
+                    {city},{" "}
+                    {new Date().toLocaleString("ru", {
+                        day: "numeric",
+                        month: "long",
+                    })}
                 </div>
                 <div>
-                    { temperature }°C, { weather }
+                    {temperature}°C, {weather}
                 </div>
             </StyledContainer>
         </div>
@@ -77,7 +82,7 @@ export const Footer = styled(FooterContainer)`
     z-index: 5;
 
     .logo {
-        color: #EA454C;
+        color: #ea454c;
     }
 
     .container {

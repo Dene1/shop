@@ -1,11 +1,11 @@
-import { Button } from "../button/button.jsx"
+import { Button } from "../button/button"
 import { useSelector } from "react-redux"
 import {
     selectModalIsOpen,
     selectModalOnCancel,
     selectModalOnConfirm,
-    selectModalText
-} from "../../selectors/index.js"
+    selectModalText,
+} from "@selectors"
 import styled from "styled-components"
 
 const ModalContainer = ({ className }) => {
@@ -18,24 +18,22 @@ const ModalContainer = ({ className }) => {
         return null
     }
 
-    return <div className={ className }>
-        <div className="overlay"></div>
-        <div className="box">
-            <h3>{ text }</h3>
-            <div className="buttons">
-                <Button width="120px"
-                        onClick={ onConfirm }
-                >
-                    Да
-                </Button>
-                <Button width="120px"
-                        onClick={ onCancel }
-                >
-                    Отмена
-                </Button>
+    return (
+        <div className={className}>
+            <div className="overlay"></div>
+            <div className="box">
+                <h3>{text}</h3>
+                <div className="buttons">
+                    <Button width="120px" onClick={onConfirm}>
+                        Да
+                    </Button>
+                    <Button width="120px" onClick={onCancel}>
+                        Отмена
+                    </Button>
+                </div>
             </div>
         </div>
-    </div>
+    )
 }
 
 export const ConfirmModal = styled(ModalContainer)`

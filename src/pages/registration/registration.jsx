@@ -1,28 +1,38 @@
 import * as yup from "yup"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { server } from "../../bff"
-import { AuthFormError, Button, Content, Input } from "../../components"
+import { server } from "@bff"
+import { AuthFormError, Button, Content, Input } from "@components"
 import { Link, Navigate } from "react-router-dom"
-import { setUser } from "../../actions"
+import { setUser } from "@actions"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUserRole } from "../../selectors"
-import { ROLE } from "../../constants"
-import { useResetForm } from "../../hooks"
+import { selectUserRole } from "@selectors"
+import { ROLE } from "@constants"
+import { useResetForm } from "@hooks"
 import { useState } from "react"
 import styled from "styled-components"
 
 const regFormSchema = yup.object().shape({
-    login: yup.string()
+    login: yup
+        .string()
         .required("Введите логин")
-        .matches(/^\w+$/, "Неверно введен логин. Допускаются только латинские буквы и цифры ")
+        .matches(
+            /^\w+$/,
+            "Неверно введен логин. Допускаются только латинские буквы и цифры ",
+        )
         .min(3, "Неверно введен логин.Минимум 3 символа ")
         .max(15, "Неверно  введен  логин . Максимум 15 символов "),
-    password: yup.string().required("Введите пароль")
-        .matches(/^[\w#%]+$/, "Неверно введен пароль. Допускаются только латинские буквы, цифры и знаки # %")
+    password: yup
+        .string()
+        .required("Введите пароль")
+        .matches(
+            /^[\w#%]+$/,
+            "Неверно введен пароль. Допускаются только латинские буквы, цифры и знаки # %",
+        )
         .min(6, "Неверно введен пароль.Минимум 6 символа ")
         .max(25, "Неверно введен пароль. Максимум 25 символов"),
-    passcheck: yup.string()
+    passcheck: yup
+        .string()
         .required("Введите пароль повторно")
         .oneOf([yup.ref("password"), null], "Пароли не cовпадают"),
 })
@@ -36,10 +46,9 @@ const StyledLink = styled(Link)`
     font-size: 18px;
 
     &:hover {
-        color: #EA454C;
+        color: #ea454c;
     }
 `
-
 
 const RegistrationContainer = ({ className }) => {
     const {
@@ -64,7 +73,7 @@ const RegistrationContainer = ({ className }) => {
     const onSubmit = ({ login, password }) => {
         server.register(login, password).then(({ error, res }) => {
             if (error) {
-                setServerError(`Ошибка запроса: ${ error }`)
+                setServerError(`Ошибка запроса: ${error}`)
                 return
             }
             dispatch(setUser(res))
@@ -73,7 +82,8 @@ const RegistrationContainer = ({ className }) => {
     }
 
     const formError =
-        errors?.login?.message || errors?.password?.message ||
+        errors?.login?.message ||
+        errors?.password?.message ||
         errors?.passcheck?.message
     const errorMessage = formError || serverError
 
@@ -83,33 +93,43 @@ const RegistrationContainer = ({ className }) => {
 
     return (
         <Content>
-            <div className={ className }>
+            <div className={className}>
                 <h1>Register</h1>
-                <div className="title-text">Hello! Please enter your details.</div>
-                <form onSubmit={ handleSubmit(onSubmit) }>
-                    <Input type="login"
-                           placeholder="Логин..." { ...register("login", {
-                        onChange: () => setServerError(null),
-                    }) } />
-                    <Input type="password"
-                           placeholder="Пароль..."  { ...register("password", {
-                        onChange: () => setServerError(null),
-                    }) } />
-                    <Input type="password"
-                           placeholder="Повторите пароль..." { ...register("passcheck", {
-                        onChange: () => setServerError(null),
-                    }) } />
-                    <Button type="submit"
-                            disabled={ !!formError }
-                    >Зарегистрироваться
+                <div className="title-text">
+                    Hello! Please enter your details.
+                </div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <Input
+                        type="login"
+                        placeholder="Логин..."
+                        {...register("login", {
+                            onChange: () => setServerError(null),
+                        })}
+                    />
+                    <Input
+                        type="password"
+                        placeholder="Пароль..."
+                        {...register("password", {
+                            onChange: () => setServerError(null),
+                        })}
+                    />
+                    <Input
+                        type="password"
+                        placeholder="Повторите пароль..."
+                        {...register("passcheck", {
+                            onChange: () => setServerError(null),
+                        })}
+                    />
+                    <Button type="submit" disabled={!!formError}>
+                        Зарегистрироваться
                     </Button>
-                    { errorMessage && <AuthFormError>{ errorMessage }</AuthFormError> }
+                    {errorMessage && (
+                        <AuthFormError>{errorMessage}</AuthFormError>
+                    )}
                     <StyledLink to="/login">Вернуться к Авторизации</StyledLink>
                 </form>
             </div>
-            <img src={ imageMan }
-                 alt="Man"
-            />
+            <img src={imageMan} alt="Man" />
         </Content>
     )
 }

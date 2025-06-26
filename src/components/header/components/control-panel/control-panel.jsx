@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom"
-import { FiHeart, FiUsers } from "react-icons/fi";
-import { FaSignOutAlt, FaWpforms } from "react-icons/fa";
-import { LuShoppingBag, LuStepBack } from "react-icons/lu";
+import { FiHeart, FiUsers } from "react-icons/fi"
+import { FaSignOutAlt, FaWpforms } from "react-icons/fa"
+import { LuShoppingBag, LuStepBack } from "react-icons/lu"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUserLogin, selectUserRole, selectUserSession } from "../../../../selectors"
-import { logout } from "../../../../actions"
-import { ROLE } from "../../../../constants"
+import { selectUserLogin, selectUserRole, selectUserSession } from "@selectors"
+import { logout } from "@actions"
+import { ROLE } from "@constants"
 import styled from "styled-components"
 
 const RightAligned = styled.div`
@@ -24,7 +24,7 @@ const StyledLink = styled(Link)`
     font-size: 18px;
     width: 100px;
     height: 30px;
-    border: 1px solid #2C3333;
+    border: 1px solid #2c3333;
 
     &:hover {
         cursor: pointer;
@@ -74,40 +74,47 @@ const ControlPanelContainer = ({ className }) => {
     const session = useSelector(selectUserSession)
 
     const handleLogout = () => {
-        dispatch(logout(session));
-        navigate("/");
-    };
+        dispatch(logout(session))
+        navigate("/")
+    }
 
     return (
-        <div className={ className }>
-            { roleId === ROLE.GUEST ? (
+        <div className={className}>
+            {roleId === ROLE.GUEST ? (
                 <RightAligned>
                     <StyledLink to="/login">Войти</StyledLink>
                 </RightAligned>
             ) : (
                 <RightAligned>
-                    <UserName>{ login }</UserName>
+                    <UserName>{login}</UserName>
                     <CursorPointer>
-                        <FaSignOutAlt className="sign-out"
-                                      onClick={ handleLogout }
+                        <FaSignOutAlt
+                            className="sign-out"
+                            onClick={handleLogout}
                         />
                     </CursorPointer>
                 </RightAligned>
-            ) }
+            )}
             <RightAligned>
-                <StyledButton onClick={ () => navigate(-1) }>
-                    <LuStepBack size={ 30 } />
+                <StyledButton onClick={() => navigate(-1)}>
+                    <LuStepBack size={30} />
                 </StyledButton>
-                <StyledIcon to="/favorites"><FiHeart size={ 30 } /></StyledIcon>
-                <StyledIcon to="/cart">
-                    <LuShoppingBag size={ 30 } />
+                <StyledIcon to="/favorites">
+                    <FiHeart size={30} />
                 </StyledIcon>
-                { roleId === ROLE.ADMIN &&
+                <StyledIcon to="/cart">
+                    <LuShoppingBag size={30} />
+                </StyledIcon>
+                {roleId === ROLE.ADMIN && (
                     <>
-                        <StyledIcon to="/users"><FiUsers size={ 30 } /></StyledIcon>
-                        <StyledIcon to="/admin"><FaWpforms size={ 31 } /></StyledIcon>
+                        <StyledIcon to="/users">
+                            <FiUsers size={30} />
+                        </StyledIcon>
+                        <StyledIcon to="/admin">
+                            <FaWpforms size={31} />
+                        </StyledIcon>
                     </>
-                }
+                )}
             </RightAligned>
         </div>
     )
