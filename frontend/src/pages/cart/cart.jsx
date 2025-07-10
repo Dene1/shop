@@ -9,8 +9,9 @@ import {
 } from "@actions"
 import { useDispatch, useSelector } from "react-redux"
 import { useServerRequest } from "@hooks"
-import { selectCarts, selectProducts, selectUserId } from "@selectors"
+import { selectProducts } from "@selectors"
 import styled from "styled-components"
+import { selectCart } from "../../selectors/index.js"
 
 const StyledH1 = styled.h1`
     text-transform: uppercase;
@@ -20,11 +21,15 @@ const StyledH1 = styled.h1`
 const CartContainer = ({ className }) => {
     const requestServer = useServerRequest()
     const dispatch = useDispatch()
-    const carts = useSelector(selectCarts)
     const products = useSelector(selectProducts)
-    const userId = useSelector(selectUserId)
     const [isLoading, setIsLoading] = useState(true)
-    const cartForUser = carts.filter((item) => item.userId === userId)
+    const cartForUser = useSelector(selectCart)
+
+    console.log(cartForUser)
+
+    // useEffect(() => {
+    //     request("/cart").then((carts) => {})
+    // }, [dispatch])
 
     const handleRemoveFromCart = (productId) => {
         dispatch(

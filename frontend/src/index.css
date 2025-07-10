@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Roboto Slab";
-    src: url("../public/fonts/RobotoSlab-Regular.woff2") format("woff2");
+    src: url("/fonts/RobotoSlab-Regular.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
     font-family: "Bebas Neue";
-    src: url("../public/fonts/BebasNeue-Thin.woff2") format("woff2");
+    src: url("/fonts/BebasNeue-Thin.woff2") format("woff2");
     font-weight: 100;
     font-style: normal;
     font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
     font-family: "Bebas Neue";
-    src: url("../public/fonts/BebasNeue-Light.woff2") format("woff2");
+    src: url("/fonts/BebasNeue-Light.woff2") format("woff2");
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
     font-family: "Bebas Neue";
-    src: url("../public/fonts/BebasNeue-Book.woff2") format("woff2");
+    src: url("/fonts/BebasNeue-Book.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -32,7 +32,7 @@
 
 @font-face {
     font-family: "Bebas Neue";
-    src: url("../public/fonts/BebasNeue-Regular.woff2") format("woff2");
+    src: url("/fonts/BebasNeue-Regular.woff2") format("woff2");
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -40,7 +40,7 @@
 
 @font-face {
     font-family: "Bebas Neue";
-    src: url("../public/fonts/BebasNeue-Bold.woff2") format("woff2");
+    src: url("/fonts/BebasNeue-Bold.woff2") format("woff2");
     font-weight: 700;
     font-style: normal;
     font-display: swap;

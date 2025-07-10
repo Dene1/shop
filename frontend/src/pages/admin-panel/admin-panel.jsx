@@ -1,12 +1,18 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa"
-import { CLOSE_MODAL, openModal, removeProductAsync } from "@actions"
+import {
+    CLOSE_MODAL,
+    openModal,
+    removeProductAsync,
+    setProductsData,
+} from "@actions"
 import { Button, Input, Modal, sanitizeContent } from "@components"
 import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { request } from "../../utils/request"
-import { saveProductAsync } from "../../actions/index.js"
+import { selectProducts } from "../../selectors"
+import { addProductAsync } from "../../actions/index.js"
 
 const AdminPanelContainer = ({ className }) => {
     const dispatch = useDispatch()
@@ -21,15 +27,13 @@ const AdminPanelContainer = ({ className }) => {
     const [sizeValue, setSizeValue] = useState("")
     const [modalText, setModalText] = useState("")
     const [isOpen, setIsOpen] = useState(false)
-    const [products, setProducts] = useState([])
+    const products = useSelector(selectProducts)
 
     useEffect(() => {
-        request("/products/all").then((res) => {
-            setProducts(res.data)
+        request("/products/all").then(({ data: res }) => {
+            dispatch(setProductsData(res))
         })
     }, [dispatch])
-
-    console.log(products)
 
     console.log(products)
     const onImageChange = ({ target }) => setImageUrlValue(target.value)
@@ -40,33 +44,35 @@ const AdminPanelContainer = ({ className }) => {
     const onGenderChange = ({ target }) => setGenderValue(target.value)
     const onSizeChange = ({ target }) => setSizeValue(target.value)
 
-    const resetForm = () => {
-        setImageUrlValue("")
-        setTitleValue("")
-        setPriceValue("")
-        setBrandValue("")
-        setCategoryValue("")
-        setGenderValue("")
-        setSizeValue("")
-        setModalText("")
-        descriptionRef.current.innerHTML = ""
-        setIsOpen(false)
-    }
-
     const onSave = () => {
         const newContent = sanitizeContent(descriptionRef.current.innerHTML)
+        const resetForm = () => {
+            setImageUrlValue("")
+            setTitleValue("")
+            setPriceValue("")
+            setBrandValue("")
+            setCategoryValue("")
+            setGenderValue("")
+            setSizeValue("")
+            descriptionRef.current.innerHTML = ""
+        }
 
         function isValidUrl(url) {
             try {
                 new URL(url)
                 return true
             } catch (e) {
+                setModalText("Please enter a valid link")
+                setIsOpen(true)
+                setTimeout(() => {
+                    setIsOpen(false)
+                }, 2000)
                 return false
             }
         }
 
         if (!isValidUrl(imageUrlValue)) {
-            setModalText("Пожалуйста, введите валидную ссылку.")
+            setModalText("Please enter a valid link")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -75,7 +81,7 @@ const AdminPanelContainer = ({ className }) => {
         }
 
         if (!titleValue) {
-            setModalText("Пожалуйста, введите название продукта.")
+            setModalText("Please, enter the title")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -84,7 +90,7 @@ const AdminPanelContainer = ({ className }) => {
         }
 
         if (!priceValue) {
-            setModalText("Пожалуйста, введите цену продукта.")
+            setModalText("Please, enter the price")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -93,7 +99,7 @@ const AdminPanelContainer = ({ className }) => {
         }
 
         if (!brandValue) {
-            setModalText("Пожалуйста, введите название бренда.")
+            setModalText("Please, enter the brand")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -102,7 +108,7 @@ const AdminPanelContainer = ({ className }) => {
         }
 
         if (!categoryValue) {
-            setModalText("Пожалуйста, введите название категории.")
+            setModalText("Please, enter the category")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -111,7 +117,7 @@ const AdminPanelContainer = ({ className }) => {
         }
 
         if (!genderValue) {
-            setModalText("Пожалуйста, введите пол.")
+            setModalText("Please, enter the gender")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -120,7 +126,42 @@ const AdminPanelContainer = ({ className }) => {
         }
 
         if (!sizeValue) {
-            setModalText("Пожалуйста, введите размер.")
+            setModalText("Please, enter the size")
+            setIsOpen(true)
+            setTimeout(() => {
+                setIsOpen(false)
+            }, 2000)
+            return
+        }
+
+        const numberFunction = (sizeValue) => {
+            const sizes = sizeValue.split(",")
+
+            for (const size of sizes) {
+                const trimmedSize = size.trim()
+
+                if (trimmedSize === "") {
+                    return false
+                }
+
+                if (isNaN(Number(trimmedSize))) {
+                    return false
+                }
+            }
+            return true
+        }
+
+        if (numberFunction(priceValue) === false) {
+            setModalText("Please enter a number in the price field")
+            setIsOpen(true)
+            setTimeout(() => {
+                setIsOpen(false)
+            }, 2000)
+            return
+        }
+
+        if (numberFunction(sizeValue) === false) {
+            setModalText("Please enter a number in the size field")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -138,7 +179,7 @@ const AdminPanelContainer = ({ className }) => {
         const sizeValueArr = sortSizes(sizeValue)
 
         dispatch(
-            saveProductAsync(null, {
+            addProductAsync({
                 title: titleValue,
                 image_url: imageUrlValue,
                 price: priceValue,
@@ -149,15 +190,26 @@ const AdminPanelContainer = ({ className }) => {
                 description: newContent,
             }),
         )
+
+        setIsOpen(true)
+        setModalText("Product added")
+        setTimeout(() => {
+            setIsOpen(false)
+        }, 2000)
+
         resetForm()
     }
 
     const onPostRemove = (id) => {
         dispatch(
             openModal({
-                text: "Удалить продукт?",
+                text: "Delete product?",
                 onConfirm: () => {
-                    console.log(id)
+                    setModalText("Product deleted")
+                    setIsOpen(true)
+                    setTimeout(() => {
+                        setIsOpen(false)
+                    }, 2000)
                     dispatch(removeProductAsync(id))
                     dispatch(CLOSE_MODAL)
                 },
@@ -249,7 +301,7 @@ const AdminPanelContainer = ({ className }) => {
                                 <td className="product-title">
                                     {product.title}
                                 </td>
-                                <td>{product.image_url}</td>
+                                <td>{product.imageUrl}</td>
                                 <td>{product.category}</td>
                                 <td>{product.gender}</td>
                                 <td>{product.price}</td>

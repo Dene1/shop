@@ -37,11 +37,8 @@ async function getProducts(search = "", page = 1, limit = 10) {
 }
 
 async function getAllProducts() {
-    const products = await Product.find().populate({
-        path: "reviews",
-        populate: "author"
-    })
-    
+    const products = await Product.find()
+
     return products
 }
 

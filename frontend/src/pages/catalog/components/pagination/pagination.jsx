@@ -2,24 +2,25 @@ import styled from "styled-components"
 
 const PaginationContainer = ({ className, page, lastPage, setPage }) => {
     return (
-        <div className={ className }>
-            <button disabled={ page === 1 }
-                    onClick={ () => setPage(1) }
-            >В начало
+        <div className={className}>
+            <button disabled={page === 1} onClick={() => setPage(1)}>
+                In the beginning
             </button>
-            <button disabled={ page === 1 }
-                    onClick={ () => setPage(page - 1) }
-            >Предыдущая
+            <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+                Previous
             </button>
-            <div className="current-page">Страница: { page }</div>
-            <button disabled={ page === lastPage }
-                    onClick={ () => setPage(page + 1) }
-            >Следующая
+            <div className="current-page">Page: {page}</div>
+            <button
+                disabled={page === lastPage}
+                onClick={() => setPage(page + 1)}
+            >
+                Next
             </button>
-            <button disabled={ page === lastPage }
-                    onClick={ () => setPage(lastPage) }
-            >В
-                конец
+            <button
+                disabled={page === lastPage}
+                onClick={() => setPage(lastPage)}
+            >
+                At the end
             </button>
         </div>
     )
@@ -32,7 +33,6 @@ export const Pagination = styled(PaginationContainer)`
     bottom: 140px;
     margin: 0 0 10px;
     padding: 0 35px;
-    
 
     button {
         margin: 0 5px;
@@ -49,14 +49,14 @@ export const Pagination = styled(PaginationContainer)`
     button:hover {
         cursor: pointer;
         background-color: transparent;
-        color: #2C3333;
+        color: #2c3333;
         border: 1px solid #5b6969;
     }
 
     button:disabled {
         cursor: not-allowed;
         background-color: #dedede;
-        color: #2C3333;
+        color: #2c3333;
     }
 
     .current-page {

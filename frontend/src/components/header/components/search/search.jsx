@@ -18,13 +18,14 @@ const StyledButton = styled.button`
 
 const SearchContainer = ({ className, searchPhrase, onChange }) => {
     return (
-        <div className={ className }>
-            <StyledInput value={ searchPhrase }
-                         type="text"
-                         placeholder="🔍︎ Поиск..."
-                         onChange={ onChange }
+        <div className={className}>
+            <StyledInput
+                value={searchPhrase}
+                type="text"
+                placeholder="🔍︎ Search..."
+                onChange={onChange}
             />
-            <StyledButton>{ <FiSearch size={ 24 } /> }</StyledButton>
+            <StyledButton>{<FiSearch size={24} />}</StyledButton>
         </div>
     )
 }

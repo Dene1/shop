@@ -1,4 +1,4 @@
-import { Button, Input, sanitizeContent } from "@components"
+import { Button, Input, Modal, sanitizeContent } from "@components"
 import { SpecialPanel } from "@pages/product/components"
 import { useLayoutEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -32,13 +32,14 @@ const StyledSpan = styled.span`
 
 const ProductFormContainer = ({
     className,
-    product: { id, title, imageUrl, price, size, publishedAt, description },
+    product: { id, title, imageUrl, price, size, description },
 }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [imageUrlValue, setImageUrlValue] = useState(imageUrl)
     const [titleValue, setTitleValue] = useState(title)
     const [priceValue, setPriceValue] = useState(price)
+    const [isOpen, setIsOpen] = useState(false)
     const userRole = useSelector(selectUserRole)
     const descriptionRef = useRef(null)
 
@@ -68,7 +69,6 @@ const ProductFormContainer = ({
 
     const onSave = () => {
         const newContent = sanitizeContent(descriptionRef.current.innerHTML)
-
         dispatch(
             saveProductAsync(id, {
                 image_url: imageUrlValue,
@@ -78,6 +78,10 @@ const ProductFormContainer = ({
                 description: newContent,
             }),
         ).then(({ id }) => navigate(`/product/${id}`))
+        setIsOpen(true)
+        setTimeout(() => {
+            setIsOpen(false)
+        }, 2000)
     }
 
     const onImageChange = ({ target }) => setImageUrlValue(target.value)
@@ -109,11 +113,11 @@ const ProductFormContainer = ({
 
     return (
         <div className={className}>
+            {isOpen && <Modal text={"Product saved"} />}
             <div className="edit-panel">
                 <h1>Изменить карточку</h1>
                 <SpecialPanel
                     id={id}
-                    publishedAt={publishedAt}
                     editButton={<FaRegSave size="30px" onClick={onSave} />}
                 />
             </div>

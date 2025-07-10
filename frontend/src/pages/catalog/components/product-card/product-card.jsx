@@ -76,8 +76,6 @@ const ProductCardContainer = ({
         }, 3000)
     }
 
-    console.log(reviewsCount)
-
     const handleCloseSizeModal = () => {
         setShowSizeModal(false)
     }

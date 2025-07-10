@@ -78,10 +78,8 @@ const ControlPanelContainer = ({ className }) => {
         sessionStorage.removeItem("userData")
         navigate("/")
     }
-    console.log(roleId)
 
     const isAdmin = checkAccess([ROLE.ADMIN], roleId)
-    console.log(roleId)
 
     return (
         <div className={className}>

@@ -28,8 +28,8 @@ router.get("/", async (req, res) => {
 
 router.get("/all", async (req, res) => {
     const products = await getAllProducts()
-
-    res.send({ data: products })
+    const mappedProducts = products.map(product => mapProduct(product));
+    res.send({ data: mappedProducts })
 })
 
 router.get("/:id", async (req, res) => {
@@ -53,28 +53,26 @@ router.delete("/:productId/reviews/:reviewId", authenticated, hasRole([ROLES.ADM
 })
 
 router.post("/", authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
-    console.log("POST called", req.params.id, req.body)
     const newProduct = await addProduct({
         title: req.body.title,
-        image_url: req.body.imageUrl,
+        image_url: req.body.image_url,
         price: req.body.price,
         brand: req.body.brand,
         category: req.body.category,
         size: req.body.size,
         gender: req.body.gender,
         description: req.body.description
-    })
-
-    res.send({ data: mapProduct(newProduct) })
+    });
+    const savedProduct = await newProduct.save()
+    res.send({ data: mapProduct(savedProduct) })
 })
 
 router.patch("/:id", authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
-    console.log("PATCH /:id called", req.params.id, req.body)
     const updatedProduct = await editProduct(
         req.params.id,
         {
             title: req.body.title,
-            image_url: req.body.imageUrl,
+            image_url: req.body.image_url,
             price: req.body.price,
             brand: req.body.brand,
             category: req.body.category,
@@ -83,12 +81,11 @@ router.patch("/:id", authenticated, hasRole([ROLES.ADMIN]), async (req, res) => 
             description: req.body.description
         }
     )
-    console.log("updatedProduct:", updatedProduct)
     res.send({ data: mapProduct(updatedProduct) })
 })
 
 router.delete("/:id", authenticated, hasRole([ROLES.ADMIN]), async (req, res) => {
-    await deleteProduct(req.params._id)
+    await deleteProduct(req.params.id)
 
     res.send({ error: null })
 })
