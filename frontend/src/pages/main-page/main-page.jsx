@@ -26,6 +26,7 @@ const StyledJust = styled.div`
     position: absolute;
     display: flex;
     flex-direction: column;
+    padding-top: 10px;
 
     p {
         margin: 0;
@@ -33,7 +34,7 @@ const StyledJust = styled.div`
         opacity: 0.4;
         letter-spacing: 70px;
         font:
-            400 22rem "Bebas Neue",
+            400 21rem "Bebas Neue",
             sans-serif;
     }
 `

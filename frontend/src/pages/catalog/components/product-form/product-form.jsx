@@ -115,7 +115,7 @@ const ProductFormContainer = ({
         <div className={className}>
             {isOpen && <Modal text={"Product saved"} />}
             <div className="edit-panel">
-                <h1>Change the card</h1>
+                <h1>Change the product</h1>
                 <SpecialPanel
                     id={id}
                     editButton={<FaRegSave size="30px" onClick={onSave} />}
