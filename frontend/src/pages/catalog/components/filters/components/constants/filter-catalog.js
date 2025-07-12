@@ -1,5 +1,5 @@
 export const FILTER_CATALOG = [
-    "По умолчанию",
-    "По возрастанию цены",
-    "По убыванию цены",
+    "Default",
+    "In increasing price",
+    "In descending prices",
 ]

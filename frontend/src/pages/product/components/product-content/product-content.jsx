@@ -5,25 +5,20 @@ import { FaPencilAlt, FaStarHalfAlt } from "react-icons/fa"
 import { SpecialPanel } from "@pages/product/components/special-panel/special-panel"
 import { FiHeart } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux"
-import { selectProduct, selectUserId, selectUserSession } from "@selectors"
+import { selectProduct, selectUserId } from "@selectors"
 import { useState } from "react"
 import { addCartAsync } from "@actions"
-import { useServerRequest } from "@hooks"
-import { nanoid } from "nanoid"
 
 const ProductContentContainer = ({ className }) => {
     const navigate = useNavigate()
     const params = useParams()
     const path = `${params.id}`
     const userId = useSelector(selectUserId)
-    const sessionUserId = useSelector(selectUserSession)
     const [selectedSize, setSelectedSize] = useState(null)
     const [isOpen, setIsOpen] = useState(false)
     const [modalText, setModalText] = useState("")
-    const requestServer = useServerRequest()
     const dispatch = useDispatch()
     const product = useSelector(selectProduct)
-    console.log(product)
 
     const getSizeArray = (sizeData) => {
         if (Array.isArray(sizeData)) {
@@ -47,7 +42,7 @@ const ProductContentContainer = ({ className }) => {
             return
         }
 
-        if (sessionUserId === null) {
+        if (userId === null) {
             setModalText("Сначала авторизуйтесь")
             setIsOpen(true)
             setTimeout(() => {
@@ -56,23 +51,15 @@ const ProductContentContainer = ({ className }) => {
             return
         }
 
-        const generateId = () => {
-            return nanoid()
-        }
-        const myId = generateId()
-        const cartItemId = `${productId}-${myId}`
-
         dispatch(
-            addCartAsync(
-                requestServer,
-                cartItemId,
-                userId,
-                productId,
-                selectedSize,
-                1,
-            ),
+            addCartAsync({
+                user_id: userId,
+                product_id: productId,
+                size: selectedSize,
+                count: 1,
+            }),
         )
-        setModalText("Товар добавлен в корзину")
+        setModalText("The goods are added to the cart")
         setIsOpen(true)
         setTimeout(() => {
             setIsOpen(false)

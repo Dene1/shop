@@ -1,7 +1,5 @@
 import { removeFromCart } from "./remove-cart-data.js"
+import { request } from "../utils/request.js"
 
-export const removeCartAsync = (requestServer, productId) => (dispatch) => {
-    console.log(productId)
-    requestServer("removeCart", productId)
-        .then(() => dispatch(removeFromCart(productId)))
-}
+export const removeCartAsync = (id) => (dispatch) =>
+    request(`/cart/${id}`, "DELETE").then(() => dispatch(removeFromCart(id)))

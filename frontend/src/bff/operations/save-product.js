@@ -13,10 +13,10 @@ export const saveProduct = async (hash, newProductData) => {
             res: null,
         }
     }
-    console.log(newProductData)
-    const savedProduct = newProductData.id === ""
-        ? await addProduct(newProductData)
-        : await updateProduct(newProductData)
+    const savedProduct =
+        newProductData.id === ""
+            ? await addProduct(newProductData)
+            : await updateProduct(newProductData)
 
     return {
         error: null,

@@ -6,7 +6,7 @@ const initialState = {
 
 export const cartReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ACTION_TYPE.ADD_TO_CART:
+        case ACTION_TYPE.ADD_CART:
             return {
                 cart: [...state.cart, action.payload],
             }
@@ -36,7 +36,7 @@ export const cartReducer = (state = initialState, action) => {
                     if (product.id === action.payload.id) {
                         return {
                             ...product,
-                            count: action.payload.count,
+                            ...action.payload,
                         }
                     }
                     return product

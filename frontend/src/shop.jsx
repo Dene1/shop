@@ -1,5 +1,5 @@
-import { ConfirmModal, Footer, Header } from "@components/"
-import { setUser } from "@actions"
+import { ConfirmModal, Footer, Header } from "@components"
+import { setProductsData, setUser } from "@actions"
 import { useDispatch } from "react-redux"
 import styled from "styled-components"
 import {
@@ -14,8 +14,9 @@ import {
     Users,
 } from "./pages"
 import { ERROR } from "./constants"
-import { Route, Routes } from "react-router-dom"
-import { useLayoutEffect } from "react"
+import { Route, Routes, useLocation } from "react-router-dom"
+import { useEffect, useLayoutEffect } from "react"
+import { request } from "@utils/request"
 
 const AppColumn = styled.div`
     display: flex;
@@ -29,11 +30,19 @@ const AppColumn = styled.div`
 `
 
 const Content = styled.div`
-    padding: 120px 0 60px 0;
-`
+    padding: ${(props) => (props.$isMainPage ? "0 0 60px 0" : "120px 0 60px 0")}
+} `
 
 export const Shop = () => {
     const dispatch = useDispatch()
+    const location = useLocation()
+    const isMainPage = location.pathname === "/"
+
+    useEffect(() => {
+        request("/products/all").then(({ data: res }) => {
+            dispatch(setProductsData(res))
+        })
+    }, [dispatch])
 
     useLayoutEffect(() => {
         const currentUserDataJSON = sessionStorage.getItem("userData")
@@ -55,7 +64,7 @@ export const Shop = () => {
     return (
         <AppColumn>
             <Header />
-            <Content>
+            <Content $isMainPage={isMainPage}>
                 <Routes>
                     <Route path="/" element={<MainPage />} />
                     <Route path="/login" element={<Authorization />} />

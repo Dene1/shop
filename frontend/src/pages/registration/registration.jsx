@@ -15,26 +15,26 @@ import { request } from "../../utils/request.js"
 const regFormSchema = yup.object().shape({
     login: yup
         .string()
-        .required("Введите логин")
+        .required("Enter the login")
         .matches(
             /^\w+$/,
-            "Неверно введен логин. Допускаются только латинские буквы и цифры ",
+            "The login is incorrectly introduced. Only Latin letters and numbers are allowed",
         )
-        .min(3, "Неверно введен логин.Минимум 3 символа ")
-        .max(15, "Неверно  введен  логин . Максимум 15 символов "),
+        .min(3, "The login is incorrectly entered. At least 3 characters")
+        .max(15, "The login is incorrectly introduced. Maximum 15 characters"),
     password: yup
         .string()
-        .required("Введите пароль")
+        .required("Enter the password")
         .matches(
             /^[\w#%]+$/,
-            "Неверно введен пароль. Допускаются только латинские буквы, цифры и знаки # %",
+            "The password is incorrectly entered. Only Latin letters, numbers and signs # % are allowed",
         )
-        .min(6, "Неверно введен пароль.Минимум 6 символа ")
-        .max(25, "Неверно введен пароль. Максимум 25 символов"),
+        .min(6, "The password is incorrectly entered. At least 6 characters")
+        .max(25, "The password is incorrectly entered. Maximum 25 characters"),
     passcheck: yup
         .string()
-        .required("Введите пароль повторно")
-        .oneOf([yup.ref("password"), null], "Пароли не совпадают"),
+        .required("Enter the password again")
+        .oneOf([yup.ref("password"), null], "Passwords do not match"),
 })
 
 const imageMan = "/man.jpg"
@@ -74,7 +74,7 @@ const RegistrationContainer = ({ className }) => {
         request("/register", "POST", { login, password }).then(
             ({ error, user }) => {
                 if (error) {
-                    setServerError(`Ошибка запроса: ${error}`)
+                    setServerError(`Request error: ${error}`)
                     return
                 }
                 dispatch(setUser(user))
@@ -100,35 +100,38 @@ const RegistrationContainer = ({ className }) => {
                 <div className="title-text">
                     Hello! Please enter your details.
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form name="reg-form" onSubmit={handleSubmit(onSubmit)}>
                     <Input
                         type="login"
-                        placeholder="Логин..."
+                        name="login"
+                        placeholder="Login..."
                         {...register("login", {
                             onChange: () => setServerError(null),
                         })}
                     />
                     <Input
                         type="password"
-                        placeholder="Пароль..."
+                        name="password"
+                        placeholder="Password..."
                         {...register("password", {
                             onChange: () => setServerError(null),
                         })}
                     />
                     <Input
                         type="password"
-                        placeholder="Повторите пароль..."
+                        name="passcheck"
+                        placeholder="Repeat password..."
                         {...register("passcheck", {
                             onChange: () => setServerError(null),
                         })}
                     />
                     <Button type="submit" disabled={!!formError}>
-                        Зарегистрироваться
+                        Register
                     </Button>
                     {errorMessage && (
                         <AuthFormError>{errorMessage}</AuthFormError>
                     )}
-                    <StyledLink to="/login">Вернуться к Авторизации</StyledLink>
+                    <StyledLink to="/login">Return to Join</StyledLink>
                 </form>
             </div>
             <img src={imageMan} alt="Man" />

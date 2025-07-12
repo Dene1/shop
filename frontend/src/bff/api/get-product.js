@@ -7,7 +7,7 @@ export const getProduct = async (productId) =>
             if (res.ok) {
                 return res
             }
-            console.log(productId)
+
             const error =
                 res.status === 404
                     ? "Такая страница не существует"

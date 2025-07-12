@@ -10,7 +10,6 @@ export const ProductListContainer = ({
     lastPage,
     setPage,
 }) => {
-    console.log(renderProducts.reviews)
     return (
         <div className={className}>
             <div className="product-list">

@@ -5,8 +5,6 @@ export const fetchProduct = async (productId) => {
     let product
     let error
 
-    console.log(productId)
-
     try {
         product = await getProduct(productId)
     } catch (productError) {

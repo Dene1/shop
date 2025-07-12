@@ -1,16 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa"
-import {
-    CLOSE_MODAL,
-    openModal,
-    removeProductAsync,
-    setProductsData,
-} from "@actions"
+import { CLOSE_MODAL, openModal, removeProductAsync } from "@actions"
 import { Button, Input, Modal, sanitizeContent } from "@components"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import { request } from "../../utils/request"
 import { selectProducts } from "../../selectors"
 import { addProductAsync } from "../../actions/index.js"
 
@@ -29,13 +23,6 @@ const AdminPanelContainer = ({ className }) => {
     const [isOpen, setIsOpen] = useState(false)
     const products = useSelector(selectProducts)
 
-    useEffect(() => {
-        request("/products/all").then(({ data: res }) => {
-            dispatch(setProductsData(res))
-        })
-    }, [dispatch])
-
-    console.log(products)
     const onImageChange = ({ target }) => setImageUrlValue(target.value)
     const onTitleChange = ({ target }) => setTitleValue(target.value)
     const onPriceChange = ({ target }) => setPriceValue(target.value)

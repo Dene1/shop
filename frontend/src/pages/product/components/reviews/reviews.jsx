@@ -34,7 +34,7 @@ const ReviewsContainer = ({ className, reviews, productId }) => {
                     <textarea
                         name="review"
                         value={newReview}
-                        placeholder="Комментарий..."
+                        placeholder="Write a review..."
                         onChange={({ target }) => setNewReview(target.value)}
                     ></textarea>
                     <FaRegPaperPlane

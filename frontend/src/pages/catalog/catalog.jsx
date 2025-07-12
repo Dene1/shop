@@ -30,7 +30,6 @@ const CatalogContainer = ({ className }) => {
             request(
                 `/products?searchPhrase=${searchPhrase}&page=${page}&limit=${PAGINATION_LIMIT}`,
             ).then(({ data: { products, lastPage } }) => {
-                console.log(products)
                 setProducts(products)
                 setLastPage(lastPage)
                 setIsLoading(false)
@@ -146,7 +145,7 @@ const CatalogContainer = ({ className }) => {
                 {isLoading ? (
                     <Loader isLoading={isLoading} />
                 ) : !renderProducts || renderProducts.length === 0 ? (
-                    <div className="no-posts-found">Продукции не найдено</div>
+                    <div className="no-posts-found">Products not found</div>
                 ) : (
                     <ProductList
                         renderProducts={renderProducts}

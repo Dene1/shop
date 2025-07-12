@@ -21,7 +21,6 @@ const CartItemContainer = ({
     decreaseCount,
 }) => {
     const disabled = () => productDetails.count <= 1
-
     return (
         <li className={className}>
             <div className="remove-from-cart">
@@ -31,7 +30,7 @@ const CartItemContainer = ({
                 />
             </div>
 
-            <Container to={`/product/${product.id}`}>
+            <Container to={`/product/${productDetails.product_id}`}>
                 <img src={product.imageUrl} alt={product.title} />
 
                 <div className="product-info">

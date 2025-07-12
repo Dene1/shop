@@ -3,13 +3,12 @@ import { FiHeart } from "react-icons/fi"
 import { FaStar } from "react-icons/fa"
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUserId, selectUserSession } from "@selectors"
+import { selectUserId, selectUserRole } from "@selectors"
 import { useState } from "react"
 import { Button, Modal } from "@components"
 import { addCartAsync } from "@actions"
-import { useServerRequest } from "@hooks"
 import { SizeModal } from "./components/index.js"
-import { nanoid } from "nanoid"
+import { ROLE } from "@constants"
 
 const ProductCardContainer = ({
     className,
@@ -23,34 +22,26 @@ const ProductCardContainer = ({
     reviewsCount,
 }) => {
     const userId = useSelector(selectUserId)
-    const sessionUserId = useSelector(selectUserSession)
     const [selectedSize, setSelectedSize] = useState(null)
     const [isOpen, setIsOpen] = useState(false)
     const [modalText, setModalText] = useState("")
     const [showSizeModal, setShowSizeModal] = useState(false)
-    const requestServer = useServerRequest()
     const dispatch = useDispatch()
+    const userRole = useSelector(selectUserRole)
 
     const handleAddToCart = (productId) => {
         if (selectedSize === null) {
-            setModalText("Please select a size.")
+            setModalText("Please select a size")
             setShowSizeModal(true)
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
-            }, 2000)
+            }, 1000)
             return
         }
 
-        const generateId = () => {
-            return nanoid()
-        }
-        const myId = generateId()
-
-        const cartItemId = `${productId}-${myId}`
-
-        if (sessionUserId === null) {
-            setModalText("Сначала авторизуйтесь")
+        if (userRole === ROLE.GUEST) {
+            setModalText("Please log in")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -59,17 +50,16 @@ const ProductCardContainer = ({
         }
 
         dispatch(
-            addCartAsync(
-                requestServer,
-                cartItemId,
-                userId,
-                productId,
-                selectedSize,
-                1,
-            ),
+            addCartAsync({
+                user_id: userId,
+                product_id: productId,
+                size: selectedSize,
+                count: 1,
+            }),
         )
+
         setShowSizeModal(false)
-        setModalText("Товар добавлен в корзину")
+        setModalText("The shoes are added to the cart")
         setIsOpen(true)
         setTimeout(() => {
             setIsOpen(false)

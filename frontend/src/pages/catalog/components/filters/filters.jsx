@@ -20,7 +20,7 @@ const FiltersContainer = ({
 
     return (
         <div className={className}>
-            <div className="filters-title">Фильтры</div>
+            <div className="filters-title">Filters</div>
 
             <div className="select-container">
                 <Select

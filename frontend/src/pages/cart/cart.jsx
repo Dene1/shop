@@ -1,17 +1,17 @@
 import { CartItem, CartTitle } from "./components/index.js"
 import { Button, Loader } from "@components"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
     CLOSE_MODAL,
     openModal,
     removeCartAsync,
-    updateCartAsync,
+    saveCartAsync,
+    setCartData,
 } from "@actions"
 import { useDispatch, useSelector } from "react-redux"
-import { useServerRequest } from "@hooks"
-import { selectProducts } from "@selectors"
+import { selectCart, selectProducts } from "@selectors"
 import styled from "styled-components"
-import { selectCart } from "../../selectors/index.js"
+import { request } from "@utils/request"
 
 const StyledH1 = styled.h1`
     text-transform: uppercase;
@@ -19,24 +19,23 @@ const StyledH1 = styled.h1`
 `
 
 const CartContainer = ({ className }) => {
-    const requestServer = useServerRequest()
     const dispatch = useDispatch()
-    const products = useSelector(selectProducts)
     const [isLoading, setIsLoading] = useState(true)
+    const products = useSelector(selectProducts)
     const cartForUser = useSelector(selectCart)
 
-    console.log(cartForUser)
+    useEffect(() => {
+        request("/cart").then((cart) => {
+            dispatch(setCartData(cart.data))
+        })
+    }, [dispatch])
 
-    // useEffect(() => {
-    //     request("/cart").then((carts) => {})
-    // }, [dispatch])
-
-    const handleRemoveFromCart = (productId) => {
+    const handleRemoveFromCart = (id) => {
         dispatch(
             openModal({
                 text: "Удалить товар?",
                 onConfirm: () => {
-                    dispatch(removeCartAsync(requestServer, productId))
+                    dispatch(removeCartAsync(id))
                     dispatch(CLOSE_MODAL)
                 },
                 onCancel: () => dispatch(CLOSE_MODAL),
@@ -44,56 +43,41 @@ const CartContainer = ({ className }) => {
         )
     }
 
-    const increaseCount = (productId) => {
-        const cartItem = cartForUser.find((item) => item.id === productId)
-        dispatch(
-            updateCartAsync(requestServer, {
-                id: productId,
-                userId: cartItem.userId,
-                productId: cartItem.productId,
-                size: cartItem.size,
-                count: cartItem.count + 1,
-            }),
-        )
+    const increaseCount = (id) => {
+        const cartItem = cartForUser.find((item) => item.id === id)
+
+        if (cartItem) {
+            dispatch(
+                saveCartAsync(id, {
+                    count: cartItem.count + 1,
+                }),
+            )
+        }
     }
 
-    const decreaseCount = (productId) => {
-        const cartItem = cartForUser.find((item) => item.id === productId)
-        dispatch(
-            updateCartAsync(requestServer, {
-                id: productId,
-                userId: cartItem.userId,
-                productId: cartItem.productId,
-                size: cartItem.size,
-                count: cartItem.count - 1,
-            }),
-        )
-    }
-    console.log(products)
+    const decreaseCount = (id) => {
+        const cartItem = cartForUser.find((item) => item.id === id)
 
-    const getProduct = products.filter((product) =>
-        cartForUser.map((item) => item.productId).includes(product.id),
-    )
+        if (cartItem) {
+            dispatch(
+                saveCartAsync(id, {
+                    count: cartItem.count - 1,
+                }),
+            )
+        }
+    }
 
     const calculateTotal = () => {
         let total = 0
 
         for (let i = 0; i < cartForUser.length; i++) {
             const cartItem = cartForUser[i]
-            const product = getProduct.find((p) => p.id === cartItem.productId)
+            const product = products.find((p) => p.id === cartItem.product_id)
             if (product) {
                 total += Number(product.price) * Number(cartItem.count)
             }
         }
         return total
-    }
-
-    const calculateTotalCount = () => {
-        let totalCount = 0
-        for (let i = 0; i < cartForUser.length; i++) {
-            totalCount += Number(cartForUser[i].count)
-        }
-        return totalCount
     }
 
     setTimeout(() => {
@@ -111,8 +95,8 @@ const CartContainer = ({ className }) => {
                 <>
                     <ul>
                         {cartForUser.map((item) => {
-                            const product = getProduct.find(
-                                (p) => p.id === item.productId,
+                            const product = products.find(
+                                (p) => p.id === item.product_id,
                             )
                             return (
                                 <CartItem
@@ -131,7 +115,7 @@ const CartContainer = ({ className }) => {
                         <div className="total-item">
                             <h2>TOTAL ITEM</h2>
                             <div className="total-price">
-                                {calculateTotalCount()}
+                                {cartForUser.length}
                             </div>
                         </div>
                         <div className="total-item">

@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useMatch, useParams } from "react-router-dom"
 import { useEffect, useLayoutEffect, useState } from "react"
-import { useServerRequest } from "@hooks"
 import { loadProductAsync, RESET_PRODUCT_DATA } from "@actions"
 import { selectProduct } from "@selectors"
 import { Error, Loader, PrivateContent } from "@components"
@@ -17,7 +16,6 @@ const ProductContainer = ({ className }) => {
     const [isLoading, setIsLoading] = useState(true)
     const isCreating = !!useMatch("/product")
     const isEditing = !!useMatch("/product/:id/edit")
-    const requestServer = useServerRequest()
     const product = useSelector(selectProduct)
 
     useLayoutEffect(() => {
@@ -34,7 +32,7 @@ const ProductContainer = ({ className }) => {
             setError(productData.error)
             setIsLoading(false)
         })
-    }, [dispatch, isCreating, params.id, requestServer])
+    }, [dispatch, isCreating, params.id])
 
     if (isLoading) {
         return <Loader isLoading={isLoading} />

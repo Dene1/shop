@@ -17,7 +17,7 @@ const FooterContainer = ({ className }) => {
 
     useEffect(() => {
         fetch(
-            "http://api.openweathermap.org/data/2.5/weather?q=Moscow&units=metric&lang=ru&appid=acd4f346c669d7400f4dbbeb7f1350e0",
+            "http://api.openweathermap.org/data/2.5/weather?q=Moscow&units=metric&lang=eng&appid=acd4f346c669d7400f4dbbeb7f1350e0",
         )
             .then((res) => res.json())
             .then(({ name, main, weather }) => {
@@ -54,7 +54,7 @@ const FooterContainer = ({ className }) => {
             <StyledContainer>
                 <div>
                     {city},{" "}
-                    {new Date().toLocaleString("ru", {
+                    {new Date().toLocaleString("eng", {
                         day: "numeric",
                         month: "long",
                     })}

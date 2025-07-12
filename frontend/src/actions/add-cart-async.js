@@ -1,5 +1,7 @@
-import { addToCart } from "./add-to-cart.js"
+import { addCart } from "./add-cart.js"
+import { request } from "../utils/request.js"
 
-export const addCartAsync = (requestServer, cartId, userId, productId, size, count) => (dispatch) =>
-    requestServer("addInCart", cartId, userId, productId, size, count)
-        .then((productData) => dispatch(addToCart(productData.res)))
+export const addCartAsync = (newCartProductData) => (dispatch) =>
+    request("/cart", "POST", newCartProductData).then((newCartProductData) =>
+        dispatch(addCart(newCartProductData.data)),
+    )

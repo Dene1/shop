@@ -24,20 +24,24 @@ const cross3 = "/x-main/2.png"
 
 const StyledJust = styled.div`
     position: absolute;
-    color: #ea454c;
-    opacity: 0.3;
-    text-transform: uppercase;
-    letter-spacing: 60px;
-    top: 3%;
-    font:
-        400 24rem "Bebas Neue",
-        sans-serif;
+    display: flex;
+    flex-direction: column;
+
+    p {
+        margin: 0;
+        color: #ea454c;
+        opacity: 0.4;
+        letter-spacing: 70px;
+        font:
+            400 22rem "Bebas Neue",
+            sans-serif;
+    }
 `
 
 const StyledImage = styled.img`
     position: relative;
-    top: 40px;
-    right: 16%;
+    top: 80px;
+    right: 14%;
     width: 150%;
     max-width: 1000px;
 `
@@ -45,8 +49,7 @@ const StyledImage = styled.img`
 const InnerContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 40px 0 0 10px;
-    gap: 2rem;
+    padding: 120px 0 0 10px;
     width: 50%;
 `
 
@@ -154,9 +157,9 @@ const MainPageContainer = ({ className }) => {
 
             <div className="image-container">
                 <StyledJust>
-                    just <br />
-                    do <br />
-                    it
+                    <p>just</p>
+                    <p>do</p>
+                    <p>it</p>
                 </StyledJust>
                 <StyledImage src={RightShoeImage} alt="Nike Shoe" />
                 <RightCross src={cross1} alt="shoe image" />
@@ -166,7 +169,6 @@ const MainPageContainer = ({ className }) => {
 }
 
 export const MainPage = styled(MainPageContainer)`
-    margin: 0 auto;
     padding: 0 3rem;
     display: flex;
     flex-direction: row;

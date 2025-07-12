@@ -6,7 +6,7 @@ import { FaRegCalendarAlt, FaRegTrashAlt, FaUserCircle } from "react-icons/fa"
 import styled from "styled-components"
 import moment from "moment"
 import { useState } from "react"
-import { Modal } from "../../../../../../components/index.js"
+import { Modal } from "@components"
 
 const ReviewContainer = ({
     className,
@@ -23,7 +23,7 @@ const ReviewContainer = ({
     const onReviewRemove = (id) => {
         dispatch(
             openModal({
-                text: "Удалить отзыв?",
+                text: "Delete review?",
                 onConfirm: () => {
                     setIsOpen(true)
                     dispatch(removeReviewAsync(productId, id))

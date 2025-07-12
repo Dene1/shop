@@ -1,7 +1,6 @@
 import { Icon } from "@components"
 import { CLOSE_MODAL, openModal, removeProductAsync } from "@actions"
 import { useDispatch, useSelector } from "react-redux"
-import { useServerRequest } from "@hooks"
 import { useNavigate } from "react-router-dom"
 import { checkAccess } from "@utils"
 import { ROLE } from "@constants"
@@ -12,7 +11,6 @@ import styled from "styled-components"
 const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const requestServer = useServerRequest()
     const roleId = useSelector(selectUserRole)
 
     const onPostRemove = (id) => {
@@ -20,9 +18,7 @@ const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
             openModal({
                 text: "Удалить продукт?",
                 onConfirm: () => {
-                    dispatch(removeProductAsync(requestServer, id)).then(() =>
-                        navigate("/"),
-                    )
+                    dispatch(removeProductAsync(id)).then(() => navigate("/"))
                     dispatch(CLOSE_MODAL)
                 },
                 onCancel: () => dispatch(CLOSE_MODAL),
