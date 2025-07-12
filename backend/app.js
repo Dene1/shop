@@ -22,7 +22,7 @@ app.use(express.static("../frontend/dist"));
 
 mongoose.connect(process.env.DB_CONNECTION_STRING)
     .then(() => {
-        app.listen(port, () => {
+        app.listen(port, "0.0.0.0", () => {
             console.log(`Server started on port ${ port }`);
         });
     });

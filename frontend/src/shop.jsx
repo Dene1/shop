@@ -30,7 +30,7 @@ const AppColumn = styled.div`
 `
 
 const Content = styled.div`
-    padding: ${(props) => (props.$isMainPage ? "0 0 60px 0" : "120px 0 60px 0")}
+    padding: ${(props) => (props.$isMainPage ? "0" : "120px 0 60px 0")}
 } `
 
 export const Shop = () => {
