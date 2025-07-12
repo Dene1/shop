@@ -20,7 +20,7 @@ const SizeModalContainer = ({
         <div className={className}>
             <div className="overlay"></div>
             <div className="box">
-                <h3>Выберите размер:</h3>
+                <h3>Select the size:</h3>
                 <div className="size-container">
                     {size.map((item) => (
                         <Button
@@ -42,10 +42,10 @@ const SizeModalContainer = ({
                             onClose()
                         }}
                     >
-                        Добавить в корзину
+                        Add to basket
                     </Button>
                     <Button height="60" onClick={onClose}>
-                        Отмена
+                        Cancel
                     </Button>
                 </div>
             </div>

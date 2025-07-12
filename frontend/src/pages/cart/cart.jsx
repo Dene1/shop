@@ -33,7 +33,7 @@ const CartContainer = ({ className }) => {
     const handleRemoveFromCart = (id) => {
         dispatch(
             openModal({
-                text: "Удалить товар?",
+                text: "Delete the product?",
                 onConfirm: () => {
                     dispatch(removeCartAsync(id))
                     dispatch(CLOSE_MODAL)

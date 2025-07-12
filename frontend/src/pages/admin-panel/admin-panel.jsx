@@ -1,12 +1,16 @@
 import { useDispatch, useSelector } from "react-redux"
 import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa"
-import { CLOSE_MODAL, openModal, removeProductAsync } from "@actions"
+import {
+    addProductAsync,
+    CLOSE_MODAL,
+    openModal,
+    removeProductAsync,
+} from "@actions"
 import { Button, Input, Modal, sanitizeContent } from "@components"
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import { selectProducts } from "../../selectors"
-import { addProductAsync } from "../../actions/index.js"
+import { selectProducts } from "@selectors"
 
 const AdminPanelContainer = ({ className }) => {
     const dispatch = useDispatch()

@@ -76,10 +76,7 @@ export const Shop = () => {
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/favorites" element={<Favorites />} />
                     <Route path="/admin" element={<AdminPanel />} />
-                    <Route
-                        path="/order"
-                        element={<div>Оформление заказа</div>}
-                    />
+                    <Route path="/order" element={<div>Order</div>} />
                     <Route path="*" element={ERROR.PAGE_NOT_EXIST} />
                 </Routes>
             </Content>

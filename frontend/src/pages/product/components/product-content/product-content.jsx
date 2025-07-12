@@ -34,7 +34,7 @@ const ProductContentContainer = ({ className }) => {
 
     const handleAddToCart = (productId) => {
         if (selectedSize === null) {
-            setModalText("Выберите размер")
+            setModalText("Select size")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -43,7 +43,7 @@ const ProductContentContainer = ({ className }) => {
         }
 
         if (userId === null) {
-            setModalText("Сначала авторизуйтесь")
+            setModalText("Please Log In")
             setIsOpen(true)
             setTimeout(() => {
                 setIsOpen(false)
@@ -77,7 +77,7 @@ const ProductContentContainer = ({ className }) => {
                 <button className="back" onClick={() => navigate(-1)}>
                     Back
                 </button>
-                <span className="path-text">ID товара: {path}</span>
+                <span className="path-text">ID product: {path}</span>
 
                 <SpecialPanel
                     id={product.id}

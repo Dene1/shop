@@ -104,9 +104,9 @@ const ProductFormContainer = ({
     if (userRole !== ROLE.ADMIN && userRole !== ROLE.MODERATOR) {
         return (
             <Container>
-                Вы должны войти в систему, чтобы создать или изменить пост.
+                You must enter the system to create or change the post.
                 <br />
-                Пожалуйста <Link to="/login">Войдите.</Link>
+                Please <Link to="/login">Sign in.</Link>
             </Container>
         )
     }
@@ -115,7 +115,7 @@ const ProductFormContainer = ({
         <div className={className}>
             {isOpen && <Modal text={"Product saved"} />}
             <div className="edit-panel">
-                <h1>Изменить карточку</h1>
+                <h1>Change the card</h1>
                 <SpecialPanel
                     id={id}
                     editButton={<FaRegSave size="30px" onClick={onSave} />}
@@ -125,20 +125,20 @@ const ProductFormContainer = ({
             <StyledSpan>Picture</StyledSpan>
             <Input
                 value={imageUrlValue}
-                placeholder="Изображение"
+                placeholder="Image URL"
                 onChange={onImageChange}
             />
             <StyledSpan>Title</StyledSpan>
             <Input
                 value={titleValue}
-                placeholder="Заголовок"
+                placeholder="Heading"
                 onChange={onTitleChange}
             />
 
             <StyledSpan>Price</StyledSpan>
             <Input
                 value={priceValue}
-                placeholder="Цена"
+                placeholder="Price"
                 onChange={onPriceChange}
             />
 

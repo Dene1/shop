@@ -56,7 +56,7 @@ const StyledButton = styled.button`
 const CursorPointer = styled.div`
     cursor: pointer;
 
-    & > .sign-out {
+    .sign-out {
         font-size: 18px;
         margin-top: 8px;
     }
@@ -85,7 +85,7 @@ const ControlPanelContainer = ({ className }) => {
         <div className={className}>
             {roleId === ROLE.GUEST ? (
                 <RightAligned>
-                    <StyledLink to="/login">Войти</StyledLink>
+                    <StyledLink to="/login">Sign In</StyledLink>
                 </RightAligned>
             ) : (
                 <RightAligned>
