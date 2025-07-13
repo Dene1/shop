@@ -74,6 +74,19 @@ const CartContainer = ({ className }) => {
             const cartItem = cartForUser[i]
             const product = products.find((p) => p.id === cartItem.product_id)
             if (product) {
+                total += Number(cartItem.count)
+            }
+        }
+        return total
+    }
+
+    const calculateTotalPrice = () => {
+        let total = 0
+
+        for (let i = 0; i < cartForUser.length; i++) {
+            const cartItem = cartForUser[i]
+            const product = products.find((p) => p.id === cartItem.product_id)
+            if (product) {
                 total += Number(product.price) * Number(cartItem.count)
             }
         }
@@ -115,13 +128,13 @@ const CartContainer = ({ className }) => {
                         <div className="total-item">
                             <h2>TOTAL ITEM</h2>
                             <div className="total-price">
-                                {cartForUser.length}
+                                {calculateTotal()}
                             </div>
                         </div>
                         <div className="total-item">
                             <h2>TOTAL</h2>
                             <div className="total-price">
-                                $ {calculateTotal()}
+                                $ {calculateTotalPrice()}
                             </div>
                         </div>
                     </div>
