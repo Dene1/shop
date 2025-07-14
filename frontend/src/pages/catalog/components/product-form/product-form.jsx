@@ -1,14 +1,14 @@
-import { Button, Input, Modal, sanitizeContent } from "@components"
-import { SpecialPanel } from "@pages/product/components"
+import { Button, Input, Modal, sanitizeContent } from "@/components"
+import { SpecialPanel } from "@/pages/product/components"
 import { useLayoutEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-import { saveProductAsync } from "@actions"
-import { selectUserRole } from "@selectors"
+import { saveProductAsync } from "@/actions"
+import { selectUserRole } from "@/selectors"
 import { FaRegSave } from "react-icons/fa"
 import { TiDocumentDelete } from "react-icons/ti"
 import styled from "styled-components"
-import { ROLE } from "@constants"
+import { ROLE } from "@/constants"
 
 const Container = styled.div`
     text-align: center;

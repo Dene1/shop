@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { BRANDS_NAME, GENDER, PRICE, Select, SIZE } from "./components/index.js"
+import { BRANDS_NAME, GENDER, PRICE, Select, SIZE } from "./components"
 
 const FiltersContainer = ({
     className,

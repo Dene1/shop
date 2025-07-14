@@ -1,12 +1,12 @@
-import { CLOSE_MODAL, openModal, removeReviewAsync } from "@actions"
+import { CLOSE_MODAL, openModal, removeReviewAsync } from "@/actions"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUserRole } from "@selectors"
-import { ROLE } from "@constants"
+import { selectUserRole } from "@/selectors"
+import { ROLE } from "@/constants"
 import { FaRegCalendarAlt, FaRegTrashAlt, FaUserCircle } from "react-icons/fa"
 import styled from "styled-components"
 import moment from "moment"
 import { useState } from "react"
-import { Modal } from "@components"
+import { Modal } from "@/components"
 
 const ReviewContainer = ({
     className,

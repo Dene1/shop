@@ -1,15 +1,12 @@
 import { useEffect, useMemo, useState } from "react"
-import { debounce } from "./utils/index.js"
-import { PAGINATION_LIMIT } from "@constants"
-import { Filters, ProductList } from "./components/index.js"
-import { Search } from "@components/header/components"
-import { Loader } from "@components"
-import {
-    FILTER_CATALOG,
-    Select,
-} from "./components/filters/components/index.js"
+import { debounce } from "./utils"
+import { PAGINATION_LIMIT } from "@/constants"
+import { Filters, ProductList } from "./components"
+import { Search } from "@/components/header/components"
+import { Loader } from "@/components"
+import { FILTER_CATALOG, Select } from "./components/filters/components"
 import styled from "styled-components"
-import { request } from "../../utils/request.js"
+import { request } from "@/utils/request"
 
 const CatalogContainer = ({ className }) => {
     const [products, setProducts] = useState([])

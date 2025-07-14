@@ -1,12 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useMatch, useParams } from "react-router-dom"
 import { useEffect, useLayoutEffect, useState } from "react"
-import { loadProductAsync, RESET_PRODUCT_DATA } from "@actions"
-import { selectProduct } from "@selectors"
-import { Error, Loader, PrivateContent } from "@components"
-import { ROLE } from "@constants"
-import { ProductContent, Reviews } from "./components/index.js"
-import { ProductForm } from "@pages/catalog/components/product-form/product-form"
+import { loadProductAsync, RESET_PRODUCT_DATA } from "@/actions"
+import { selectProduct } from "@/selectors"
+import { Error, Loader, PrivateContent } from "@/components"
+import { ROLE } from "@/constants"
+import { ProductContent, Reviews } from "./components"
+import { ProductForm } from "@/pages/catalog/components/product-form/product-form"
 import styled from "styled-components"
 
 const ProductContainer = ({ className }) => {

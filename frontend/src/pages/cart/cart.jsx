@@ -1,5 +1,5 @@
 import { CartItem, CartTitle } from "./components/index.js"
-import { Button, Loader } from "@components"
+import { Button, Loader } from "@/components"
 import { useEffect, useState } from "react"
 import {
     CLOSE_MODAL,
@@ -7,11 +7,11 @@ import {
     removeCartAsync,
     saveCartAsync,
     setCartData,
-} from "@actions"
+} from "@/actions"
 import { useDispatch, useSelector } from "react-redux"
-import { selectCart, selectProducts } from "@selectors"
+import { selectCart, selectProducts } from "@/selectors"
 import styled from "styled-components"
-import { request } from "@utils/request"
+import { request } from "@/utils/request"
 
 const StyledH1 = styled.h1`
     text-transform: uppercase;
