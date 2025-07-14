@@ -3,8 +3,8 @@ import { useState } from "react"
 import { PiFloppyDiskBold } from "react-icons/pi"
 import { RiDeleteBin5Line } from "react-icons/ri"
 import styled from "styled-components"
-import { request } from "../../../../utils/request.js"
-import { Modal } from "../../../../components/index.js"
+import { request } from "@/utils/request"
+import { Modal } from "@/components"
 import moment from "moment"
 
 const StyledFloppyDiskIcon = styled(PiFloppyDiskBold)`

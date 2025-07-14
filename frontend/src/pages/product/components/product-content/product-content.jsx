@@ -1,13 +1,13 @@
 import styled from "styled-components"
-import { Button, Modal } from "@components"
+import { Button, Modal } from "@/components"
 import { useNavigate, useParams } from "react-router-dom"
 import { FaPencilAlt, FaStarHalfAlt } from "react-icons/fa"
-import { SpecialPanel } from "@pages/product/components/special-panel/special-panel"
+import { SpecialPanel } from "@/pages/product/components/special-panel/special-panel"
 import { FiHeart } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux"
-import { selectProduct, selectUserId } from "@selectors"
+import { selectProduct, selectUserId } from "@/selectors"
 import { useState } from "react"
-import { addCartAsync } from "@actions"
+import { addCartAsync } from "@/actions"
 
 const ProductContentContainer = ({ className }) => {
     const navigate = useNavigate()

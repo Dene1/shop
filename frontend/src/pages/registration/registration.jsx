@@ -1,16 +1,16 @@
 import * as yup from "yup"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { AuthFormError, Button, Content, Input } from "@components"
+import { AuthFormError, Button, Content, Input } from "@/components"
 import { Link, Navigate } from "react-router-dom"
-import { setUser } from "@actions"
+import { setUser } from "@/actions"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUserRole } from "@selectors"
-import { ROLE } from "@constants"
-import { useResetForm } from "@hooks"
+import { selectUserRole } from "@/selectors"
+import { ROLE } from "@/constants"
+import { useResetForm } from "@/hooks"
 import { useState } from "react"
 import styled from "styled-components"
-import { request } from "../../utils/request.js"
+import { request } from "@/utils/request"
 
 const regFormSchema = yup.object().shape({
     login: yup

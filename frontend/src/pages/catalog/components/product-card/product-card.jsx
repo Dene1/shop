@@ -3,12 +3,12 @@ import { FiHeart } from "react-icons/fi"
 import { FaStar } from "react-icons/fa"
 import styled from "styled-components"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUserId, selectUserRole } from "@selectors"
+import { selectUserId, selectUserRole } from "@/selectors"
 import { useState } from "react"
-import { Button, Modal } from "@components"
-import { addCartAsync } from "@actions"
+import { Button, Modal } from "@/components"
+import { addCartAsync } from "@/actions"
 import { SizeModal } from "./components/index.js"
-import { ROLE } from "@constants"
+import { ROLE } from "@/constants"
 
 const ProductCardContainer = ({
     className,

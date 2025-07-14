@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react"
-import { ConfirmModal, PrivateContent } from "@components"
-import { TableRow, UserRow } from "./components/"
-import { ROLE } from "@constants"
-import { checkAccess } from "@utils"
+import { ConfirmModal, Modal, PrivateContent } from "@/components"
+import { TableRow, UserRow } from "./components"
+import { ROLE } from "@/constants"
+import { checkAccess } from "@/utils"
 import { useDispatch, useSelector } from "react-redux"
-import { selectUserRole } from "@selectors"
-import { request } from "@utils/request"
+import { selectUserRole } from "@/selectors"
+import { request } from "@/utils/request"
+import { CLOSE_MODAL, openModal } from "@/actions"
 import styled from "styled-components"
-import { CLOSE_MODAL, openModal } from "../../actions/index.js"
-import { Modal } from "../../components/index.js"
 
 const UsersContainer = ({ className }) => {
     const [users, setUsers] = useState([])

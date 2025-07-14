@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
 import { FaGithub, FaInstagram, FaTelegramPlane } from "react-icons/fa"
-import { Button } from "@components"
+import { Button } from "@/components"
 
 const Title = styled.div`
     text-transform: uppercase;

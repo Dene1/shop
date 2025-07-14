@@ -5,12 +5,12 @@ import {
     CLOSE_MODAL,
     openModal,
     removeProductAsync,
-} from "@actions"
-import { Button, Input, Modal, sanitizeContent } from "@components"
+} from "@/actions"
+import { Button, Input, Modal, sanitizeContent } from "@/components"
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import { selectProducts } from "@selectors"
+import { selectProducts } from "@/selectors"
 
 const AdminPanelContainer = ({ className }) => {
     const dispatch = useDispatch()
