@@ -1,5 +1,5 @@
 import { ACTION_TYPE } from "./action-type.js"
-import { request } from "../utils/request.js"
+import { request } from "@/utils/request"
 
 export const logout = () => {
     request("/logout", "POST")

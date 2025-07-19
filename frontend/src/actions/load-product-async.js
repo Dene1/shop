@@ -1,5 +1,5 @@
 import { setProductData } from "./set-product-data.js"
-import { request } from "../utils/request.js"
+import { request } from "@/utils/request"
 
 export const loadProductAsync = (productId) => (dispatch) =>
     request(`/products/${productId}`).then((productData) => {

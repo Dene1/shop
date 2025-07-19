@@ -11,6 +11,7 @@ import { ROLE } from "@/constants"
 import { useResetForm } from "@/hooks"
 import styled from "styled-components"
 import { request } from "@//utils/request"
+import { AuthorizationContainer } from "@/pages/authorization/authorization.styles"
 
 const authFormSchema = yup.object().shape({
     login: yup
@@ -46,7 +47,7 @@ const StyledLink = styled(Link)`
 `
 const imageMan = "/man.jpg"
 
-const AuthorizationContainer = ({ className }) => {
+export const Authorization = () => {
     const {
         register,
         reset,
@@ -87,7 +88,7 @@ const AuthorizationContainer = ({ className }) => {
 
     return (
         <Content>
-            <div className={className}>
+            <AuthorizationContainer>
                 <div className="title">Welcome back</div>
                 <div className="title-text">
                     Welcome back! <br /> Please enter your details.
@@ -117,33 +118,8 @@ const AuthorizationContainer = ({ className }) => {
                     )}
                     <StyledLink to="/register">Register</StyledLink>
                 </form>
-            </div>
+            </AuthorizationContainer>
             <img src={imageMan} alt="Man" />
         </Content>
     )
 }
-
-export const Authorization = styled(AuthorizationContainer)`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    & .title {
-        margin-top: 12px;
-        font-size: 40px;
-        text-transform: uppercase;
-    }
-
-    & .title-text {
-        margin: 8px 0;
-        text-align: center;
-    }
-
-    & > form {
-        display: flex;
-        flex-direction: column;
-        width: 260px;
-        margin-top: 20px;
-    }
-`

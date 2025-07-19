@@ -5,10 +5,10 @@ import { Filters, ProductList } from "./components"
 import { Search } from "@/components/header/components"
 import { Loader } from "@/components"
 import { FILTER_CATALOG, Select } from "./components/filters/components"
-import styled from "styled-components"
 import { request } from "@/utils/request"
+import { CatalogContainer } from "@/pages/catalog/catalog.styles"
 
-const CatalogContainer = ({ className }) => {
+export const Catalog = () => {
     const [products, setProducts] = useState([])
     const [page, setPage] = useState(1)
     const [lastPage, setLastPage] = useState(1)
@@ -118,7 +118,7 @@ const CatalogContainer = ({ className }) => {
     }
 
     return (
-        <div className={className}>
+        <CatalogContainer>
             <Filters
                 onBrandFilter={handleBrandFilter}
                 onSizeFilter={handleSizeFilter}
@@ -152,36 +152,6 @@ const CatalogContainer = ({ className }) => {
                     />
                 )}
             </div>
-        </div>
+        </CatalogContainer>
     )
 }
-
-export const Catalog = styled(CatalogContainer)`
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    font-size: 18px;
-    margin: 20px;
-
-    .sort {
-        margin-left: 60px;
-        display: flex;
-        flex-direction: row;
-        justify-content: start;
-        gap: 240px;
-        align-items: flex-end;
-    }
-
-    .no-posts-found {
-        text-align: center;
-        margin: 20px 0 0 40px;
-        font-size: 24px;
-        font-weight: 600;
-        align-items: center;
-        justify-content: center;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-`

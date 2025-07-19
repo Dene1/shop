@@ -1,15 +1,9 @@
-import styled from "styled-components"
-
-const Div = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
+import { Container } from "@/components/error/error.styles"
 
 export const Error = ({ error }) =>
     error && (
-        <Div>
+        <Container>
             <h1>An error occurred</h1>
-            <div>{ error }</div>
-        </Div>
+            <div>{error}</div>
+        </Container>
     )

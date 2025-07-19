@@ -1,4 +1,4 @@
-import { BASE_URL } from "../constants"
+import { BASE_URL } from "@/constants"
 
 export function request(url, method, data) {
     return fetch(`${BASE_URL}${url}`, {

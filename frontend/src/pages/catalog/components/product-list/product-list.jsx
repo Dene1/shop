@@ -1,17 +1,11 @@
 import React from "react"
-import { ProductCard } from "../product-card/product-card.jsx"
-import { Pagination } from "../pagination/pagination.jsx"
-import styled from "styled-components"
+import { ProductCard } from "@/pages/catalog/components/product-card/product-card"
+import { Pagination } from "@/pages/catalog/components/pagination/pagination"
+import { ProductListContainer } from "@/pages/catalog/components/product-list/product-list.styles"
 
-export const ProductListContainer = ({
-    className,
-    renderProducts,
-    page,
-    lastPage,
-    setPage,
-}) => {
+export const ProductList = ({ renderProducts, page, lastPage, setPage }) => {
     return (
-        <div className={className}>
+        <ProductListContainer>
             <div className="product-list">
                 {renderProducts.map(
                     ({
@@ -41,20 +35,6 @@ export const ProductListContainer = ({
             {lastPage > 1 && renderProducts.length > 0 && (
                 <Pagination page={page} lastPage={lastPage} setPage={setPage} />
             )}
-        </div>
+        </ProductListContainer>
     )
 }
-
-export const ProductList = styled(ProductListContainer)`
-    margin: 20px;
-    display: flex;
-    flex-direction: row;
-
-    .product-list {
-        display: grid;
-        align-items: stretch;
-        margin: 20px 0 0 40px;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 40px;
-    }
-`

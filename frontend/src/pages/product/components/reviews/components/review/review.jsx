@@ -3,19 +3,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectUserRole } from "@/selectors"
 import { ROLE } from "@/constants"
 import { FaRegCalendarAlt, FaRegTrashAlt, FaUserCircle } from "react-icons/fa"
-import styled from "styled-components"
 import moment from "moment"
 import { useState } from "react"
 import { Modal } from "@/components"
+import { ReviewContainer } from "@/pages/product/components/reviews/components/review/review.styles"
 
-const ReviewContainer = ({
-    className,
-    productId,
-    id,
-    author,
-    content,
-    publishedAt,
-}) => {
+export const Review = ({ productId, id, author, content, publishedAt }) => {
     const dispatch = useDispatch()
     const [isOpen, setIsOpen] = useState(false)
     const userRole = useSelector(selectUserRole)
@@ -41,7 +34,7 @@ const ReviewContainer = ({
     const formattedDate = moment(publishedAt).format("DD-MM-YYYY, HH:mm")
 
     return (
-        <div className={className}>
+        <ReviewContainer>
             {isOpen && <Modal text={"The review is deleted"} />}
             <div className="review">
                 <div className="information-panel">
@@ -64,54 +57,6 @@ const ReviewContainer = ({
                     onClick={() => onReviewRemove(id)}
                 />
             )}
-        </div>
+        </ReviewContainer>
     )
 }
-
-export const Review = styled(ReviewContainer)`
-    display: flex;
-    align-items: flex-start;
-    margin-top: 10px;
-
-    .review {
-        border: 1px solid black;
-        padding: 5px 10px;
-        width: 550px;
-        max-width: 100%;
-        box-sizing: border-box;
-        overflow-wrap: break-word;
-        word-break: break-word;
-        white-space: pre-wrap;
-        text-align: left;
-    }
-
-    .published-at {
-        margin: 0 0 0 5px;
-        display: flex;
-        align-items: center;
-    }
-
-    .information-panel {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .author-name {
-        margin: 0 0 0 5px;
-    }
-
-    .author {
-        display: flex;
-        align-items: center;
-    }
-
-    .published-at {
-        display: flex;
-    }
-
-    .remove-review-icon {
-        display: flex;
-        margin: 6px 0 0 10px;
-        cursor: pointer;
-    }
-`

@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectUserRole } from "@/selectors"
 import { request } from "@/utils/request"
 import { CLOSE_MODAL, openModal } from "@/actions"
-import styled from "styled-components"
+import { UsersContainer } from "@/pages/users/users.styles"
 
-const UsersContainer = ({ className }) => {
+export const Users = () => {
     const [users, setUsers] = useState([])
     const [roles, setRoles] = useState([])
     const [errorMessage, setErrorMessage] = useState(null)
@@ -62,7 +62,7 @@ const UsersContainer = ({ className }) => {
         <PrivateContent access={[ROLE.ADMIN]} serverError={errorMessage}>
             {isOpen && <Modal text={"The user is deleted"} />}
             <ConfirmModal text={"Delete the user?"} />
-            <div className={className}>
+            <UsersContainer>
                 <h1>Users</h1>
                 <div className="table">
                     <TableRow>
@@ -86,20 +86,7 @@ const UsersContainer = ({ className }) => {
                         />
                     ))}
                 </div>
-            </div>
+            </UsersContainer>
         </PrivateContent>
     )
 }
-
-export const Users = styled(UsersContainer)`
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    align-items: center;
-    width: 570px;
-    font-size: 18px;
-
-    .table {
-        margin-top: 20px;
-    }
-`

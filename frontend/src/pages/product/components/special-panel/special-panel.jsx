@@ -6,9 +6,9 @@ import { checkAccess } from "@/utils"
 import { ROLE } from "@/constants"
 import { selectUserRole } from "@/selectors"
 import { FaRegTrashAlt } from "react-icons/fa"
-import styled from "styled-components"
+import { SpecialPanelContainer } from "@/pages/product/components/special-panel/special-panel.styles"
 
-const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
+export const SpecialPanel = ({ id, publishedAt, editButton }) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const roleId = useSelector(selectUserRole)
@@ -29,7 +29,7 @@ const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
     const isAdmin = checkAccess([ROLE.ADMIN], roleId)
 
     return (
-        <div className={className}>
+        <SpecialPanelContainer>
             <div className="published-at">
                 {publishedAt && (
                     <Icon
@@ -53,26 +53,6 @@ const SpecialPanelContainer = ({ className, id, publishedAt, editButton }) => {
                     )}
                 </div>
             )}
-        </div>
+        </SpecialPanelContainer>
     )
 }
-
-export const SpecialPanel = styled(SpecialPanelContainer)`
-    display: flex;
-    justify-content: space-between;
-    margin: ${({ margin }) => margin};
-    cursor: pointer;
-
-    .published-at {
-        display: flex;
-        font-size: 18px;
-    }
-
-    .buttons {
-        display: flex;
-    }
-
-    i {
-        position: relative;
-    }
-`

@@ -7,9 +7,8 @@ import { Error, Loader, PrivateContent } from "@/components"
 import { ROLE } from "@/constants"
 import { ProductContent, Reviews } from "./components"
 import { ProductForm } from "@/pages/catalog/components/product-form/product-form"
-import styled from "styled-components"
 
-const ProductContainer = ({ className }) => {
+export const Product = ({ className }) => {
     const [error, setError] = useState(null)
     const dispatch = useDispatch()
     const params = useParams()
@@ -53,5 +52,3 @@ const ProductContainer = ({ className }) => {
         )
     return error ? <Error error={error} /> : SpecificPostPage
 }
-
-export const Product = styled(ProductContainer)``
