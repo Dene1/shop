@@ -31,6 +31,16 @@
 
 <img width="1000" alt="Admin-Panel-with-subtitle-obr" src="https://github.com/user-attachments/assets/ba21718e-8e9f-480a-8c1c-4c5dd0dc48a4" />
 
+## Todo
+
+- [ ] Payment Page 
+- [ ] Blog maybe
+- [ ] Animation
+- [ ] Improve the design
+- [ ] Improve images
+- [ ] Improve selects
+- [ ] Delete unused code
+
 
 ## How to Run Locally
 ### List of Pages
