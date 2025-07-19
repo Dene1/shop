@@ -1,15 +1,7 @@
-import styled from "styled-components"
+import { CartTitleContainer } from "@/pages/cart/components/cart-title/cart-title.styles"
 
-const CartTitleContainer = ({ className }) => (
-    <div className={ className }>
+export const CartTitle = () => (
+    <CartTitleContainer>
         <h2>Your cart is empty</h2>
-    </div>
+    </CartTitleContainer>
 )
-
-export const CartTitle = styled(CartTitleContainer)`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-`

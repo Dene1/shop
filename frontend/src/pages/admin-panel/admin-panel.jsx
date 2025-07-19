@@ -1,20 +1,14 @@
-import { useDispatch, useSelector } from "react-redux"
-import { FaPencilAlt, FaRegTrashAlt } from "react-icons/fa"
-import {
-    addProductAsync,
-    CLOSE_MODAL,
-    openModal,
-    removeProductAsync,
-} from "@/actions"
-import { Button, Input, Modal, sanitizeContent } from "@/components"
+import { useDispatch } from "react-redux"
+import { addProductAsync } from "@/actions"
+import { Button, Input, Modal } from "@/components"
 import { useRef, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import styled from "styled-components"
-import { selectProducts } from "@/selectors"
+import { AdminPanelContainer } from "@/pages/admin-panel/admin-panel.styles"
+import { sanitizeContent } from "@/utils/sanitize-content"
+import { ProductTable } from "@/pages/admin-panel/components/product-table"
+import { useModal } from "@/pages/admin-panel/utils/hooks"
 
-const AdminPanelContainer = ({ className }) => {
+export const AdminPanel = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const descriptionRef = useRef(null)
     const [imageUrlValue, setImageUrlValue] = useState("")
     const [titleValue, setTitleValue] = useState("")
@@ -23,9 +17,7 @@ const AdminPanelContainer = ({ className }) => {
     const [categoryValue, setCategoryValue] = useState("")
     const [genderValue, setGenderValue] = useState("")
     const [sizeValue, setSizeValue] = useState("")
-    const [modalText, setModalText] = useState("")
-    const [isOpen, setIsOpen] = useState(false)
-    const products = useSelector(selectProducts)
+    const { isOpen, modalText, showModal } = useModal()
 
     const onImageChange = ({ target }) => setImageUrlValue(target.value)
     const onTitleChange = ({ target }) => setTitleValue(target.value)
@@ -53,75 +45,43 @@ const AdminPanelContainer = ({ className }) => {
                 new URL(url)
                 return true
             } catch (e) {
-                setModalText("Please enter a valid link")
-                setIsOpen(true)
-                setTimeout(() => {
-                    setIsOpen(false)
-                }, 2000)
+                showModal("Please enter a valid link")
                 return false
             }
         }
 
         if (!isValidUrl(imageUrlValue)) {
-            setModalText("Please enter a valid link")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please enter a valid link")
             return
         }
 
         if (!titleValue) {
-            setModalText("Please, enter the title")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please, enter the title")
             return
         }
 
         if (!priceValue) {
-            setModalText("Please, enter the price")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please, enter the price")
             return
         }
 
         if (!brandValue) {
-            setModalText("Please, enter the brand")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please, enter the brand")
             return
         }
 
         if (!categoryValue) {
-            setModalText("Please, enter the category")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please, enter the category")
             return
         }
 
         if (!genderValue) {
-            setModalText("Please, enter the gender")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please, enter the gender")
             return
         }
 
         if (!sizeValue) {
-            setModalText("Please, enter the size")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please, enter the size")
             return
         }
 
@@ -143,20 +103,12 @@ const AdminPanelContainer = ({ className }) => {
         }
 
         if (numberFunction(priceValue) === false) {
-            setModalText("Please enter a number in the price field")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please enter a number in the price field")
             return
         }
 
         if (numberFunction(sizeValue) === false) {
-            setModalText("Please enter a number in the size field")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please enter a number in the size field")
             return
         }
 
@@ -182,35 +134,12 @@ const AdminPanelContainer = ({ className }) => {
             }),
         )
 
-        setIsOpen(true)
-        setModalText("Product added")
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 2000)
-
+        showModal("Product added")
         resetForm()
     }
 
-    const onPostRemove = (id) => {
-        dispatch(
-            openModal({
-                text: "Delete product?",
-                onConfirm: () => {
-                    setModalText("Product deleted")
-                    setIsOpen(true)
-                    setTimeout(() => {
-                        setIsOpen(false)
-                    }, 2000)
-                    dispatch(removeProductAsync(id))
-                    dispatch(CLOSE_MODAL)
-                },
-                onCancel: () => dispatch(CLOSE_MODAL),
-            }),
-        )
-    }
-
     return (
-        <div className={className}>
+        <AdminPanelContainer>
             {isOpen && <Modal text={modalText} />}
             <h1>Admin panel</h1>
             <div className="container">
@@ -271,136 +200,8 @@ const AdminPanelContainer = ({ className }) => {
                         <Button onClick={onSave}>ADD</Button>
                     </div>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>title</th>
-                            <th>photo</th>
-                            <th>category</th>
-                            <th>gender</th>
-                            <th>price</th>
-                            <th>brand</th>
-                            <th>size</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {products.map((product) => (
-                            <tr key={product.id}>
-                                <td>{product.id}</td>
-                                <td className="product-title">
-                                    {product.title}
-                                </td>
-                                <td>{product.imageUrl}</td>
-                                <td>{product.category}</td>
-                                <td>{product.gender}</td>
-                                <td>{product.price}</td>
-                                <td>{product.brand}</td>
-                                <td>{product.size.join(",")}</td>
-                                <td>
-                                    <button>
-                                        <FaPencilAlt
-                                            size="24px"
-                                            onClick={() =>
-                                                navigate(
-                                                    `/product/${product.id}/edit`,
-                                                )
-                                            }
-                                        />
-                                    </button>
-                                    <button>
-                                        <FaRegTrashAlt
-                                            size="24px"
-                                            onClick={() =>
-                                                onPostRemove(product.id)
-                                            }
-                                        />
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <ProductTable />
             </div>
-        </div>
+        </AdminPanelContainer>
     )
 }
-
-export const AdminPanel = styled(AdminPanelContainer)`
-    margin: 0 20px;
-
-    .container {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-    }
-
-    .add-product {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        width: 30%;
-        border: 1px solid #405060;
-    }
-
-    .add-product-form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-    }
-
-    h1 {
-        text-align: center;
-    }
-
-    table {
-        width: 50%;
-        border-collapse: collapse;
-    }
-
-    th {
-        text-transform: uppercase;
-    }
-
-    th,
-    td {
-        border: 1px solid black;
-        padding: 4px;
-        text-align: center;
-    }
-
-    td:first-child {
-        max-width: 100px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    td:not(:first-child) {
-        max-width: 200px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-
-    td button {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-    }
-
-    .product-text {
-        min-height: 80px;
-        border: 1px solid black;
-        font-size: 18px;
-        white-space: pre-line;
-    }
-
-    .edit-panel button {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-    }
-`

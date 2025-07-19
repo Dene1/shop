@@ -1,4 +1,4 @@
-import { request } from "../utils/request.js"
+import { request } from "@/utils/request"
 import { updateCartData } from "./update-cart-data.js"
 
 export const saveCartAsync = (id, cartData) => (dispatch) =>

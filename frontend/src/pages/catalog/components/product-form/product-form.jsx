@@ -1,4 +1,4 @@
-import { Button, Input, Modal, sanitizeContent } from "@/components"
+import { Button, Input, Modal } from "@/components"
 import { SpecialPanel } from "@/pages/product/components"
 import { useLayoutEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -7,31 +7,15 @@ import { saveProductAsync } from "@/actions"
 import { selectUserRole } from "@/selectors"
 import { FaRegSave } from "react-icons/fa"
 import { TiDocumentDelete } from "react-icons/ti"
-import styled from "styled-components"
 import { ROLE } from "@/constants"
+import {
+    Container,
+    ProductFormContainer,
+    StyledSpan,
+} from "@/pages/catalog/components/product-form/product-form.styles"
+import { sanitizeContent } from "@/utils/sanitize-content"
 
-const Container = styled.div`
-    text-align: center;
-    font-size: 24px;
-
-    a:link {
-        cursor: pointer;
-        text-decoration: underline;
-    }
-
-    a:link:hover {
-        text-decoration: none;
-        opacity: 0.8;
-    }
-`
-
-const StyledSpan = styled.span`
-    font-size: 20px;
-    font-weight: 600;
-`
-
-const ProductFormContainer = ({
-    className,
+export const ProductForm = ({
     product: { id, title, imageUrl, price, size, description },
 }) => {
     const dispatch = useDispatch()
@@ -112,7 +96,7 @@ const ProductFormContainer = ({
     }
 
     return (
-        <div className={className}>
+        <ProductFormContainer>
             {isOpen && <Modal text={"Product saved"} />}
             <div className="edit-panel">
                 <h1>Change the product</h1>
@@ -176,54 +160,6 @@ const ProductFormContainer = ({
                     {description}
                 </div>
             </div>
-        </div>
+        </ProductFormContainer>
     )
 }
-
-export const ProductForm = styled(ProductFormContainer)`
-    margin: 0 100px;
-
-    .edit-panel {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .description {
-        margin-top: 20px;
-    }
-
-    .size-container {
-        display: grid;
-        grid-template-columns: repeat(9, 0.2fr);
-        gap: 14px;
-    }
-
-    .container {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .delete {
-        cursor: pointer;
-    }
-
-    .btn-add {
-        cursor: pointer;
-        height: 40px;
-        width: 98px;
-    }
-
-    img {
-        float: left;
-        margin: 0 20px 10px 0;
-    }
-
-    .post-text {
-        min-height: 80px;
-        border: 1px solid black;
-        font-size: 18px;
-        white-space: pre-line;
-        padding: 10px 10px;
-    }
-`

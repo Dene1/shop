@@ -1,5 +1,5 @@
 import { setCartData } from "./set-cart-data.js"
-import { request } from "../utils/request.js"
+import { request } from "@/utils/request"
 
 export const loadCartAsync = (userId, cartData) => (dispatch) =>
     request(`/cart/${userId}`, cartData).then((updatedCart) => {

@@ -1,4 +1,4 @@
-import { request } from "../utils/request.js"
+import { request } from "@/utils/request"
 import { addReview } from "./add-review.js"
 
 export const addReviewAsync = (productId, content) => (dispatch) => {

@@ -10,15 +10,11 @@ import {
 } from "@/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { selectCart, selectProducts } from "@/selectors"
-import styled from "styled-components"
 import { request } from "@/utils/request"
+import { CartContainer, StyledH1 } from "@/pages/cart/cart.styles"
+import { calculateTotal, calculateTotalPrice } from "@/pages/cart/utils"
 
-const StyledH1 = styled.h1`
-    text-transform: uppercase;
-    text-align: center;
-`
-
-const CartContainer = ({ className }) => {
+export const Cart = () => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(true)
     const products = useSelector(selectProducts)
@@ -67,38 +63,15 @@ const CartContainer = ({ className }) => {
         }
     }
 
-    const calculateTotal = () => {
-        let total = 0
-
-        for (let i = 0; i < cartForUser.length; i++) {
-            const cartItem = cartForUser[i]
-            const product = products.find((p) => p.id === cartItem.product_id)
-            if (product) {
-                total += Number(cartItem.count)
-            }
-        }
-        return total
-    }
-
-    const calculateTotalPrice = () => {
-        let total = 0
-
-        for (let i = 0; i < cartForUser.length; i++) {
-            const cartItem = cartForUser[i]
-            const product = products.find((p) => p.id === cartItem.product_id)
-            if (product) {
-                total += Number(product.price) * Number(cartItem.count)
-            }
-        }
-        return total
-    }
+    const total = calculateTotal(cartForUser, products)
+    const totalPrice = calculateTotalPrice(cartForUser, products)
 
     setTimeout(() => {
         setIsLoading(false)
     }, 1000)
 
     return (
-        <div className={className}>
+        <CartContainer>
             <StyledH1>Shopping Cart</StyledH1>
             {isLoading ? (
                 <Loader isLoading={isLoading} />
@@ -127,15 +100,11 @@ const CartContainer = ({ className }) => {
                     <div className="total">
                         <div className="total-item">
                             <h2>TOTAL ITEM</h2>
-                            <div className="total-price">
-                                {calculateTotal()}
-                            </div>
+                            <div className="total-price">{total}</div>
                         </div>
                         <div className="total-item">
                             <h2>TOTAL</h2>
-                            <div className="total-price">
-                                $ {calculateTotalPrice()}
-                            </div>
+                            <div className="total-price">$ {totalPrice}</div>
                         </div>
                     </div>
                     <div className="buttons-container">
@@ -144,55 +113,6 @@ const CartContainer = ({ className }) => {
                     </div>
                 </>
             )}
-        </div>
+        </CartContainer>
     )
 }
-
-export const Cart = styled(CartContainer)`
-    ul {
-        list-style-type: disc;
-    }
-
-    .total {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        margin-right: 30.6%;
-        font-size: 20px;
-        gap: 30px;
-        text-align: center;
-    }
-
-    h2 {
-        font:
-            500 24px "Bebas Neue",
-            sans-serif;
-        letter-spacing: 1px;
-        color: gray;
-    }
-
-    span {
-        color: gray;
-    }
-
-    .total-item {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .total-price {
-        font:
-            500 34px "Bebas Neue",
-            sans-serif;
-        letter-spacing: 1px;
-    }
-
-    .buttons-container {
-        margin-top: 30px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 100px;
-    }
-`

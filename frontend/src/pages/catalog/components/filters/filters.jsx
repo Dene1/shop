@@ -1,8 +1,7 @@
-import styled from "styled-components"
 import { BRANDS_NAME, GENDER, PRICE, Select, SIZE } from "./components"
+import { FiltersContainer } from "@/pages/catalog/components/filters/filters.styles"
 
-const FiltersContainer = ({
-    className,
+export const Filters = ({
     onGenderFilter,
     onBrandFilter,
     onSizeFilter,
@@ -19,7 +18,7 @@ const FiltersContainer = ({
     const handlePriceFilter = (event) => onPriceFilter(event.target.value)
 
     return (
-        <div className={className}>
+        <FiltersContainer>
             <div className="filters-title">Filters</div>
 
             <div className="select-container">
@@ -55,42 +54,6 @@ const FiltersContainer = ({
             <button className="filters-reset" onClick={onResetFilters}>
                 Reset Filters
             </button>
-        </div>
+        </FiltersContainer>
     )
 }
-
-export const Filters = styled(FiltersContainer)`
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    margin: 80px 0 0 40px;
-
-    .filters-title {
-        font-size: 24px;
-        font-weight: 600;
-    }
-
-    .select-container {
-        display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-    }
-
-    .filters-reset {
-        margin: 30px 0 0 0;
-        font-size: 20px;
-        width: 200px;
-        height: 40px;
-        color: white;
-        background-color: #2c3333;
-    }
-
-    .filters-reset:hover {
-        background-color: #dedede;
-        color: #2c3333;
-    }
-
-    .filters-reset:active {
-        background-color: #ea454c;
-    }
-`

@@ -1,4 +1,4 @@
-import { ACTION_TYPE } from "@actions/index"
+import { ACTION_TYPE } from "@/actions"
 
 const initialState = {
     cart: [],

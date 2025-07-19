@@ -1,5 +1,5 @@
-import { ConfirmModal, Footer, Header } from "@components"
-import { setProductsData, setUser } from "@actions"
+import { ConfirmModal, Footer, Header } from "@/components"
+import { setProductsData, setUser } from "@/actions"
 import { useDispatch } from "react-redux"
 import styled from "styled-components"
 import {
@@ -12,11 +12,11 @@ import {
     Product,
     Registration,
     Users,
-} from "./pages"
+} from "@/pages"
 import { ERROR } from "./constants"
 import { Route, Routes, useLocation } from "react-router-dom"
 import { useEffect, useLayoutEffect } from "react"
-import { request } from "@utils/request"
+import { request } from "@/utils/request"
 
 const AppColumn = styled.div`
     display: flex;

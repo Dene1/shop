@@ -1,5 +1,5 @@
 import { addProductData } from "./add-product-data.js"
-import { request } from "../utils/request.js"
+import { request } from "@/utils/request"
 
 export const addProductAsync = (newProductData) => (dispatch) =>
     request("/products", "POST", newProductData).then((updatedProduct) => {

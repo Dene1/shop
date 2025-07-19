@@ -1,8 +1,8 @@
-import { Error } from "@components/error/error"
+import { Error } from "@/components/error/error"
 import { useSelector } from "react-redux"
-import { selectUserRole } from "@selectors"
-import { ERROR } from "@constants"
-import { checkAccess } from "@utils"
+import { selectUserRole } from "@/selectors"
+import { ERROR } from "@/constants"
+import { checkAccess } from "@/utils"
 
 export const PrivateContent = ({ children, access, serverError = null }) => {
     const userRole = useSelector(selectUserRole)

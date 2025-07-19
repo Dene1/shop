@@ -11,6 +11,7 @@ import { useResetForm } from "@/hooks"
 import { useState } from "react"
 import styled from "styled-components"
 import { request } from "@/utils/request"
+import { RegistrationContainer } from "@/pages/registration/registration.styles"
 
 const regFormSchema = yup.object().shape({
     login: yup
@@ -50,7 +51,7 @@ const StyledLink = styled(Link)`
     }
 `
 
-const RegistrationContainer = ({ className }) => {
+export const Registration = () => {
     const {
         register,
         reset,
@@ -95,7 +96,7 @@ const RegistrationContainer = ({ className }) => {
 
     return (
         <Content>
-            <div className={className}>
+            <RegistrationContainer>
                 <h1>Register</h1>
                 <div className="title-text">
                     Hello! Please enter your details.
@@ -133,28 +134,8 @@ const RegistrationContainer = ({ className }) => {
                     )}
                     <StyledLink to="/login">Return to Join</StyledLink>
                 </form>
-            </div>
+            </RegistrationContainer>
             <img src={imageMan} alt="Man" />
         </Content>
     )
 }
-
-export const Registration = styled(RegistrationContainer)`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    .title-text {
-        margin: 8px 0;
-        width: 324px;
-        text-align: center;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        width: 260px;
-        margin-top: 8px;
-    }
-`
