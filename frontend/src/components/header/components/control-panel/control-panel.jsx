@@ -10,11 +10,11 @@ import { checkAccess } from "@/utils"
 import {
     CursorPointer,
     RightAligned,
+    StyledButton,
     StyledIcon,
     StyledLink,
     UserName,
 } from "@/components/header/components/control-panel/control-panel.styles"
-import { StyledButton } from "@/components/header/components/search/search.styles"
 
 export const ControlPanel = ({ className }) => {
     const navigate = useNavigate()

@@ -3,15 +3,17 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useState } from "react"
 import { AuthFormError, Button, Content, Input } from "@/components"
-import { Link, Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 import { setUser } from "@/actions"
 import { useDispatch, useSelector } from "react-redux"
 import { selectUserRole } from "@/selectors"
 import { ROLE } from "@/constants"
 import { useResetForm } from "@/hooks"
-import styled from "styled-components"
 import { request } from "@//utils/request"
-import { AuthorizationContainer } from "@/pages/authorization/authorization.styles"
+import {
+    AuthorizationContainer,
+    StyledLink,
+} from "@/pages/authorization/authorization.styles"
 
 const authFormSchema = yup.object().shape({
     login: yup
@@ -35,16 +37,6 @@ const authFormSchema = yup.object().shape({
         .max(25, "The password is incorrectly entered. Maximum 25 characters"),
 })
 
-const StyledLink = styled(Link)`
-    text-align: center;
-    text-decoration: underline;
-    margin: 16px 0;
-    font-size: 18px;
-
-    &:hover {
-        color: #ea454c;
-    }
-`
 const imageMan = "/man.jpg"
 
 export const Authorization = () => {

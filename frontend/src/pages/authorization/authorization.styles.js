@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
-export const AuthorizationContainer = styled.div`
+const AuthorizationContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -24,3 +25,16 @@ export const AuthorizationContainer = styled.div`
         margin-top: 20px;
     }
 `
+
+const StyledLink = styled(Link)`
+    text-align: center;
+    text-decoration: underline;
+    margin: 16px 0;
+    font-size: 18px;
+
+    &:hover {
+        color: #ea454c;
+    }
+`
+
+export { AuthorizationContainer, StyledLink }

@@ -1,4 +1,4 @@
-import { ConfirmModal, Footer, Header } from "@/components"
+import { ConfirmModal, Footer, Header, PrivateRoute } from "@/components"
 import { setProductsData, setUser } from "@/actions"
 import { useDispatch } from "react-redux"
 import styled from "styled-components"
@@ -73,7 +73,14 @@ export const Shop = () => {
                     <Route path="/catalog" element={<Catalog />} />
                     <Route path="/product/:id" element={<Product />} />
                     <Route path="/product/:id/edit" element={<Product />} />
-                    <Route path="/cart" element={<Cart />} />
+                    <Route
+                        path="/cart"
+                        element={
+                            <PrivateRoute element={<Cart />}>
+                                <Cart />
+                            </PrivateRoute>
+                        }
+                    />
                     <Route path="/favorites" element={<Favorites />} />
                     <Route path="/admin" element={<AdminPanel />} />
                     <Route path="/order" element={<div>Order</div>} />
