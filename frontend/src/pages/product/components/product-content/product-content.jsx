@@ -8,6 +8,7 @@ import { selectProduct, selectUserId } from "@/selectors"
 import { useState } from "react"
 import { addCartAsync } from "@/actions"
 import { ProductContentContainer } from "@/pages/product/components/product-content/product-content.styles"
+import { useModal } from "@/pages/admin-panel/utils/hooks"
 
 export const ProductContent = () => {
     const navigate = useNavigate()
@@ -15,10 +16,9 @@ export const ProductContent = () => {
     const path = `${params.id}`
     const userId = useSelector(selectUserId)
     const [selectedSize, setSelectedSize] = useState(null)
-    const [isOpen, setIsOpen] = useState(false)
-    const [modalText, setModalText] = useState("")
     const dispatch = useDispatch()
     const product = useSelector(selectProduct)
+    const { isOpen, modalText, showModal } = useModal()
 
     const getSizeArray = (sizeData) => {
         if (Array.isArray(sizeData)) {
@@ -34,23 +34,14 @@ export const ProductContent = () => {
 
     const handleAddToCart = (productId) => {
         if (selectedSize === null) {
-            setModalText("Select size")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Select size")
             return
         }
 
         if (userId === null) {
-            setModalText("Please Log In")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please Log In")
             return
         }
-
         dispatch(
             addCartAsync({
                 user_id: userId,
@@ -59,16 +50,10 @@ export const ProductContent = () => {
                 count: 1,
             }),
         )
-        setModalText("The goods are added to the cart")
-        setIsOpen(true)
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 3000)
+        showModal("The goods are added to the cart", 3000)
     }
 
-    const handleSizeClick = (size) => {
-        setSelectedSize(size)
-    }
+    const handleSizeClick = (size) => setSelectedSize(size)
 
     return (
         <ProductContentContainer>
@@ -113,10 +98,10 @@ export const ProductContent = () => {
                     <div className="sizes">
                         <div className="content-title">SIZE</div>
                         <div className="size-items">
-                            {sizeArray.map((item) => (
+                            {sizeArray.map((item, index) => (
                                 <div
                                     className={`size-container ${selectedSize === item ? "selected" : ""}`}
-                                    key={item}
+                                    key={index}
                                     onClick={() => handleSizeClick(item)}
                                 >
                                     {item}
@@ -128,6 +113,7 @@ export const ProductContent = () => {
                         <FiHeart className="heart" size="26px" />
                         <Button
                             width="40%"
+                            id={product.id}
                             onClick={() => handleAddToCart(product.id)}
                         >
                             Add to cart

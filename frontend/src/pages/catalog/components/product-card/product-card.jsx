@@ -9,6 +9,7 @@ import { addCartAsync } from "@/actions"
 import { SizeModal } from "./components"
 import { ROLE } from "@/constants"
 import { ProductCardContainer } from "@/pages/catalog/components/product-card/product-card.styles"
+import { useModal } from "@/pages/admin-panel/utils/hooks"
 
 export const ProductCard = ({
     id,
@@ -22,29 +23,20 @@ export const ProductCard = ({
 }) => {
     const userId = useSelector(selectUserId)
     const [selectedSize, setSelectedSize] = useState(null)
-    const [isOpen, setIsOpen] = useState(false)
-    const [modalText, setModalText] = useState("")
     const [showSizeModal, setShowSizeModal] = useState(false)
     const dispatch = useDispatch()
     const userRole = useSelector(selectUserRole)
+    const { isOpen, modalText, showModal } = useModal()
 
     const handleAddToCart = (productId) => {
         if (selectedSize === null) {
-            setModalText("Please select a size")
             setShowSizeModal(true)
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 1000)
+            showModal("Please select a size")
             return
         }
 
         if (userRole === ROLE.GUEST) {
-            setModalText("Please log in")
-            setIsOpen(true)
-            setTimeout(() => {
-                setIsOpen(false)
-            }, 2000)
+            showModal("Please log in")
             return
         }
 
@@ -56,13 +48,8 @@ export const ProductCard = ({
                 count: 1,
             }),
         )
-
         setShowSizeModal(false)
-        setModalText("The shoes are added to the cart")
-        setIsOpen(true)
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 3000)
+        showModal("The shoes are added to the cart", 3000)
     }
 
     const handleCloseSizeModal = () => {
@@ -99,13 +86,7 @@ export const ProductCard = ({
             </Link>
 
             <div className="product-card-buttons">
-                <Button
-                    width="50%"
-                    onClick={(e) => {
-                        handleAddToCart(id)
-                        e.stopPropagation()
-                    }}
-                >
+                <Button width="50%" onClick={(id) => handleAddToCart(id)}>
                     add to cart
                 </Button>
             </div>

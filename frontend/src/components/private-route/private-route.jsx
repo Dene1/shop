@@ -14,7 +14,7 @@ export const PrivateRoute = ({ element: component }) => {
                 setShouldRedirect(true)
             }, 3000)
 
-            return () => clearTimeout(timer) // Очистка таймера при размонтировании
+            return () => clearTimeout(timer)
         }
     }, [isAuthenticated])
 

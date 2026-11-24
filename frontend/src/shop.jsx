@@ -17,20 +17,10 @@ import { ERROR } from "./constants"
 import { Route, Routes, useLocation } from "react-router-dom"
 import { useEffect, useLayoutEffect } from "react"
 import { request } from "@/utils/request"
-
-const AppColumn = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    width: 1440px;
-    min-height: 100%;
-    margin: 0 auto;
-    background-color: white;
-`
+import { AppColumn } from "./shop.styles"
 
 const Content = styled.div`
-    padding: ${(props) => (props.$isMainPage ? "0" : "120px 0 60px 0")}
+    padding: ${ (props) => (props.$isMainPage ? "0" : "120px 0 60px 0") }
 } `
 
 export const Shop = () => {
@@ -64,27 +54,38 @@ export const Shop = () => {
     return (
         <AppColumn>
             <Header />
-            <Content $isMainPage={isMainPage}>
+            <Content $isMainPage={ isMainPage }>
                 <Routes>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/login" element={<Authorization />} />
-                    <Route path="/register" element={<Registration />} />
-                    <Route path="/users" element={<Users />} />
-                    <Route path="/catalog" element={<Catalog />} />
-                    <Route path="/product/:id" element={<Product />} />
-                    <Route path="/product/:id/edit" element={<Product />} />
+                    <Route path="/"
+                           element={ <MainPage /> } />
+                    <Route path="/login"
+                           element={ <Authorization /> } />
+                    <Route path="/register"
+                           element={ <Registration /> } />
+                    <Route path="/users"
+                           element={ <Users /> } />
+                    <Route path="/catalog"
+                           element={ <Catalog /> } />
+                    <Route path="/product/:id"
+                           element={ <Product /> } />
+                    <Route path="/product/:id/edit"
+                           element={ <Product /> } />
                     <Route
                         path="/cart"
                         element={
-                            <PrivateRoute element={<Cart />}>
+                            <PrivateRoute element={ <Cart /> }>
                                 <Cart />
                             </PrivateRoute>
                         }
                     />
-                    <Route path="/favorites" element={<Favorites />} />
-                    <Route path="/admin" element={<AdminPanel />} />
-                    <Route path="/order" element={<div>Order</div>} />
-                    <Route path="*" element={ERROR.PAGE_NOT_EXIST} />
+                    <Route path="/favorites"
+                           element={ <Favorites /> } />
+                    <Route path="/admin"
+                           element={ <AdminPanel /> } />
+                    <Route path="/order"
+                           element={ <div>Order</div> } />
+                    <Route path="*"
+                           element={ ERROR.PAGE_NOT_EXIST } />
                 </Routes>
             </Content>
             <Footer />

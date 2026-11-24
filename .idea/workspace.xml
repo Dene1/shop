@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e6cd6115-9b8b-4e05-9de9-a335db2bdfe0" name="Changes" comment="update: Added a private route for the cart">
+      <change afterPath="$PROJECT_DIR$/frontend/src/shop.styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/confirm-modal/confirm-modal.styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/confirm-modal/confirm-modal.styles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/private-route/private-route.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/private-route/private-route.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/catalog/components/product-card/product-card.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/catalog/components/product-card/product-card.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/product/components/product-content/product-content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/product/components/product-content/product-content.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/shop.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/shop.jsx" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSX Component Folder.jsx.child.0" />
+        <option value="JSX Component Folder" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="JSX File" />
+        <option value="JSX Component Folder with styles.jsx.child.0" />
+        <option value="JSX Component Folder with styles.jsx.child.1" />
+        <option value="JSX Component Folder with styles" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="SHOP-1.1" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Dene1&quot;
+  }
+}</component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1752892297" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="SHOP-1.1" />
+                    <option name="lastUsedInstant" value="1752891900" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="SHOP-1" />
+                    <option name="lastUsedInstant" value="1752530486" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="SHOP-016" />
+                    <option name="lastUsedInstant" value="1752420917" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="SHOP-015" />
+                    <option name="lastUsedInstant" value="1752363544" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Dene1/shop.git&quot;,
+    &quot;accountId&quot;: &quot;cd9a4176-aae7-4244-9421-f004a6b5483e&quot;
+  }
+}</component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2vScNUysIVbIV7zbHylIqGhgPju" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "22.18.0",
+    "javascript.nodejs.core.library.typings.version": "22.18.13",
+    "last_opened_file_path": "D:/Курс Junior/Дипломная работа/shop",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.stylelint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.dev.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "F:\\Курс Junior\\Дипломная работа\\shop\\frontend\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "0d570cb2-96df-43cc-80da-7f777e6d0afe",
+    "ts.external.directory.path": "F:\\WebStorm\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Курс Junior\Дипломная работа\shop\frontend\src" />
+      <recent name="F:\Курс Junior\Дипломная работа\shop\frontend\src\utils" />
+      <recent name="F:\Курс Junior\Дипломная работа\shop\frontend\src\components\modal" />
+      <recent name="F:\Курс Junior\Дипломная работа\shop\frontend\src\components\loader" />
+      <recent name="F:\Курс Junior\Дипломная работа\shop\frontend\src\components\input" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Курс Junior\Дипломная работа\shop\frontend\src\pages\admin-panel\utils\hooks" />
+      <recent name="F:\Курс Junior\Дипломная работа\shop\frontend" />
+      <recent name="F:\Курс Junior\Дипломная работа\shop\public\fonts" />
+      <recent name="F:\Курс Junior\Дипломная работа\shop\public\fonts\Bebas_Neue" />
+      <recent name="F:\Курс Junior\Дипломная работа\shop\src\pages\catalog\components\product-card\components\size-modal" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="settings" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-WS-261.23567.141" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\Denel\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e6cd6115-9b8b-4e05-9de9-a335db2bdfe0" name="Changes" comment="" />
+      <created>1744141875076</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744141875076</updated>
+      <workItem from="1744141876166" duration="8723000" />
+      <workItem from="1744150756086" duration="7593000" />
+      <workItem from="1744194127824" duration="2947000" />
+      <workItem from="1744214230040" duration="17179000" />
+      <workItem from="1744240235630" duration="6075000" />
+      <workItem from="1744300615161" duration="4000" />
+      <workItem from="1744300661057" duration="13000" />
+      <workItem from="1744310039901" duration="2889000" />
+      <workItem from="1744313321912" duration="686000" />
+      <workItem from="1744324653992" duration="5000" />
+      <workItem from="1744796193788" duration="160000" />
+      <workItem from="1744841623332" duration="14034000" />
+      <workItem from="1744880019109" duration="10640000" />
+      <workItem from="1744935084915" duration="4038000" />
+      <workItem from="1744941786345" duration="10425000" />
+      <workItem from="1744963832993" duration="3862000" />
+      <workItem from="1745014127572" duration="27094000" />
+      <workItem from="1745063527093" duration="25000" />
+      <workItem from="1745119281925" duration="2707000" />
+      <workItem from="1745225223321" duration="419000" />
+      <workItem from="1745226045457" duration="779000" />
+      <workItem from="1745294049214" duration="835000" />
+      <workItem from="1745305230305" duration="23000" />
+      <workItem from="1745305279182" duration="1000" />
+      <workItem from="1745321447604" duration="186000" />
+      <workItem from="1745321808650" duration="24000" />
+      <workItem from="1745506647958" duration="182000" />
+      <workItem from="1745594773068" duration="1000" />
+      <workItem from="1745595144255" duration="79000" />
+      <workItem from="1745595275011" duration="37000" />
+      <workItem from="1745595325476" duration="51000" />
+      <workItem from="1745595450443" duration="651000" />
+      <workItem from="1745596192898" duration="1091000" />
+      <workItem from="1745597314454" duration="13254000" />
+      <workItem from="1745645760187" duration="6532000" />
+      <workItem from="1745673352839" duration="2563000" />
+      <workItem from="1745734153650" duration="13929000" />
+      <workItem from="1745754515940" duration="2000" />
+      <workItem from="1745908728731" duration="552000" />
+      <workItem from="1745915201901" duration="3000" />
+      <workItem from="1745926796083" duration="9000" />
+      <workItem from="1747932018979" duration="9149000" />
+      <workItem from="1748009305846" duration="14041000" />
+      <workItem from="1748030952775" duration="11415000" />
+      <workItem from="1748115400131" duration="16783000" />
+      <workItem from="1748206008010" duration="12823000" />
+      <workItem from="1748252937385" duration="1000" />
+      <workItem from="1748293935889" duration="10337000" />
+      <workItem from="1748358774225" duration="9813000" />
+      <workItem from="1748518951356" duration="707000" />
+      <workItem from="1748531113524" duration="274000" />
+      <workItem from="1748554082286" duration="2655000" />
+      <workItem from="1748628064613" duration="482000" />
+      <workItem from="1748628582870" duration="1333000" />
+      <workItem from="1748629984517" duration="5497000" />
+      <workItem from="1748787772612" duration="8727000" />
+      <workItem from="1748808645871" duration="1772000" />
+      <workItem from="1748810464107" duration="1000" />
+      <workItem from="1748863253719" duration="8834000" />
+      <workItem from="1748886761913" duration="3371000" />
+      <workItem from="1748897725393" duration="9192000" />
+      <workItem from="1748909760918" duration="2579000" />
+      <workItem from="1748972461405" duration="3552000" />
+      <workItem from="1748990325306" duration="5200000" />
+      <workItem from="1749125385818" duration="10694000" />
+      <workItem from="1749224514137" duration="551000" />
+      <workItem from="1749233969519" duration="4072000" />
+      <workItem from="1749238462127" duration="1649000" />
+      <workItem from="1749240525499" duration="12548000" />
+      <workItem from="1749295220276" duration="4301000" />
+      <workItem from="1749595737226" duration="7737000" />
+      <workItem from="1749663688536" duration="79000" />
+      <workItem from="1749663782029" duration="48000" />
+      <workItem from="1749663861541" duration="26565000" />
+      <workItem from="1749692695437" duration="227000" />
+      <workItem from="1749692952501" duration="70000" />
+      <workItem from="1749762912988" duration="19771000" />
+      <workItem from="1749825557638" duration="331000" />
+      <workItem from="1749825908567" duration="658000" />
+      <workItem from="1749840152219" duration="2967000" />
+      <workItem from="1749865791842" duration="7515000" />
+      <workItem from="1749949249891" duration="13629000" />
+      <workItem from="1750011814283" duration="154000" />
+      <workItem from="1750021779797" duration="24361000" />
+      <workItem from="1750107691639" duration="8075000" />
+      <workItem from="1750120305416" duration="13499000" />
+      <workItem from="1750175941595" duration="15000" />
+      <workItem from="1750175971957" duration="4634000" />
+      <workItem from="1750209385057" duration="68000" />
+      <workItem from="1750209472891" duration="25000" />
+      <workItem from="1750209509848" duration="14964000" />
+      <workItem from="1750310182784" duration="8871000" />
+      <workItem from="1750380428704" duration="4000" />
+      <workItem from="1750381251238" duration="1423000" />
+      <workItem from="1750464118329" duration="47000" />
+      <workItem from="1750566896087" duration="17797000" />
+      <workItem from="1750651335509" duration="23494000" />
+      <workItem from="1750799948029" duration="2583000" />
+      <workItem from="1750841906006" duration="12051000" />
+      <workItem from="1750905548044" duration="1240000" />
+      <workItem from="1750907744618" duration="50000" />
+      <workItem from="1750922885778" duration="539000" />
+      <workItem from="1750925276286" duration="851000" />
+      <workItem from="1750926167495" duration="6000" />
+      <workItem from="1750926203272" duration="243000" />
+      <workItem from="1750926471286" duration="2833000" />
+      <workItem from="1750929338834" duration="153000" />
+      <workItem from="1750929707014" duration="3566000" />
+      <workItem from="1750937204211" duration="1027000" />
+      <workItem from="1750939009700" duration="1379000" />
+      <workItem from="1750940958019" duration="683000" />
+      <workItem from="1750941695857" duration="615000" />
+      <workItem from="1750942361338" duration="649000" />
+      <workItem from="1750943069706" duration="219000" />
+      <workItem from="1750943389369" duration="457000" />
+      <workItem from="1750943967432" duration="261000" />
+      <workItem from="1750944337832" duration="301000" />
+      <workItem from="1750944651504" duration="86000" />
+      <workItem from="1750944750284" duration="1270000" />
+      <workItem from="1750946079637" duration="1852000" />
+      <workItem from="1750949223835" duration="1175000" />
+      <workItem from="1750950847230" duration="1743000" />
+      <workItem from="1750990551157" duration="2369000" />
+      <workItem from="1751206021603" duration="5819000" />
+      <workItem from="1751300300838" duration="1990000" />
+      <workItem from="1751404115225" duration="1313000" />
+      <workItem from="1751463880531" duration="15459000" />
+      <workItem from="1751529794945" duration="2000" />
+      <workItem from="1751530725345" duration="4496000" />
+      <workItem from="1751536174830" duration="9000" />
+      <workItem from="1751546837345" duration="14496000" />
+      <workItem from="1751623652174" duration="13020000" />
+      <workItem from="1751661256047" duration="6000000" />
+      <workItem from="1751736139218" duration="11242000" />
+      <workItem from="1751789209178" duration="28619000" />
+      <workItem from="1751881117812" duration="2331000" />
+      <workItem from="1751896856237" duration="4192000" />
+      <workItem from="1751920267800" duration="5851000" />
+      <workItem from="1751961809524" duration="19100000" />
+      <workItem from="1752000558574" duration="12634000" />
+      <workItem from="1752050294975" duration="7259000" />
+      <workItem from="1752068538385" duration="524000" />
+      <workItem from="1752077893838" duration="7059000" />
+      <workItem from="1752086262129" duration="124000" />
+      <workItem from="1752087150303" duration="10291000" />
+      <workItem from="1752145176307" duration="23121000" />
+      <workItem from="1752229284786" duration="3833000" />
+      <workItem from="1752249929265" duration="18669000" />
+      <workItem from="1752309831698" duration="5511000" />
+      <workItem from="1752315651145" duration="36721000" />
+      <workItem from="1752396895529" duration="10683000" />
+      <workItem from="1752521461299" duration="1030000" />
+      <workItem from="1752525514820" duration="89000" />
+      <workItem from="1752527142741" duration="819000" />
+      <workItem from="1752528005756" duration="83000" />
+      <workItem from="1752528152109" duration="391000" />
+      <workItem from="1752528573032" duration="1377000" />
+      <workItem from="1752533084287" duration="126000" />
+      <workItem from="1752617532465" duration="28000" />
+      <workItem from="1752617577019" duration="48000" />
+      <workItem from="1752618205089" duration="17000" />
+      <workItem from="1752706669293" duration="6000" />
+      <workItem from="1752879816510" duration="13963000" />
+      <workItem from="1752952916042" duration="1149000" />
+      <workItem from="1752971398704" duration="6918000" />
+      <workItem from="1753146102396" duration="9000" />
+      <workItem from="1753147242724" duration="711000" />
+      <workItem from="1753148076213" duration="93000" />
+      <workItem from="1753148496715" duration="41000" />
+      <workItem from="1753148678715" duration="703000" />
+      <workItem from="1753224042451" duration="6864000" />
+      <workItem from="1753238086382" duration="116000" />
+      <workItem from="1753248784006" duration="177000" />
+      <workItem from="1757419038963" duration="121000" />
+      <workItem from="1759960602757" duration="1084000" />
+      <workItem from="1759961891017" duration="596000" />
+      <workItem from="1759963021494" duration="10000" />
+      <workItem from="1759964576120" duration="416000" />
+      <workItem from="1771622719394" duration="8000" />
+      <workItem from="1771656771356" duration="292000" />
+      <workItem from="1773570367188" duration="120000" />
+      <workItem from="1795517623539" duration="610000" />
+    </task>
+    <task id="LOCAL-00001" summary="Мелкие изменения">
+      <option name="closed" value="true" />
+      <created>1744196318834</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744196318834</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Корректировки по верстке и удаление ошибок">
+      <option name="closed" value="true" />
+      <created>1744253324845</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1744253324845</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Реализовал начальную пагинацию и фильтрацию">
+      <option name="closed" value="true" />
+      <created>1745044796256</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1745044796256</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Небольшие обновления">
+      <option name="closed" value="true" />
+      <created>1745506815953</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1745506815953</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Начал страницу одного продукта">
+      <option name="closed" value="true" />
+      <created>1745909196878</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1745909196878</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Начал работу над корзиной">
+      <option name="closed" value="true" />
+      <created>1749962314666</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1749962314666</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Подготовил проект, готовность к беку">
+      <option name="closed" value="true" />
+      <created>1750853521853</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1750853521853</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Подготовил проект, готовность к беку">
+      <option name="closed" value="true" />
+      <created>1750853593225</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1750853593225</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Поправил импорты">
+      <option name="closed" value="true" />
+      <created>1750947954529</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1750947954529</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Подготовка к беку">
+      <option name="closed" value="true" />
+      <created>1752068586567</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1752068586567</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Подготовка к беку">
+      <option name="closed" value="true" />
+      <created>1752069023702</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1752069023702</updated>
+    </task>
+    <task id="LOCAL-00012" summary="реализована админ-панель">
+      <option name="closed" value="true" />
+      <created>1752181818306</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1752181818306</updated>
+    </task>
+    <task id="LOCAL-00013" summary="реализовано все для переноса на бэк">
+      <option name="closed" value="true" />
+      <created>1752333286985</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1752333286985</updated>
+    </task>
+    <task id="LOCAL-00014" summary="подключил бэк, готово к докеру">
+      <option name="closed" value="true" />
+      <created>1752348999746</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1752348999746</updated>
+    </task>
+    <task id="LOCAL-00015" summary="update: подключил бэк, готово к докеру">
+      <option name="closed" value="true" />
+      <created>1752356477421</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1752356477421</updated>
+    </task>
+    <task id="LOCAL-00016" summary="update: для readme подгрузил">
+      <option name="closed" value="true" />
+      <created>1752363574408</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1752363574408</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix: исправил отображение общего количество товара в корзине">
+      <option name="closed" value="true" />
+      <created>1752420962248</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1752420962248</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: поправил переход алиасов">
+      <option name="closed" value="true" />
+      <created>1752530374974</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1752530374974</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fix: поправил переход алиасов">
+      <option name="closed" value="true" />
+      <created>1752530491584</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1752530491584</updated>
+    </task>
+    <task id="LOCAL-00020" summary="update: add styles and any hooks">
+      <option name="closed" value="true" />
+      <created>1752892149229</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1752892149229</updated>
+    </task>
+    <task id="LOCAL-00021" summary=".">
+      <option name="closed" value="true" />
+      <created>1752892635718</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1752892635718</updated>
+    </task>
+    <task id="LOCAL-00022" summary="update: Added a private route for the cart">
+      <option name="closed" value="true" />
+      <created>1752978217367</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1752978217367</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Мелкие изменения" />
+    <MESSAGE value="Корректировки по верстке и удаление ошибок" />
+    <MESSAGE value="Реализовал начальную пагинацию и фильтрацию" />
+    <MESSAGE value="Небольшие обновления" />
+    <MESSAGE value="Начал страницу одного продукта" />
+    <MESSAGE value="Начал работу над корзиной" />
+    <MESSAGE value="Подготовил проект, готовность к беку" />
+    <MESSAGE value="Поправил импорты" />
+    <MESSAGE value="Подготовка к беку" />
+    <MESSAGE value="реализована админ-панель" />
+    <MESSAGE value="реализовано все для переноса на бэк" />
+    <MESSAGE value="подключил бэк, готово к докеру" />
+    <MESSAGE value="update: подключил бэк, готово к докеру" />
+    <MESSAGE value="update: для readme подгрузил" />
+    <MESSAGE value="fix: исправил отображение общего количество товара в корзине" />
+    <MESSAGE value="fix: поправил переход алиасов" />
+    <MESSAGE value="update: add styles and any hooks" />
+    <MESSAGE value="." />
+    <MESSAGE value="update: Added a private route for the cart" />
+    <option name="LAST_COMMIT_MESSAGE" value="update: Added a private route for the cart" />
+  </component>
+</project>
